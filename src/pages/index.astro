@@ -187,9 +187,6 @@ const whyItems = [
           {whyItems.map((item, i) => (
             <div class="why-item">
               <div class="why-num mono-font">{String(i + 1).padStart(2, '0')}</div>
-              <div class="why-icon-wrap">
-                <item.icon width={20} height={20} class="why-icon" />
-              </div>
               <div class="why-content">
                 <strong class="display-font" style="font-size:1.3rem;color:var(--ember-3)">{item.title}</strong>
                 <p style="color:var(--text-secondary);font-size:0.9rem;margin-top:0.25rem">{item.desc}</p>

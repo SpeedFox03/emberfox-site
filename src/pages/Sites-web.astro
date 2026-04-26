@@ -49,7 +49,6 @@ const processSteps = [
           <div class="process-step">
             <div class="step-num display-font fire-text">{step.num}</div>
             <div class="step-line"></div>
-            <step.icon width={24} height={24} class="step-icon" />
             <h3 class="display-font" style="font-size:1.5rem;color:var(--ember-3);margin-top:0.5rem">{step.title}</h3>
             <p style="color:var(--text-secondary);font-size:0.9rem;margin-top:0.5rem">{step.desc}</p>
           </div>
@@ -65,19 +64,22 @@ const processSteps = [
       <div class="fire-divider"></div>
       <div class="offers-grid">
         {offers.map(o => (
-          <div class={`offer-card card ${o.highlight ? 'offer-highlight' : ''}`}>
+          <div class={`offer-wrapper ${o.highlight ? 'offer-wrapper-highlight' : ''}`}>
             {o.highlight && <div class="offer-badge mono-font">Populaire</div>}
-            <h3 class="display-font" style="font-size:1.8rem;color:var(--text-primary)">{o.title}</h3>
-            <div class="offer-price fire-text display-font">{o.price}</div>
-            <ul class="offer-features">
-              {o.features.map(f => (
-                <li>
-                  <CheckCircleLight width={14} height={14} class="feature-check" />
-                  {f}
-                </li>
-              ))}
-            </ul>
-            <a href="/contact" class={o.highlight ? 'btn-fire' : 'btn-outline'} style="width:100%;justify-content:center">Choisir cette formule</a>
+
+            <div class={`offer-card card ${o.highlight ? 'offer-highlight' : ''}`}>
+              <h3 class="display-font" style="font-size:1.8rem;color:var(--text-primary)">{o.title}</h3>
+              <div class="offer-price fire-text display-font">{o.price}</div>
+              <ul class="offer-features">
+                {o.features.map(f => (
+                  <li>
+                    <CheckCircleLight width={14} height={14} class="feature-check" />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+              <a href="/contact" class={o.highlight ? 'btn-fire' : 'btn-outline'} style="width:100%;justify-content:center">Choisir cette formule</a>
+            </div>
           </div>
         ))}
       </div>
@@ -109,7 +111,7 @@ const processSteps = [
 .page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
 .page-hero-deco {
   position: absolute;
-  right: -2rem;
+  right: 2rem;
   top: 50%;
   transform: translateY(-50%);
   font-size: clamp(8rem, 15vw, 14rem);
@@ -129,18 +131,27 @@ const processSteps = [
 }
 .step-icon { color: var(--ember-2); opacity: 0.8; }
 
-.offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
-.offer-card { position: relative; display: flex; flex-direction: column; gap: 1.25rem; }
+.offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; overflow: visible; }
+.offer-wrapper { position: relative; overflow: visible; }
+.offer-wrapper:hover .offer-badge {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(255, 69, 0, 0.4);
+}
+.offer-card { position: relative; display: flex; flex-direction: column; gap: 1.25rem; overflow: visible; height: 100%; }
+.offer-highlight { padding-top: 1.5rem; }
 .offer-highlight { border-color: var(--ember-1) !important; }
 .offer-highlight::before { opacity: 1 !important; }
 .offer-badge {
   position: absolute;
   top: -12px; right: 1.5rem;
   background: var(--gradient-fire);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   color: #0A0804;
   font-size: 0.7rem;
   letter-spacing: 0.15em;
   padding: 0.25rem 0.75rem;
+  z-index: 999;
+  overflow: visible;
 }
 .offer-price { font-size: 1.5rem; color: var(--ember-3); }
 .offer-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
