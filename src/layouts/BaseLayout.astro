@@ -4,17 +4,16 @@ import { Image } from 'astro:assets';
 import logo from '../images/logo2.png';
 import EnvelopeLight from 'phosphor-astro/EnvelopeLight.astro';
 import PhoneLight from 'phosphor-astro/PhoneLight.astro';
-import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
 
 const { title = 'EmberFox', description = 'Solutions informatiques sur mesure' } = Astro.props;
 
 const navLinks = [
   { href: '/', label: 'Accueil' },
-  { href: '/Sites-web', label: 'Sites Web' },
-  { href: '/Applications', label: 'Applications' },
-  { href: '/Montage-pc', label: 'Montage PC' },
-  { href: '/Depannage', label: 'Dépannage' },
-  { href: '/Contact', label: 'Contact' },
+  { href: '/emberfox-site/Sites-web', label: 'Sites Web' },
+  { href: '/emberfox-site/Applications', label: 'Applications' },
+  { href: '/emberfox-site/Montage-pc', label: 'Montage PC' },
+  { href: '/emberfox-site/Depannage', label: 'Dépannage' },
+  { href: '/emberfox-site/Contact', label: 'Contact' },
 ];
 
 const currentPath = Astro.url.pathname;
