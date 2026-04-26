@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LightbulbLight from 'phosphor-astro/LightbulbLight.astro';
+import FileDashedLight from 'phosphor-astro/FileDashedLight.astro';
+import HammerLight from 'phosphor-astro/HammerLight.astro';
+import RocketLight from 'phosphor-astro/RocketLight.astro';
+import CheckCircleLight from 'phosphor-astro/CheckCircleLight.astro';
+import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
+
+const offers = [
+  { title: 'Site Vitrine', price: 'À partir de 800€', features: ['Design sur mesure', 'Responsive mobile', 'SEO de base', '3 pages', 'Formulaire de contact', 'Mise en ligne incluse'] },
+  { title: 'Site Pro', price: 'À partir de 1 500€', features: ['Tout du Vitrine', 'Jusqu\'à 10 pages', 'Blog intégré', 'SEO avancé', 'Google Analytics', 'Optimisation performance'], highlight: true },
+  { title: 'E-commerce', price: 'À partir de 2 500€', features: ['Boutique en ligne', 'Paiement sécurisé', 'Gestion produits', 'Tableau de bord', 'Intégrations logistique', 'Formation incluse'] },
+];
+
+const techs = ['Astro', 'Next.js', 'WordPress', 'Shopify', 'Tailwind CSS', 'Figma', 'Vercel', 'Netlify'];
+
+const processSteps = [
+  { num: '01', icon: LightbulbLight,  title: 'Brief',          desc: "On discute de votre projet, vos besoins, votre cible et votre identité." },
+  { num: '02', icon: FileDashedLight, title: 'Maquette',       desc: "Je conçois les wireframes et la charte graphique pour votre validation." },
+  { num: '03', icon: HammerLight,     title: 'Développement',  desc: "Je code votre site avec les meilleures technologies du marché." },
+  { num: '04', icon: RocketLight,     title: 'Livraison',      desc: "Tests, mise en ligne, formation et suivi post-lancement." },
+];
+---
+<BaseLayout title="Sites Web" description="Création de sites web professionnels sur mesure — EmberFox">
+
+  <!-- HERO PAGE -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="section-pre mono-font fire-text">— Service 01</p>
+        <h1 class="display-font page-title">Sites<br/><span class="fire-text">Web</span></h1>
+        <p class="page-sub">Des sites qui ne passent pas inaperçus. Du design au code, je crée des expériences web qui reflètent votre identité et convertissent vos visiteurs.</p>
+        <a href="/contact" class="btn-fire">
+          Demander un devis
+          <ArrowRightLight width={16} height={16} />
+        </a>
+      </div>
+    </div>
+    <div class="page-hero-deco display-font">WEB</div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section">
+    <div class="container">
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:3rem">Comment ça marche ?</h2>
+      <div class="process-steps">
+        {processSteps.map(step => (
+          <div class="process-step">
+            <div class="step-num display-font fire-text">{step.num}</div>
+            <div class="step-line"></div>
+            <step.icon width={24} height={24} class="step-icon" />
+            <h3 class="display-font" style="font-size:1.5rem;color:var(--ember-3);margin-top:0.5rem">{step.title}</h3>
+            <p style="color:var(--text-secondary);font-size:0.9rem;margin-top:0.5rem">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- OFFERS -->
+  <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border);border-bottom:1px solid var(--dark-border)">
+    <div class="container">
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:0.5rem">Formules</h2>
+      <div class="fire-divider"></div>
+      <div class="offers-grid">
+        {offers.map(o => (
+          <div class={`offer-card card ${o.highlight ? 'offer-highlight' : ''}`}>
+            {o.highlight && <div class="offer-badge mono-font">Populaire</div>}
+            <h3 class="display-font" style="font-size:1.8rem;color:var(--text-primary)">{o.title}</h3>
+            <div class="offer-price fire-text display-font">{o.price}</div>
+            <ul class="offer-features">
+              {o.features.map(f => (
+                <li>
+                  <CheckCircleLight width={14} height={14} class="feature-check" />
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <a href="/contact" class={o.highlight ? 'btn-fire' : 'btn-outline'} style="width:100%;justify-content:center">Choisir cette formule</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH -->
+  <section class="section">
+    <div class="container">
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2rem">Technologies utilisées</h2>
+      <div class="tech-grid">
+        {techs.map(t => (
+          <div class="tech-pill mono-font">{t}</div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero {
+  padding: 10rem 0 5rem;
+  position: relative;
+  overflow: hidden;
+}
+.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
+.page-title { font-size: clamp(4rem, 8vw, 7rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
+.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+.page-hero-deco {
+  position: absolute;
+  right: -2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(8rem, 15vw, 14rem);
+  color: var(--dark-border);
+  pointer-events: none;
+  z-index: 1;
+  line-height: 1;
+}
+
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+.process-step { position: relative; }
+.step-num { font-size: 3rem; line-height: 1; }
+.step-line {
+  width: 40px; height: 2px;
+  background: var(--gradient-fire);
+  margin: 0.75rem 0;
+}
+.step-icon { color: var(--ember-2); opacity: 0.8; }
+
+.offers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.offer-card { position: relative; display: flex; flex-direction: column; gap: 1.25rem; }
+.offer-highlight { border-color: var(--ember-1) !important; }
+.offer-highlight::before { opacity: 1 !important; }
+.offer-badge {
+  position: absolute;
+  top: -12px; right: 1.5rem;
+  background: var(--gradient-fire);
+  color: #0A0804;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  padding: 0.25rem 0.75rem;
+}
+.offer-price { font-size: 1.5rem; color: var(--ember-3); }
+.offer-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; flex: 1; }
+.offer-features li { font-size: 0.9rem; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem; }
+.feature-check { color: var(--ember-3); flex-shrink: 0; }
+
+.tech-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.tech-pill {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--dark-border);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  transition: border-color 0.2s, color 0.2s;
+}
+.tech-pill:hover { border-color: var(--ember-2); color: var(--ember-3); }
+
+@media (max-width: 768px) {
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .offers-grid { grid-template-columns: 1fr; }
+}
+</style>

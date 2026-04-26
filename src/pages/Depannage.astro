@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BugLight from 'phosphor-astro/BugLight.astro';
+import HardDriveLight from 'phosphor-astro/HardDriveLight.astro';
+import WifiSlashLight from 'phosphor-astro/WifiSlashLight.astro';
+import PrinterLight from 'phosphor-astro/PrinterLight.astro';
+import EnvelopeLight from 'phosphor-astro/EnvelopeLight.astro';
+import HardDrivesLight from 'phosphor-astro/HardDrivesLight.astro';
+import WindowsLogoLight from 'phosphor-astro/WindowsLogoLight.astro';
+import DeviceMobileLight from 'phosphor-astro/DeviceMobileLight.astro';
+import PhoneCallLight from 'phosphor-astro/PhoneCallLight.astro';
+import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
+import LightningLight from 'phosphor-astro/LightningLight.astro';
+import MagnifyingGlassLight from 'phosphor-astro/MagnifyingGlassLight.astro';
+import HammerLight from 'phosphor-astro/HammerLight.astro';
+import HandshakeLight from 'phosphor-astro/HandshakeLight.astro';
+
+const problems = [
+  { icon: BugLight,          title: 'Virus & malwares',          desc: 'Nettoyage complet, désinfection, protection et prévention.' },
+  { icon: HardDriveLight,    title: 'PC lent ou bloqué',         desc: 'Diagnostic, optimisation, nettoyage système.' },
+  { icon: WifiSlashLight,    title: 'Réseau & Wi-Fi',            desc: 'Configuration routeur, couverture Wi-Fi, dépannage box.' },
+  { icon: PrinterLight,      title: 'Imprimante / périphériques', desc: 'Installation, driver, partage réseau.' },
+  { icon: EnvelopeLight,     title: 'Email & messagerie',        desc: 'Configuration Outlook, Gmail, synchronisation.' },
+  { icon: HardDrivesLight,   title: 'Récupération de données',   desc: 'Fichiers perdus, disque dur en panne, sauvegarde.' },
+  { icon: WindowsLogoLight,  title: 'Windows & macOS',           desc: 'Mise à jour, réinstallation, erreurs système.' },
+  { icon: DeviceMobileLight, title: 'Smartphone & tablette',     desc: 'Synchro, configuration, problèmes de mise à jour.' },
+];
+
+const included = [
+  { icon: MagnifyingGlassLight, title: 'Audit besoins',        desc: 'On discute de votre usage avant de choisir les composants.' },
+  { icon: HammerLight,          title: 'Diagnostic & réparation', desc: 'Explications claires, solution durable — pas de jargon inutile.' },
+  { icon: HandshakeLight,       title: 'Facturation transparente', desc: 'Tarif annoncé à l\'avance. Pas de surprise.' },
+];
+---
+<BaseLayout title="Dépannage" description="Dépannage informatique à domicile chez particuliers — EmberFox">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="section-pre mono-font fire-text">— Service 04</p>
+        <h1 class="display-font page-title">Dépannage<br/><span class="fire-text">à domicile</span></h1>
+        <p class="page-sub">Votre ordinateur ne démarre plus ? Internet ne fonctionne pas ? Un virus ? J'interviens chez vous rapidement pour diagnostiquer et résoudre le problème.</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap">
+          <a href="tel:+32000000000" class="btn-fire">
+            <PhoneCallLight width={16} height={16} />
+            Appeler maintenant
+          </a>
+          <a href="/contact" class="btn-outline">
+            Prendre RDV
+            <ArrowRightLight width={16} height={16} />
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-hero-deco display-font">FIX</div>
+  </section>
+
+  <!-- URGENCY BAND -->
+  <div class="urgency-band">
+    <div class="container urgency-inner">
+      <span class="urgency-label mono-font">
+        <LightningLight width={14} height={14} />
+        URGENCE
+      </span>
+      <p style="font-size:0.95rem">Intervention le jour même ou le lendemain dans la région de Namur et alentours.</p>
+      <a href="tel:+32000000000" class="btn-fire" style="white-space:nowrap;font-size:0.9rem;padding:0.6rem 1.5rem">Appel direct</a>
+    </div>
+  </div>
+
+  <!-- PROBLEMS -->
+  <section class="section">
+    <div class="container">
+      <p class="section-pre mono-font fire-text">— Problèmes résolus</p>
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:0.5rem">Ce que je règle</h2>
+      <div class="fire-divider"></div>
+      <div class="problems-grid">
+        {problems.map(p => (
+          <div class="problem-card card">
+            <p.icon width={28} height={28} class="problem-icon" />
+            <h3 class="display-font" style="font-size:1.3rem;color:var(--ember-3);margin-top:0.75rem">{p.title}</h3>
+            <p style="color:var(--text-secondary);font-size:0.875rem;margin-top:0.25rem">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border);border-bottom:1px solid var(--dark-border)">
+    <div class="container">
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2.5rem">Comment ça se passe ?</h2>
+      <div class="how-steps">
+        {[
+          ['Vous appelez', 'Décrivez le problème par téléphone ou formulaire — je fais un premier diagnostic.'],
+          ['Je me déplace', 'Intervention à votre domicile dans les plus brefs délais.'],
+          ['Diagnostic & réparation', 'Explications claires, solution durable — pas de jargon inutile.'],
+          ['Facturation transparente', 'Tarif annoncé à l\'avance. Pas de surprise.'],
+        ].map(([title, desc], i) => (
+          <div class="how-step">
+            <div class="how-num display-font fire-text">{String(i + 1).padStart(2, '0')}</div>
+            <div class="how-line"></div>
+            <strong class="display-font" style="font-size:1.3rem;color:var(--text-primary);display:block;margin-bottom:0.5rem">{title}</strong>
+            <p style="color:var(--text-secondary);font-size:0.875rem">{desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- TARIFS -->
+  <section class="section">
+    <div class="container">
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2rem">Tarifs indicatifs</h2>
+      <div class="tarifs-grid">
+        {[
+          ['Déplacement', '30€', 'Offert si réparation effectuée'],
+          ['Tarif horaire', '50€/h', 'Minimum 1 heure'],
+          ['Forfait dépannage simple', '65€', 'Virus, lenteur, config'],
+          ['Forfait réinstallation Windows', '90€', 'Sauvegarde + réinstall'],
+        ].map(([label, price, note]) => (
+          <div class="tarif-row">
+            <div>
+              <strong style="color:var(--text-primary)">{label}</strong>
+              <span class="mono-font" style="color:var(--text-muted);font-size:0.8rem;display:block">{note}</span>
+            </div>
+            <div class="tarif-price fire-text display-font">{price}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero { padding: 10rem 0 5rem; position: relative; overflow: hidden; }
+.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
+.page-title { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
+.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+.page-hero-deco {
+  position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+  font-size: clamp(8rem, 15vw, 14rem); color: var(--dark-border); pointer-events: none; z-index: 1; line-height: 1;
+}
+
+.urgency-band {
+  background: rgba(255, 69, 0, 0.08);
+  border-top: 1px solid rgba(255,69,0,0.2);
+  border-bottom: 1px solid rgba(255,69,0,0.2);
+  padding: 1rem 0;
+}
+.urgency-inner {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.urgency-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--ember-3);
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+
+.problems-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 2rem; }
+.problem-card { padding: 1.75rem; }
+.problem-icon { color: var(--ember-2); opacity: 0.8; }
+
+.how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
+.how-num { font-size: 3rem; line-height: 1; }
+.how-line { width: 40px; height: 2px; background: var(--gradient-fire); margin: 0.75rem 0; }
+
+.tarifs-grid { display: flex; flex-direction: column; gap: 0; max-width: 640px; }
+.tarif-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--dark-border);
+  margin-top: -1px;
+  transition: background 0.2s;
+}
+.tarif-row:hover { background: var(--dark-card); }
+.tarif-price { font-size: 1.4rem; }
+
+@media (max-width: 768px) {
+  .problems-grid { grid-template-columns: 1fr 1fr; }
+  .how-steps { grid-template-columns: 1fr 1fr; }
+}
+</style>

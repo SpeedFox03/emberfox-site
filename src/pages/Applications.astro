@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StorefrontLight from 'phosphor-astro/StorefrontLight.astro';
+import CalendarLight from 'phosphor-astro/CalendarLight.astro';
+import ChartBarLight from 'phosphor-astro/ChartBarLight.astro';
+import UsersLight from 'phosphor-astro/UsersLight.astro';
+import LinkLight from 'phosphor-astro/LinkLight.astro';
+import DeviceMobileLight from 'phosphor-astro/DeviceMobileLight.astro';
+import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
+
+const useCases = [
+  { icon: StorefrontLight,   title: 'Gestion de stock',  desc: 'Suivez vos produits, fournisseurs et commandes en temps réel.' },
+  { icon: CalendarLight,     title: 'Prise de RDV',      desc: 'Calendrier en ligne, rappels automatiques, gestion de planning.' },
+  { icon: ChartBarLight,     title: 'Dashboard métier',  desc: 'Visualisez vos KPIs, exports, rapports personnalisés.' },
+  { icon: UsersLight,        title: 'CRM sur mesure',    desc: 'Gérez vos clients, prospects et suivi commercial.' },
+  { icon: LinkLight,         title: 'APIs & intégrations', desc: 'Connectez vos outils existants entre eux.' },
+  { icon: DeviceMobileLight, title: 'App mobile',        desc: 'Application iOS et Android pour vos équipes terrain.' },
+];
+---
+<BaseLayout title="Applications" description="Développement d'applications sur mesure — EmberFox">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="section-pre mono-font fire-text">— Service 02</p>
+        <h1 class="display-font page-title">Applications<br/><span class="fire-text">Sur Mesure</span></h1>
+        <p class="page-sub">Votre métier est unique — votre outil doit l'être aussi. Je développe des applications web et mobiles qui s'adaptent parfaitement à vos processus.</p>
+        <a href="/contact" class="btn-fire">
+          Parler de mon projet
+          <ArrowRightLight width={16} height={16} />
+        </a>
+      </div>
+    </div>
+    <div class="page-hero-deco display-font">APP</div>
+  </section>
+
+  <!-- USE CASES -->
+  <section class="section">
+    <div class="container">
+      <p class="section-pre mono-font fire-text">— Cas d'usage</p>
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:0.5rem">Ce que je réalise</h2>
+      <div class="fire-divider"></div>
+      <div class="uc-grid">
+        {useCases.map(u => (
+          <div class="uc-card card">
+            <u.icon width={28} height={28} class="uc-icon" />
+            <h3 class="display-font" style="font-size:1.5rem;margin-top:0.75rem;color:var(--ember-3)">{u.title}</h3>
+            <p style="color:var(--text-secondary);font-size:0.9rem;margin-top:0.5rem">{u.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="section stack-section">
+    <div class="container">
+      <div class="stack-grid">
+        <div>
+          <p class="section-pre mono-font fire-text">— Stack technique</p>
+          <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem)">Technologies<br/>de pointe</h2>
+          <div class="fire-divider"></div>
+          <p style="color:var(--text-secondary);line-height:1.7">J'utilise les technologies les plus adaptées à votre projet — pas celles que je préfère, mais celles qui servent le mieux vos objectifs.</p>
+        </div>
+        <div class="stack-cols">
+          <div>
+            <p class="stack-cat mono-font fire-text">Frontend</p>
+            {['React', 'Next.js', 'Vue', 'Astro', 'TypeScript'].map(t => <div class="stack-item">{t}</div>)}
+          </div>
+          <div>
+            <p class="stack-cat mono-font fire-text">Backend</p>
+            {['Node.js', 'Python', 'PostgreSQL', 'Supabase', 'REST / GraphQL'].map(t => <div class="stack-item">{t}</div>)}
+          </div>
+          <div>
+            <p class="stack-cat mono-font fire-text">Mobile</p>
+            {['React Native', 'Expo', 'iOS', 'Android', 'PWA'].map(t => <div class="stack-item">{t}</div>)}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero { padding: 10rem 0 5rem; position: relative; overflow: hidden; }
+.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
+.page-title { font-size: clamp(3.5rem, 7vw, 6rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
+.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+.page-hero-deco {
+  position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+  font-size: clamp(8rem, 15vw, 14rem); color: var(--dark-border); pointer-events: none; z-index: 1; line-height: 1;
+}
+
+.uc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; }
+.uc-card { padding: 2rem; }
+.uc-icon { color: var(--ember-2); opacity: 0.8; }
+
+.stack-section { background: var(--dark-card); border-top: 1px solid var(--dark-border); border-bottom: 1px solid var(--dark-border); }
+.stack-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 5rem; align-items: center; }
+.stack-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.stack-cat { font-size: 0.75rem; letter-spacing: 0.15em; margin-bottom: 1rem; }
+.stack-item {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--dark-border);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  transition: color 0.2s, padding-left 0.2s;
+}
+.stack-item:hover { color: var(--ember-3); padding-left: 0.5rem; }
+
+@media (max-width: 768px) {
+  .uc-grid { grid-template-columns: 1fr 1fr; }
+  .stack-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .stack-cols { grid-template-columns: 1fr 1fr; }
+}
+</style>

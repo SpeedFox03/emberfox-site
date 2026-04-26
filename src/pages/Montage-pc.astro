@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MagnifyingGlassLight from 'phosphor-astro/MagnifyingGlassLight.astro';
+import ShoppingCartLight from 'phosphor-astro/ShoppingCartLight.astro';
+import WrenchLight from 'phosphor-astro/WrenchLight.astro';
+import FlaskLight from 'phosphor-astro/FlaskLight.astro';
+import HardDriveLight from 'phosphor-astro/HardDriveLight.astro';
+import PhoneLight from 'phosphor-astro/PhoneLight.astro';
+import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
+
+const configs = [
+  {
+    title: 'Home Office',
+    range: '600€ – 1 000€',
+    desc: 'PC fiable pour le travail, la bureautique et la visio.',
+    specs: ['Processeur Ryzen 5 ou Core i5', 'RAM 16 Go DDR5', 'SSD NVMe 512 Go', 'Windows 11 Pro', 'Garantie pièces 2 ans'],
+  },
+  {
+    title: 'Gaming',
+    range: '1 200€ – 2 500€',
+    desc: 'Performance maximale pour les jeux modernes en 1080p à 4K.',
+    specs: ['Ryzen 7 / Core i7 dernière gen', 'RAM 32 Go DDR5', 'GPU RTX 4070+', 'SSD NVMe 1 To', 'Refroidissement optimisé'],
+    highlight: true,
+  },
+  {
+    title: 'Workstation',
+    range: '2 000€ – 5 000€+',
+    desc: 'Puissance de calcul pour la création 3D, vidéo et IA.',
+    specs: ['Ryzen 9 / Core i9 / Threadripper', 'RAM 64 Go ECC', 'GPU pro ou dual GPU', 'Stockage RAID', 'Support prioritaire'],
+  },
+];
+
+const included = [
+  { icon: MagnifyingGlassLight, title: 'Audit besoins',        desc: 'On discute de votre usage avant de choisir les composants.' },
+  { icon: ShoppingCartLight,    title: 'Sélection pièces',     desc: 'Je négocie les meilleurs prix et évite les pièges marketing.' },
+  { icon: WrenchLight,          title: 'Montage & câblage',    desc: 'Assemblage soigné, câblage propre, optimisation thermique.' },
+  { icon: FlaskLight,           title: 'Tests & benchmarks',   desc: 'Stabilité, températures, performance vérifiées avant livraison.' },
+  { icon: HardDriveLight,       title: 'Installation OS',      desc: 'Windows ou Linux installé, drivers à jour, logiciels de base.' },
+  { icon: PhoneLight,           title: 'Support post-livraison', desc: 'Je reste disponible pour tout ajustement ou question.' },
+];
+---
+<BaseLayout title="Montage PC" description="Montage de PC sur mesure gaming et workstation — EmberFox">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="section-pre mono-font fire-text">— Service 03</p>
+        <h1 class="display-font page-title">Montage<br/><span class="fire-text">PC</span></h1>
+        <p class="page-sub">Un PC monté à la main, pièce par pièce, selon vos besoins et votre budget. Gaming, création, workstation — je sélectionne les composants les mieux adaptés.</p>
+        <a href="/contact" class="btn-fire">
+          Configurer mon PC
+          <ArrowRightLight width={16} height={16} />
+        </a>
+      </div>
+    </div>
+    <div class="page-hero-deco display-font">PC</div>
+  </section>
+
+  <!-- CONFIGS -->
+  <section class="section">
+    <div class="container">
+      <p class="section-pre mono-font fire-text">— Configurations</p>
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:0.5rem">Trouvez votre build</h2>
+      <div class="fire-divider"></div>
+      <div class="configs-grid">
+        {configs.map(c => (
+          <div class={`config-card card ${c.highlight ? 'config-highlight' : ''}`}>
+            {c.highlight && <div class="config-badge mono-font">Best-seller</div>}
+            <h3 class="display-font" style="font-size:2rem">{c.title}</h3>
+            <div class="config-range fire-text display-font">{c.range}</div>
+            <p style="color:var(--text-secondary);font-size:0.9rem;margin:1rem 0 1.5rem">{c.desc}</p>
+            <ul class="config-specs">
+              {c.specs.map(s => <li><span style="color:var(--ember-3)">▸</span> {s}</li>)}
+            </ul>
+            <a href="/contact" class={c.highlight ? 'btn-fire' : 'btn-outline'} style="margin-top:auto;justify-content:center">Demander un devis</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INCLUDED -->
+  <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border);border-bottom:1px solid var(--dark-border)">
+    <div class="container">
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2.5rem">Inclus dans chaque build</h2>
+      <div class="included-grid">
+        {included.map(item => (
+          <div class="included-item">
+            <item.icon width={24} height={24} class="included-icon" />
+            <div>
+              <strong style="color:var(--ember-3);display:block;margin-bottom:0.25rem">{item.title}</strong>
+              <span style="color:var(--text-secondary);font-size:0.875rem">{item.desc}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero { padding: 10rem 0 5rem; position: relative; overflow: hidden; }
+.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
+.page-title { font-size: clamp(4rem, 9vw, 8rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
+.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+.page-hero-deco {
+  position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+  font-size: clamp(10rem, 20vw, 18rem); color: var(--dark-border); pointer-events: none; z-index: 1; line-height: 1;
+}
+
+.configs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.config-card { display: flex; flex-direction: column; gap: 0; position: relative; padding: 2.5rem; }
+.config-highlight { border-color: var(--ember-1) !important; }
+.config-highlight::before { opacity: 1 !important; }
+.config-badge {
+  position: absolute; top: -12px; right: 1.5rem;
+  background: var(--gradient-fire); color: #0A0804;
+  font-size: 0.7rem; letter-spacing: 0.15em; padding: 0.25rem 0.75rem;
+}
+.config-range { font-size: 1.3rem; margin-top: 0.5rem; }
+.config-specs { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 2rem; flex: 1; }
+.config-specs li { color: var(--text-secondary); font-size: 0.875rem; display: flex; gap: 0.5rem; }
+
+.included-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.included-item { display: flex; gap: 1rem; align-items: flex-start; }
+.included-icon { color: var(--ember-2); flex-shrink: 0; margin-top: 0.1rem; }
+
+@media (max-width: 768px) {
+  .configs-grid { grid-template-columns: 1fr; }
+  .included-grid { grid-template-columns: 1fr 1fr; }
+}
+</style>

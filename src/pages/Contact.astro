@@ -1,0 +1,192 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PhoneLight from 'phosphor-astro/PhoneLight.astro';
+import EnvelopeLight from 'phosphor-astro/EnvelopeLight.astro';
+import MapPinLight from 'phosphor-astro/MapPinLight.astro';
+import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
+---
+<BaseLayout title="Contact" description="Contactez EmberFox pour un devis gratuit">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="section-pre mono-font fire-text">— Contact</p>
+        <h1 class="display-font page-title">Parlons de<br/><span class="fire-text">votre projet</span></h1>
+        <p class="page-sub">Devis gratuit, réponse sous 24h. Remplissez le formulaire ou contactez-moi directement.</p>
+      </div>
+    </div>
+    <div class="page-hero-deco display-font">HI</div>
+  </section>
+
+  <section class="section contact-section">
+    <div class="container contact-grid">
+
+      <!-- FORM -->
+      <div class="contact-form-wrap">
+        <form class="contact-form" id="contactForm">
+          <div class="form-group">
+            <label class="form-label mono-font">Votre nom</label>
+            <input type="text" class="form-input" placeholder="Jean Dupont" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label mono-font">Email</label>
+            <input type="email" class="form-input" placeholder="jean@exemple.be" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label mono-font">Service souhaité</label>
+            <select class="form-input form-select">
+              <option value="">Choisir un service</option>
+              <option>Site web</option>
+              <option>Application sur mesure</option>
+              <option>Montage PC</option>
+              <option>Dépannage à domicile</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label mono-font">Message</label>
+            <textarea class="form-input form-textarea" placeholder="Décrivez votre projet ou votre problème..." required></textarea>
+          </div>
+          <button type="submit" class="btn-fire" style="width:100%;justify-content:center;font-size:1.1rem">
+            Envoyer ma demande
+            <PaperPlaneTiltLight width={18} height={18} />
+          </button>
+          <div class="form-success" id="formSuccess">
+            ✅ Message envoyé ! Je vous réponds sous 24h.
+          </div>
+        </form>
+      </div>
+
+      <!-- INFOS -->
+      <div class="contact-infos">
+        <div class="info-block">
+          <p class="info-label mono-font fire-text">
+            <PhoneLight width={14} height={14} />
+            Téléphone
+          </p>
+          <a href="tel:+32000000000" class="info-value display-font">+32 000 00 00 00</a>
+          <p class="info-note" style="color:var(--text-muted);font-size:0.85rem">Lun–Sam, 9h–19h</p>
+        </div>
+        <div class="info-block">
+          <p class="info-label mono-font fire-text">
+            <EnvelopeLight width={14} height={14} />
+            Email
+          </p>
+          <a href="mailto:contact@emberfox.be" class="info-value display-font">contact@emberfox.be</a>
+          <p class="info-note" style="color:var(--text-muted);font-size:0.85rem">Réponse sous 24h</p>
+        </div>
+        <div class="info-block">
+          <p class="info-label mono-font fire-text">
+            <MapPinLight width={14} height={14} />
+            Zone d'intervention
+          </p>
+          <p class="info-value display-font" style="font-size:1.5rem">Namur & alentours</p>
+          <p class="info-note" style="color:var(--text-muted);font-size:0.85rem">Belgique — Remote possible</p>
+        </div>
+
+        <div class="availability-card card">
+          <div class="avail-dot"></div>
+          <p class="display-font" style="font-size:1.3rem;margin-top:0.5rem">Disponible maintenant</p>
+          <p style="color:var(--text-secondary);font-size:0.875rem;margin-top:0.25rem">Prise en charge rapide des urgences</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero { padding: 10rem 0 4rem; position: relative; overflow: hidden; }
+.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
+.page-title { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
+.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; }
+.page-hero-deco {
+  position: absolute; right: -1rem; top: 50%; transform: translateY(-50%);
+  font-size: clamp(10rem, 18vw, 16rem); color: var(--dark-border); pointer-events: none; z-index: 1; line-height: 1;
+}
+
+.contact-section { padding-top: 0; }
+.contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+
+/* FORM */
+.contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.form-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  color: var(--ember-3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.form-input {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border);
+  color: var(--text-primary);
+  padding: 0.875rem 1rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+.form-input:focus { border-color: var(--ember-2); }
+.form-input::placeholder { color: var(--text-muted); }
+.form-select { cursor: pointer; }
+.form-select option { background: var(--dark-card); }
+.form-textarea { resize: vertical; min-height: 160px; }
+.form-success {
+  display: none;
+  padding: 1rem;
+  background: rgba(255,140,0,0.1);
+  border: 1px solid rgba(255,140,0,0.3);
+  color: var(--ember-3);
+  font-size: 0.9rem;
+  text-align: center;
+}
+.form-success.visible { display: block; }
+
+/* INFOS */
+.contact-infos { display: flex; flex-direction: column; gap: 2.5rem; padding-top: 0.5rem; }
+.info-block { display: flex; flex-direction: column; gap: 0.25rem; }
+.info-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  margin-bottom: 0.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+.info-value { color: var(--text-primary); text-decoration: none; font-size: 1.8rem; transition: color 0.2s; }
+.info-value:hover { color: var(--ember-3); }
+
+.availability-card { padding: 1.5rem; }
+.avail-dot {
+  width: 10px; height: 10px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px rgba(34,197,94,0.2);
+  animation: avail-pulse 2s ease-in-out infinite;
+}
+@keyframes avail-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px rgba(34,197,94,0.2); }
+  50% { box-shadow: 0 0 0 8px rgba(34,197,94,0.1); }
+}
+
+@media (max-width: 768px) {
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+</style>
+
+<script>
+document.getElementById('contactForm')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const success = document.getElementById('formSuccess');
+  if (success) {
+    success.classList.add('visible');
+    (e.target as HTMLFormElement).reset();
+  }
+});
+</script>
