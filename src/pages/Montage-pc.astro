@@ -47,13 +47,74 @@ const included = [
         <p class="section-pre mono-font fire-text">— Service 03</p>
         <h1 class="display-font page-title">Montage<br/><span class="fire-text">PC</span></h1>
         <p class="page-sub">Un PC monté à la main, pièce par pièce, selon vos besoins et votre budget. Gaming, création, workstation — je sélectionne les composants les mieux adaptés.</p>
-        <a href="/contact" class="btn-fire">
+        <a href="/emberfox-site/Contact" class="btn-fire">
           Configurer mon PC
           <ArrowRightLight width={16} height={16} />
         </a>
       </div>
     </div>
-    <div class="page-hero-deco display-font">PC</div>
+    <div class="geo-bg" aria-hidden="true">
+      <svg class="geo-svg" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="pcbGlow" cx="50%" cy="50%" r="55%">
+            <stop offset="0%" stop-color="rgba(255,80,0,0.10)"/>
+            <stop offset="100%" stop-color="rgba(255,60,0,0)"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="250" cy="210" rx="210" ry="190" fill="url(#pcbGlow)"/>
+        <!-- Central chip -->
+        <rect x="178" y="152" width="144" height="106" rx="3" stroke="rgba(255,140,0,0.26)" stroke-width="1.5" fill="rgba(255,80,0,0.04)"/>
+        <text x="218" y="210" font-family="monospace" font-size="11" fill="rgba(255,140,0,0.28)">CPU</text>
+        <!-- Pins left -->
+        <line x1="158" y1="173" x2="178" y2="173" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="158" y1="191" x2="178" y2="191" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="158" y1="209" x2="178" y2="209" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="158" y1="227" x2="178" y2="227" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="158" y1="245" x2="178" y2="245" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <!-- Pins right -->
+        <line x1="322" y1="173" x2="342" y2="173" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="322" y1="191" x2="342" y2="191" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="322" y1="209" x2="342" y2="209" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="322" y1="227" x2="342" y2="227" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="322" y1="245" x2="342" y2="245" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <!-- Pins top -->
+        <line x1="202" y1="132" x2="202" y2="152" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="222" y1="132" x2="222" y2="152" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="242" y1="132" x2="242" y2="152" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="262" y1="132" x2="262" y2="152" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="282" y1="132" x2="282" y2="152" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="302" y1="132" x2="302" y2="152" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <!-- Pins bottom -->
+        <line x1="202" y1="258" x2="202" y2="278" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="222" y1="258" x2="222" y2="278" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="242" y1="258" x2="242" y2="278" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="262" y1="258" x2="262" y2="278" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="282" y1="258" x2="282" y2="278" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <line x1="302" y1="258" x2="302" y2="278" stroke="rgba(255,120,0,0.22)" stroke-width="1.2"/>
+        <!-- PCB traces -->
+        <polyline points="158,173 82,173 82,95"   stroke="rgba(255,120,0,0.16)" stroke-width="1.2" fill="none"/>
+        <polyline points="158,209 60,209 60,355"   stroke="rgba(255,100,0,0.12)" stroke-width="1.2" fill="none"/>
+        <polyline points="158,245 90,245 90,340 440,340" stroke="rgba(255,110,0,0.14)" stroke-width="1.2" fill="none"/>
+        <polyline points="342,173 418,173 418,80"  stroke="rgba(255,120,0,0.16)" stroke-width="1.2" fill="none"/>
+        <polyline points="342,209 445,209 445,355" stroke="rgba(255,100,0,0.12)" stroke-width="1.2" fill="none"/>
+        <polyline points="202,132 202,76 96,76"    stroke="rgba(255,110,0,0.14)" stroke-width="1.2" fill="none"/>
+        <polyline points="262,132 262,56 410,56"   stroke="rgba(255,100,0,0.12)" stroke-width="1.2" fill="none"/>
+        <polyline points="222,278 222,342 76,342"  stroke="rgba(255,110,0,0.14)" stroke-width="1.2" fill="none"/>
+        <polyline points="282,278 282,362 460,362" stroke="rgba(255,100,0,0.12)" stroke-width="1.2" fill="none"/>
+        <!-- Junction dots -->
+        <circle cx="82"  cy="173" r="3" fill="rgba(255,130,0,0.30)"/>
+        <circle cx="82"  cy="95"  r="3" fill="rgba(255,130,0,0.28)"/>
+        <circle cx="90"  cy="245" r="3" fill="rgba(255,130,0,0.28)"/>
+        <circle cx="418" cy="173" r="3" fill="rgba(255,130,0,0.30)"/>
+        <circle cx="202" cy="76"  r="3" fill="rgba(255,110,0,0.24)"/>
+        <circle cx="262" cy="56"  r="3" fill="rgba(255,110,0,0.22)"/>
+        <circle cx="222" cy="342" r="3" fill="rgba(255,110,0,0.22)"/>
+        <!-- Small components -->
+        <rect x="54"  y="58" width="42" height="18" rx="2" stroke="rgba(255,110,0,0.18)" stroke-width="1" fill="rgba(255,80,0,0.03)"/>
+        <rect x="398" y="330" width="36" height="18" rx="2" stroke="rgba(255,110,0,0.18)" stroke-width="1" fill="rgba(255,80,0,0.03)"/>
+        <text x="60"  y="71"  font-family="monospace" font-size="8" fill="rgba(255,120,0,0.22)">RAM</text>
+      </svg>
+    </div>
   </section>
 
   <!-- CONFIGS -->
@@ -72,7 +133,7 @@ const included = [
             <ul class="config-specs">
               {c.specs.map(s => <li><span style="color:var(--ember-3)">▸</span> {s}</li>)}
             </ul>
-            <a href="/contact" class={c.highlight ? 'btn-fire' : 'btn-outline'} style="margin-top:auto;justify-content:center">Demander un devis</a>
+            <a href="/emberfox-site/Contact" class={c.highlight ? 'btn-fire' : 'btn-outline'} style="margin-top:auto;justify-content:center">Demander un devis</a>
           </div>
         ))}
       </div>
@@ -104,9 +165,45 @@ const included = [
 .page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
 .page-title { font-size: clamp(4rem, 9vw, 8rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
 .page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
-.page-hero-deco {
-  position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
-  font-size: clamp(10rem, 20vw, 18rem); color: var(--dark-border); pointer-events: none; z-index: 1; line-height: 1;
+.page-hero-shape {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(300px, 38vw, 520px);
+  height: clamp(300px, 38vw, 520px);
+  pointer-events: none;
+  z-index: 1;
+}
+.geo-bg { position: absolute; right: -80px; top: 50%; transform: translateY(-50%); width: clamp(320px, 42vw, 560px); height: clamp(320px, 42vw, 560px); pointer-events: none; z-index: 1; }
+.geo-svg { width: 100%; height: 100%; overflow: visible; }
+@media (max-width: 768px) { .geo-bg { display: none; } }
+/* PCB chip glow */
+.geo-svg > rect:first-of-type {
+  animation: pcb-chip-glow 3.5s ease-in-out 1s infinite;
+}
+@keyframes pcb-chip-glow {
+  0%, 100% { stroke: rgba(255,140,0,0.26); }
+  50%       { stroke: rgba(255,200,0,0.55); filter: drop-shadow(0 0 4px rgba(255,160,0,0.3)); }
+}
+/* Junction dots sequential pulse */
+.geo-svg circle { animation: pcb-dot 2.8s ease-in-out infinite; }
+.geo-svg circle:nth-of-type(1) { animation-delay: 0.00s; }
+.geo-svg circle:nth-of-type(2) { animation-delay: 0.40s; }
+.geo-svg circle:nth-of-type(3) { animation-delay: 0.80s; }
+.geo-svg circle:nth-of-type(4) { animation-delay: 1.20s; }
+.geo-svg circle:nth-of-type(5) { animation-delay: 1.60s; }
+.geo-svg circle:nth-of-type(6) { animation-delay: 2.00s; }
+.geo-svg circle:nth-of-type(7) { animation-delay: 2.40s; }
+@keyframes pcb-dot {
+  0%, 100% { opacity: 1; }
+  40%, 60%  { opacity: 0.15; }
+}
+/* Entrance animation */
+.geo-bg { animation: pcb-reveal 0.9s ease 0.1s both; }
+@keyframes pcb-reveal {
+  from { opacity: 0; transform: translateY(-50%) scale(0.97); }
+  to   { opacity: 1; transform: translateY(-50%) scale(1); }
 }
 
 .configs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
@@ -129,5 +226,9 @@ const included = [
 @media (max-width: 768px) {
   .configs-grid { grid-template-columns: 1fr; }
   .included-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .included-grid { grid-template-columns: 1fr; }
+  .config-card { padding: 1.75rem; }
 }
 </style>

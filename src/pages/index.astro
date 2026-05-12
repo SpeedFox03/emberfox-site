@@ -12,12 +12,14 @@ import TargetLight from 'phosphor-astro/TargetLight.astro';
 import HandshakeLight from 'phosphor-astro/HandshakeLight.astro';
 import HeartLight from 'phosphor-astro/HeartLight.astro';
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
 const services = [
   {
     icon: GlobeLight,
     title: 'Sites Web',
     desc: 'Des sites vitrines, e-commerce et landing pages qui convertissent.',
-    href: '/Sites-web',
+    href: `${base}/Sites-web`,
     tag: 'Design & Dev',
     num: '01'
   },
@@ -25,7 +27,7 @@ const services = [
     icon: LightningLight,
     title: 'Applications',
     desc: 'Des apps métier sur mesure adaptées à vos besoins spécifiques.',
-    href: '/Applications',
+    href: `${base}/Applications`,
     tag: 'Sur mesure',
     num: '02'
   },
@@ -33,7 +35,7 @@ const services = [
     icon: DesktopLight,
     title: 'Montage PC',
     desc: 'Configurations gaming, workstation et home office sur mesure.',
-    href: '/Montage-pc',
+    href: `${base}/Montage-pc`,
     tag: 'Hardware',
     num: '03'
   },
@@ -41,7 +43,7 @@ const services = [
     icon: WrenchLight,
     title: 'Dépannage',
     desc: 'Intervention rapide chez vous — virus, panne, configuration.',
-    href: '/Depannage',
+    href: `${base}/Depannage`,
     tag: 'Particuliers',
     num: '04'
   },
@@ -75,10 +77,6 @@ const whyItems = [
 
     <div class="container hero-content">
       <div class="hero-copy">
-        <div class="hero-badge mono-font">
-          <span class="badge-dot"></span>
-          Disponible · Namur & alentours
-        </div>
         <h1 class="hero-title display-font">
           L'informatique<br/>
           <span class="fire-text">qui embrase</span><br/>
@@ -89,12 +87,13 @@ const whyItems = [
           avec expertise et passion dans tous vos besoins informatiques.
         </p>
         <div class="hero-actions">
-          <a href="/Contact" class="btn-fire">
+          <a href={`${base}/Contact`} class="btn-fire">
             Démarrer un projet
             <ArrowRightLight width={16} height={16} />
           </a>
           <a href="#services" class="btn-outline">Voir les services</a>
         </div>
+        <!-- Stats visibles seulement sur mobile (terminal masqué) -->
         <div class="hero-stats">
           {stats.map(s => (
             <div class="stat">
@@ -106,46 +105,69 @@ const whyItems = [
       </div>
 
       <div class="hero-visual">
-        <div class="video-frame">
-          <div class="video-frame-corner tl"></div>
-          <div class="video-frame-corner tr"></div>
-          <div class="video-frame-corner bl"></div>
-          <div class="video-frame-corner br"></div>
-          <div class="video-placeholder">
-            <div class="placeholder-inner">
-              <div class="placeholder-icon">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                  <polygon points="5 3 19 12 5 21 5 3"/>
-                </svg>
+        <!-- Logo BEFORE card in DOM → behind card without z-index tricks -->
+        <div class="hero-logo-float" aria-hidden="true">
+          <Image src={logo} alt="" width={480} height={640} class="fox-float-img" />
+        </div>
+        <div class="dash-card">
+          <div class="dash-frame-corner tl"></div>
+          <div class="dash-frame-corner tr"></div>
+          <div class="dash-frame-corner bl"></div>
+          <div class="dash-frame-corner br"></div>
+          <div class="dash-topbar mono-font">
+            <div class="dash-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <span class="dash-topbar-title">emberfox.be — status</span>
+            <span class="dash-cursor">█</span>
+          </div>
+          <div class="dash-body">
+            <div class="dash-row dash-row-status">
+              <span class="dash-k">status</span>
+              <span class="dash-v"><span class="dash-online-dot"></span>disponible</span>
+            </div>
+            <div class="dash-info-grid">
+              <div class="dash-info-cell">
+                <span class="dash-k">zone</span>
+                <span class="dash-v">Namur &amp; Belgique</span>
               </div>
-              <span class="mono-font placeholder-text">VIDÉO À VENIR</span>
-              <div class="placeholder-bar">
-                <div class="placeholder-bar-fill"></div>
+              <div class="dash-info-cell">
+                <span class="dash-k">services</span>
+                <span class="dash-v fire-text">web · apps · pc · it</span>
               </div>
+              <div class="dash-info-cell">
+                <span class="dash-k">délai réponse</span>
+                <span class="dash-v">{"< "}24h</span>
+              </div>
+            </div>
+            <div class="dash-sep"></div>
+            <div class="dash-metrics">
+              {stats.map(s => (
+                <div class="dash-metric">
+                  <span class="display-font fire-text dash-metric-val">{s.value}</span>
+                  <span class="mono-font dash-metric-label">{s.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Logo flottant PNG -->
-    <div class="hero-logo-float" aria-hidden="true">
-      <Image src={logo} alt="" width={480} height={640} class="fox-float-img" />
-    </div>
   </section>
 
   <!-- SERVICES -->
   <section class="section" id="services">
     <div class="container">
-      <div class="section-header">
+      <div class="section-header fade-in">
         <p class="section-pre mono-font fire-text">— Services</p>
         <h2 class="display-font" style="font-size:clamp(2.5rem,5vw,4rem)">Ce que je propose</h2>
         <div class="fire-divider"></div>
         <p class="section-desc">Une expertise complète pour répondre à tous vos besoins numériques et matériels.</p>
       </div>
       <div class="services-grid">
-        {services.map(s => (
-          <a href={s.href} class="service-card card">
+        {services.map((s, i) => (
+          <a href={s.href} class="service-card card fade-in" style={`transition-delay:${i * 0.08}s`}>
             <div class="service-header">
               <div class="service-tag mono-font">{s.tag}</div>
               <div class="service-num display-font">{s.num}</div>
@@ -178,14 +200,14 @@ const whyItems = [
             Basé à Namur, j'interviens rapidement chez vous ou à distance.
             Chaque projet est traité avec la même exigence et le même feu sacré.
           </p>
-          <a href="/Contact" class="btn-fire">
+          <a href={`${base}/Contact`} class="btn-fire">
             Me contacter
             <ArrowRightLight width={16} height={16} />
           </a>
         </div>
         <div class="why-right">
           {whyItems.map((item, i) => (
-            <div class="why-item">
+            <div class="why-item fade-in" style={`transition-delay:${i * 0.1}s`}>
               <div class="why-num mono-font">{String(i + 1).padStart(2, '0')}</div>
               <div class="why-content">
                 <strong class="display-font" style="font-size:1.3rem;color:var(--ember-3)">{item.title}</strong>
@@ -209,11 +231,11 @@ const whyItems = [
           <p style="color:var(--text-secondary);margin-top:0.25rem">Devis gratuit · Réponse sous 24h</p>
         </div>
         <div class="cta-actions">
-          <a href="/Contact" class="btn-fire">
+          <a href={`${base}/Contact`} class="btn-fire">
             Demander un devis
             <ArrowRightLight width={16} height={16} />
           </a>
-          <a href="tel:+32000000000" class="btn-outline">
+          <a href="tel:+32498377455" class="btn-outline">
             <PhoneLight width={16} height={16} />
             Appeler
           </a>
@@ -326,73 +348,145 @@ const whyItems = [
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
-  margin-bottom: 4rem;
+  margin-bottom: 2.5rem;
   animation: title-in 0.8s ease 0.3s both;
 }
+/* Stats masquées sur desktop — déjà présentes dans le terminal */
 .hero-stats {
-  display: flex;
-  gap: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--dark-border);
-  animation: title-in 0.8s ease 0.4s both;
+  display: none;
 }
 .stat { display: flex; flex-direction: column; }
-.stat-value { font-size: 2rem; line-height: 1; }
+.stat-value { font-size: 1.8rem; line-height: 1; }
 .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.25rem; letter-spacing: 0.05em; }
 
 /* HERO VISUAL */
-.hero-visual { position: relative; }
-.video-frame {
+.hero-visual {
   position: relative;
+  display: flex;
+  align-items: center;
+  /* Right padding reserves room so the logo always peeks out */
+  padding-right: 110px;
+}
+.dash-card {
+  position: relative;
+  z-index: 2;
   width: 100%;
-  max-width: 540px;
-  aspect-ratio: 16 / 9;
+  max-width: 440px;
   background: var(--dark-card);
   border: 1px solid var(--dark-border);
-  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
   overflow: hidden;
   animation: title-in 0.8s ease 0.5s both;
 }
-.video-frame-corner {
+.dash-frame-corner {
   position: absolute;
   width: 16px; height: 16px;
   z-index: 3;
 }
-.video-frame-corner.tl { top: 0; left: 0; border-top: 2px solid var(--ember-2); border-left: 2px solid var(--ember-2); }
-.video-frame-corner.tr { top: 0; right: 0; border-top: 2px solid var(--ember-2); border-right: 2px solid var(--ember-2); }
-.video-frame-corner.bl { bottom: 0; left: 0; border-bottom: 2px solid var(--ember-2); border-left: 2px solid var(--ember-2); }
-.video-frame-corner.br { bottom: 0; right: 0; border-bottom: 2px solid var(--ember-2); border-right: 2px solid var(--ember-2); }
-.video-placeholder {
-  width: 100%; height: 100%;
-  display: flex; align-items: center; justify-content: center;
-  background:
-    linear-gradient(rgba(255,70,0,0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,70,0,0.03) 1px, transparent 1px),
-    var(--dark-card);
-  background-size: 32px 32px;
+.dash-frame-corner.tl { top: 0; left: 0; border-top: 2px solid var(--ember-2); border-left: 2px solid var(--ember-2); }
+.dash-frame-corner.tr { top: 0; right: 0; border-top: 2px solid var(--ember-2); border-right: 2px solid var(--ember-2); }
+.dash-frame-corner.bl { bottom: 0; left: 0; border-bottom: 2px solid var(--ember-2); border-left: 2px solid var(--ember-2); }
+.dash-frame-corner.br { bottom: 0; right: 0; border-bottom: 2px solid var(--ember-2); border-right: 2px solid var(--ember-2); }
+.dash-topbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.25rem;
+  background: var(--dark-card-2);
+  border-bottom: 1px solid var(--dark-border);
+  font-size: 0.72rem;
+  color: var(--text-muted);
 }
-.placeholder-inner { text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
-.placeholder-icon { color: var(--ember-1); opacity: 0.5; }
-.placeholder-text { color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.2em; }
-.placeholder-bar { width: 80px; height: 2px; background: var(--dark-border); }
-.placeholder-bar-fill { width: 40%; height: 100%; background: var(--gradient-fire); animation: bar-pulse 2s ease-in-out infinite; }
-@keyframes bar-pulse { 0%, 100% { width: 30%; } 50% { width: 70%; } }
+.dash-dots { display: flex; gap: 5px; }
+.dash-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.dash-dots span:nth-child(1) { background: #ff5f57; }
+.dash-dots span:nth-child(2) { background: #ffbd2e; }
+.dash-dots span:nth-child(3) { background: #28c840; }
+.dash-topbar-title { flex: 1; text-align: center; }
+.dash-cursor { animation: cursor-blink 1s step-end infinite; color: var(--ember-3); }
+@keyframes cursor-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.dash-body { padding: 0; display: flex; flex-direction: column; }
 
-/* FLOAT LOGO */
+/* Status row — highlighted */
+.dash-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.65rem 1.25rem;
+  font-size: 0.82rem;
+}
+.dash-row-status {
+  border-bottom: 1px solid var(--dark-border);
+}
+.dash-row-status .dash-v { color: var(--ember-3); }
+
+/* 3-col info grid */
+.dash-info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--dark-border);
+}
+.dash-info-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.75rem 1.25rem;
+  border-right: 1px solid var(--dark-border);
+}
+.dash-info-cell:last-child { border-right: none; }
+
+.dash-k { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.08em; }
+.dash-v { color: var(--text-secondary); display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; }
+.dash-online-dot {
+  width: 6px; height: 6px;
+  background: #22c55e;
+  border-radius: 50%;
+  box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+  animation: blink 2s ease-in-out infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Labeled separator */
+.dash-sep {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0 1.25rem;
+  margin: 0.875rem 0 0.625rem;
+  font-size: 0.6rem;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+.dash-sep::before, .dash-sep::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--dark-border);
+}
+
+/* 4-col metrics */
+.dash-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.25rem; padding: 0 1rem 1rem; }
+.dash-metric { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.5rem 0.25rem; align-items: center; text-align: center; }
+.dash-metric-val { font-size: 1.3rem; line-height: 1; }
+.dash-metric-label { font-size: 0.5rem; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; }
+
+/* FLOAT LOGO — lié au dashboard, derrière la card (ordre DOM) */
 .hero-logo-float {
   position: absolute;
-  right: 3%;
+  right: -100px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  z-index: 1;
+  /* No z-index needed: DOM order (before dash-card) keeps it behind */
 }
 .fox-float-img {
-  width: 480px; height: 480px;
+  width: 360px; height: 360px;
   object-fit: contain;
   opacity: 0.18;
   animation: fox-float 7s ease-in-out infinite;
-  filter: drop-shadow(0 0 30px rgba(255, 100, 0, 0.2));
+  filter: drop-shadow(0 0 40px rgba(255, 100, 0, 0.5));
 }
 @keyframes fox-float {
   0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -500,17 +594,48 @@ const whyItems = [
 }
 .cta-actions { display: flex; gap: 1rem; flex-wrap: wrap; flex-shrink: 0; }
 
-@media (max-width: 1024px) {
-  .hero-logo-float { display: none; }
-}
+/* ≤ 900px — 1 colonne, logo masqué */
 @media (max-width: 900px) {
-  .hero-content { grid-template-columns: 1fr; gap: 3rem; }
+  .hero { padding: 9rem 0 4rem; min-height: auto; }
+  .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-visual { padding-right: 0; }
+  .hero-logo-float { display: none; }
+  .dash-card { max-width: 480px; }
 }
+
+/* ≤ 768px — grilles générales */
 @media (max-width: 768px) {
-  .hero-stats { gap: 1.5rem; flex-wrap: wrap; }
   .services-grid { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; gap: 3rem; }
-  .cta-inner { flex-direction: column; }
-  .cta-actions { width: 100%; }
+  .cta-band { padding: 4rem 0; }
+  .cta-inner { flex-direction: column; align-items: flex-start; padding: 2.5rem; gap: 2rem; }
+  .cta-actions { width: 100%; flex-direction: column; }
+  .cta-actions .btn-fire,
+  .cta-actions .btn-outline { width: 100%; justify-content: center; }
+}
+
+/* ≤ 480px — mobile compact */
+@media (max-width: 480px) {
+  .hero { padding: 7rem 0 3rem; }
+  .hero-badge { font-size: 0.7rem; letter-spacing: 0.08em; padding: 0.35rem 0.75rem; }
+  .hero-title { font-size: clamp(2.8rem, 11vw, 3.5rem); }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-actions { flex-direction: column; gap: 0.75rem; margin-bottom: 2rem; }
+  .hero-actions .btn-fire,
+  .hero-actions .btn-outline { width: 100%; justify-content: center; }
+  /* Terminal masqué → on réaffiche les stats */
+  .hero-visual { display: none; }
+  .hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--dark-border);
+    animation: title-in 0.8s ease 0.4s both;
+  }
+  /* Services */
+  .service-card { padding: 1.5rem; min-height: unset; }
+  /* CTA */
+  .cta-inner { padding: 1.75rem 1.25rem; }
 }
 </style>

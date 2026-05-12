@@ -25,13 +25,40 @@ const useCases = [
         <p class="section-pre mono-font fire-text">— Service 02</p>
         <h1 class="display-font page-title">Applications<br/><span class="fire-text">Sur Mesure</span></h1>
         <p class="page-sub">Votre métier est unique — votre outil doit l'être aussi. Je développe des applications web et mobiles qui s'adaptent parfaitement à vos processus.</p>
-        <a href="/contact" class="btn-fire">
+        <a href="/emberfox-site/Contact" class="btn-fire">
           Parler de mon projet
           <ArrowRightLight width={16} height={16} />
         </a>
       </div>
     </div>
-    <div class="page-hero-deco display-font">APP</div>
+    <div class="code-bg" aria-hidden="true">
+      <svg class="code-svg" viewBox="0 0 500 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="codeGlow" cx="50%" cy="50%" r="55%">
+            <stop offset="0%" stop-color="rgba(255,80,0,0.10)"/>
+            <stop offset="100%" stop-color="rgba(255,60,0,0)"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="250" cy="240" rx="220" ry="200" fill="url(#codeGlow)"/>
+        <g font-family="'Courier New', monospace" font-size="13">
+          <text x="30" y="55"  fill="rgba(255,140,0,0.18)">import &#123; createApp &#125; from 'vue';</text>
+          <text x="30" y="80"  fill="rgba(255,100,0,0.12)">import Router from './router';</text>
+          <text x="30" y="115" fill="rgba(255,140,0,0.22)">interface UserData &#123;</text>
+          <text x="50" y="140" fill="rgba(255,100,0,0.16)">  id: string;</text>
+          <text x="50" y="165" fill="rgba(255,100,0,0.16)">  email: string;</text>
+          <text x="50" y="190" fill="rgba(255,100,0,0.16)">  role: 'admin' | 'user';</text>
+          <text x="30" y="215" fill="rgba(255,140,0,0.22)">&#125;</text>
+          <text x="30" y="248" fill="rgba(255,120,0,0.20)">async function fetchData(</text>
+          <text x="50" y="273" fill="rgba(255,100,0,0.14)">  endpoint: string</text>
+          <text x="30" y="298" fill="rgba(255,120,0,0.20)">) &#123;</text>
+          <text x="50" y="323" fill="rgba(255,140,0,0.22)">  const res = await api.get(endpoint);</text>
+          <text x="50" y="348" fill="rgba(255,100,0,0.14)">  return res.data;</text>
+          <text x="30" y="373" fill="rgba(255,120,0,0.18)">&#125;</text>
+          <text x="30" y="408" fill="rgba(255,80,0,0.12)">export default app;</text>
+          <text x="30" y="440" fill="rgba(255,80,0,0.08)">// build v2.4 — production</text>
+        </g>
+      </svg>
+    </div>
   </section>
 
   <!-- USE CASES -->
@@ -87,9 +114,28 @@ const useCases = [
 .page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
 .page-title { font-size: clamp(3.5rem, 7vw, 6rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
 .page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
-.page-hero-deco {
-  position: absolute; right: 2rem; top: 50%; transform: translateY(-50%);
-  font-size: clamp(8rem, 15vw, 14rem); color: var(--dark-border); pointer-events: none; z-index: 1; line-height: 1;
+.code-bg { position: absolute; right: -60px; top: 50%; transform: translateY(-50%); width: clamp(300px, 40vw, 520px); height: clamp(300px, 40vw, 520px); pointer-events: none; z-index: 1; }
+.code-svg { width: 100%; height: 100%; overflow: visible; }
+@media (max-width: 768px) { .code-bg { display: none; } }
+.code-svg g > text { animation: code-line-in 0.4s ease both; }
+.code-svg g > text:nth-child(1)  { animation-delay: 0.25s; }
+.code-svg g > text:nth-child(2)  { animation-delay: 0.45s; }
+.code-svg g > text:nth-child(3)  { animation-delay: 0.70s; }
+.code-svg g > text:nth-child(4)  { animation-delay: 0.88s; }
+.code-svg g > text:nth-child(5)  { animation-delay: 1.06s; }
+.code-svg g > text:nth-child(6)  { animation-delay: 1.24s; }
+.code-svg g > text:nth-child(7)  { animation-delay: 1.42s; }
+.code-svg g > text:nth-child(8)  { animation-delay: 1.60s; }
+.code-svg g > text:nth-child(9)  { animation-delay: 1.78s; }
+.code-svg g > text:nth-child(10) { animation-delay: 1.96s; }
+.code-svg g > text:nth-child(11) { animation-delay: 2.14s; }
+.code-svg g > text:nth-child(12) { animation-delay: 2.32s; }
+.code-svg g > text:nth-child(13) { animation-delay: 2.50s; }
+.code-svg g > text:nth-child(14) { animation-delay: 2.68s; }
+.code-svg g > text:nth-child(15) { animation-delay: 2.86s; }
+@keyframes code-line-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .uc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; }
@@ -113,5 +159,9 @@ const useCases = [
   .uc-grid { grid-template-columns: 1fr 1fr; }
   .stack-grid { grid-template-columns: 1fr; gap: 2rem; }
   .stack-cols { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+  .uc-grid { grid-template-columns: 1fr; }
+  .stack-cols { grid-template-columns: 1fr; }
 }
 </style>
