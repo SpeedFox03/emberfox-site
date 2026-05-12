@@ -1,0 +1,247 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
+import PhoneCallLight from 'phosphor-astro/PhoneCallLight.astro';
+
+const faqs = [
+  {
+    cat: 'Général',
+    items: [
+      {
+        q: 'Dans quelle zone géographique intervenez-vous ?',
+        a: 'Je suis basé à Namur et j\'interviens principalement dans la région namuroise (Namur, Gembloux, Dinant, Andenne, etc.). Pour les projets de développement web ou d\'applications, je travaille à distance pour toute la Belgique — et au-delà.',
+      },
+      {
+        q: 'Comment se déroule le premier contact ?',
+        a: 'Soit par téléphone (+32 498 37 74 55), soit via le formulaire de contact. Ce premier échange est gratuit et sans engagement — l\'objectif est de comprendre votre besoin et de voir si je peux vous aider efficacement.',
+      },
+      {
+        q: 'Travaillez-vous seul ou en équipe ?',
+        a: 'Je travaille seul. Cela veut dire que vous avez toujours affaire à la même personne — du devis à la livraison. Pas d\'intermédiaire, pas de délégation à un sous-traitant que vous ne connaissez pas.',
+      },
+    ],
+  },
+  {
+    cat: 'Tarifs',
+    items: [
+      {
+        q: 'Comment sont calculés vos tarifs ?',
+        a: 'Selon le type de mission : au forfait pour les projets définis (site web, application, montage PC), ou au taux horaire pour le dépannage et les missions de support. Le tarif est toujours annoncé avant d\'intervenir.',
+      },
+      {
+        q: 'Y a-t-il des frais cachés ?',
+        a: 'Non. Le devis est fixe sauf changement de périmètre explicitement validé ensemble. Pour le dépannage, si je n\'arrive pas à résoudre le problème, je ne facture pas.',
+      },
+      {
+        q: 'Proposez-vous des tarifs préférentiels pour les associations ou les seniors ?',
+        a: 'Oui. Je propose un tarif réduit pour les associations à but non lucratif et les personnes âgées pour les interventions de dépannage. Mentionnez-le lors du premier contact.',
+      },
+    ],
+  },
+  {
+    cat: 'Délais',
+    items: [
+      {
+        q: 'Quel est le délai pour un site web ?',
+        a: 'Comptez 2 à 4 semaines pour un site vitrine standard, selon la complexité et la disponibilité du contenu de votre côté. Un site e-commerce ou avec fonctionnalités sur mesure peut prendre 4 à 8 semaines.',
+      },
+      {
+        q: 'Et pour une application sur mesure ?',
+        a: 'Variable selon la complexité : de 4 semaines pour une application simple à 3 mois pour un projet ambitieux. Je décompose toujours en étapes claires avec des livrables intermédiaires.',
+      },
+      {
+        q: 'Pour le dépannage, quels sont les délais d\'intervention ?',
+        a: 'Pour les urgences, j\'essaie d\'intervenir le jour même ou le lendemain. Pour les missions non urgentes, sous 3 à 5 jours ouvrables. Appelez directement pour une urgence.',
+      },
+    ],
+  },
+  {
+    cat: 'Technique',
+    items: [
+      {
+        q: 'Quelles technologies utilisez-vous ?',
+        a: 'Pour le web : Astro, React, Next.js, TypeScript, Tailwind. Pour le backend : Node.js, PostgreSQL, Supabase. Pour le mobile : React Native, Expo. Je choisis la technologie adaptée au projet, pas celle que je préfère.',
+      },
+      {
+        q: 'Proposez-vous de la maintenance après livraison ?',
+        a: 'Oui — contrats de maintenance mensuelle disponibles pour les sites web et applications : mises à jour, sauvegardes, corrections de bugs, petites évolutions. Tarif selon la complexité du projet.',
+      },
+      {
+        q: 'Pouvez-vous reprendre un site ou une application existante ?',
+        a: 'Oui. Je fais d\'abord un audit du code existant pour estimer la faisabilité et le coût. Selon l\'état du projet, je peux soit reprendre la base existante, soit conseiller une refonte.',
+      },
+    ],
+  },
+];
+---
+<BaseLayout title="FAQ" description="Questions fréquentes sur les services EmberFox — tarifs, délais, zone d'intervention.">
+
+  <section class="faq-hero">
+    <div class="container">
+      <div style="max-width:680px">
+        <p class="section-pre mono-font fire-text">— Support</p>
+        <h1 class="display-font faq-title">Questions<br/><span class="fire-text">Fréquentes</span></h1>
+        <p class="page-sub">Tout ce que vous voulez savoir avant de me contacter. Si votre question n'est pas là, appelez ou écrivez — je réponds toujours.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container faq-layout">
+      <nav class="faq-nav" aria-label="Catégories FAQ">
+        {faqs.map(g => (
+          <a href={`#${g.cat.toLowerCase().replace(/\s+/g,'-')}`} class="faq-nav-link mono-font">{g.cat}</a>
+        ))}
+      </nav>
+
+      <div class="faq-content">
+        {faqs.map(group => (
+          <div class="faq-group" id={group.cat.toLowerCase().replace(/\s+/g,'-')}>
+            <h2 class="display-font faq-group-title">
+              <span class="fire-text">{group.cat}</span>
+            </h2>
+            <div class="faq-items">
+              {group.items.map(item => (
+                <details class="faq-item">
+                  <summary class="faq-question">
+                    <span class="display-font faq-q-text">{item.q}</span>
+                    <span class="faq-chevron" aria-hidden="true">
+                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </span>
+                  </summary>
+                  <div class="faq-answer">
+                    <p>{item.a}</p>
+                  </div>
+                </details>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border)">
+    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
+      <div>
+        <h2 class="display-font" style="font-size:clamp(1.8rem,3.5vw,2.8rem)">Votre question n'est pas là ?</h2>
+        <p style="color:var(--text-secondary);margin-top:0.5rem">Je réponds en quelques heures — appelez ou écrivez.</p>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap">
+        <a href="tel:+32498377455" class="btn-fire">
+          <PhoneCallLight width={16} height={16} />
+          Appeler
+        </a>
+        <a href="/emberfox-site/Contact" class="btn-outline">
+          Formulaire
+          <ArrowRightLight width={16} height={16} />
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.faq-hero {
+  padding: 10rem 0 4rem;
+  position: relative;
+}
+.faq-title {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  line-height: 0.92;
+  margin: 1rem 0 1.5rem;
+}
+.page-sub { color: var(--text-secondary); font-size: 1.05rem; line-height: 1.8; }
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+.faq-nav {
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.faq-nav-link {
+  display: block;
+  padding: 0.6rem 0.875rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-left: 2px solid var(--dark-border);
+  transition: color 0.2s, border-color 0.2s, padding-left 0.2s;
+}
+.faq-nav-link:hover {
+  color: var(--ember-3);
+  border-left-color: var(--ember-3);
+  padding-left: 1.125rem;
+}
+
+.faq-group { margin-bottom: 3.5rem; }
+.faq-group-title { font-size: 1.6rem; margin-bottom: 1.25rem; }
+.faq-items { display: flex; flex-direction: column; }
+
+.faq-item {
+  border-top: 1px solid var(--dark-border);
+  overflow: hidden;
+}
+.faq-item:last-child { border-bottom: 1px solid var(--dark-border); }
+
+.faq-question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+.faq-question::-webkit-details-marker { display: none; }
+.faq-q-text {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+}
+.faq-question:hover .faq-q-text { color: var(--ember-3); }
+.faq-chevron {
+  color: var(--text-muted);
+  flex-shrink: 0;
+  transition: transform 0.25s ease, color 0.2s;
+}
+.faq-item[open] .faq-chevron { transform: rotate(180deg); color: var(--ember-3); }
+.faq-item[open] .faq-q-text { color: var(--ember-3); }
+
+.faq-answer {
+  padding: 0 0 1.25rem;
+  animation: faq-open 0.2s ease;
+}
+.faq-answer p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.75;
+  max-width: 640px;
+}
+@keyframes faq-open {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+  .faq-layout { grid-template-columns: 1fr; gap: 2rem; }
+  .faq-nav { flex-direction: row; flex-wrap: wrap; position: static; gap: 0.5rem; }
+  .faq-nav-link { border-left: none; border-bottom: 2px solid var(--dark-border); padding: 0.4rem 0.75rem; }
+  .faq-nav-link:hover { border-bottom-color: var(--ember-3); padding-left: 0.75rem; }
+}
+</style>

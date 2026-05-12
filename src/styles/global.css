@@ -215,14 +215,24 @@ body::before {
 button, [role="button"] { min-height: 44px; }
 a.btn-fire, a.btn-outline { min-height: 44px; }
 
+/* Desktop text scaling — scales all rem values proportionally */
+@media (min-width: 1024px) {
+  html { font-size: 112.5%; }
+}
+@media (min-width: 1600px) {
+  html { font-size: 120%; }
+}
+
 /* Responsive — container padding */
 @media (max-width: 768px) {
+  html { font-size: 100%; }
   .container { padding: 0 1.25rem; }
   .section { padding: 5rem 0; }
   .page-hero { padding: 8rem 0 3rem !important; }
 }
 
 @media (max-width: 480px) {
+  html { font-size: 100%; }
   .container { padding: 0 1rem; }
   .section { padding: 3.5rem 0; }
   h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }

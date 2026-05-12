@@ -1,0 +1,243 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StorefrontLight from 'phosphor-astro/StorefrontLight.astro';
+import ChartBarLight from 'phosphor-astro/ChartBarLight.astro';
+import CalendarLight from 'phosphor-astro/CalendarLight.astro';
+import LinkLight from 'phosphor-astro/LinkLight.astro';
+import HardDrivesLight from 'phosphor-astro/HardDrivesLight.astro';
+import BugLight from 'phosphor-astro/BugLight.astro';
+import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
+
+const projects = [
+  {
+    icon: StorefrontLight,
+    category: 'Sites Web',
+    title: 'La Brasserie du Vieux Namur',
+    desc: 'Site vitrine pour un restaurant namurois — menu interactif, galerie photos, formulaire de réservation en ligne et référencement local.',
+    stack: ['Astro', 'CSS', 'Netlify'],
+    year: '2025',
+  },
+  {
+    icon: ChartBarLight,
+    category: 'Applications',
+    title: 'StockPilot',
+    desc: 'Application web de gestion de stock pour une PME de distribution — suivi en temps réel, alertes seuil, exports CSV et tableau de bord analytique.',
+    stack: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
+    year: '2025',
+  },
+  {
+    icon: CalendarLight,
+    category: 'Applications',
+    title: 'CabinetMed Agenda',
+    desc: 'Système de prise de rendez-vous en ligne pour un cabinet médical — gestion du planning, rappels email automatisés et espace patient sécurisé.',
+    stack: ['Next.js', 'Supabase', 'Resend', 'TypeScript'],
+    year: '2024',
+  },
+  {
+    icon: LinkLight,
+    category: 'Sites Web',
+    title: 'Garage Dupont',
+    desc: 'Refonte complète du site d\'un garage automobile — présentation des services, devis en ligne, intégration Google Reviews et page contact.',
+    stack: ['Astro', 'Tailwind', 'Cloudflare'],
+    year: '2024',
+  },
+  {
+    icon: HardDrivesLight,
+    category: 'Montage PC',
+    title: 'Workstation Créative',
+    desc: 'Montage sur mesure pour une graphiste indépendante — Ryzen 9 7950X, 64 Go DDR5, RTX 4070 Ti Super, NVMe 2 To. Câblage soigné, watercooling AIO.',
+    stack: ['AMD Ryzen 9', 'NVIDIA RTX', 'Windows 11 Pro'],
+    year: '2026',
+  },
+  {
+    icon: BugLight,
+    category: 'Dépannage',
+    title: 'Récupération de données',
+    desc: 'Récupération complète des données d\'un disque dur SATA défaillant pour un particulier — 97 % des fichiers restaurés malgré une panne mécanique.',
+    stack: ['Linux', 'TestDisk', 'PhotoRec'],
+    year: '2025',
+  },
+];
+
+const catColor: Record<string, string> = {
+  'Sites Web':    'rgba(255,140,0,0.12)',
+  'Applications': 'rgba(255,69,0,0.10)',
+  'Montage PC':   'rgba(255,184,48,0.10)',
+  'Dépannage':    'rgba(255,100,0,0.10)',
+};
+---
+<BaseLayout title="Projets" description="Réalisations et projets — EmberFox">
+
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-inner">
+        <p class="section-pre mono-font fire-text">— Réalisations</p>
+        <h1 class="display-font page-title">Mes<br/><span class="fire-text">Projets</span></h1>
+        <p class="page-sub">Sites web, applications, PC montés sur mesure, dépannage — chaque projet est une nouvelle occasion de construire quelque chose qui fonctionne vraiment.</p>
+        <a href="/emberfox-site/Contact" class="btn-fire">
+          Parler de mon projet
+          <ArrowRightLight width={16} height={16} />
+        </a>
+      </div>
+    </div>
+    <div class="code-bg" aria-hidden="true">
+      <svg class="code-svg" viewBox="0 0 500 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="projGlow" cx="50%" cy="50%" r="55%">
+            <stop offset="0%" stop-color="rgba(255,80,0,0.10)"/>
+            <stop offset="100%" stop-color="rgba(255,60,0,0)"/>
+          </radialGradient>
+        </defs>
+        <ellipse cx="250" cy="240" rx="220" ry="200" fill="url(#projGlow)"/>
+        <g font-family="'Courier New', monospace" font-size="13">
+          <text x="30" y="55"  fill="rgba(255,140,0,0.22)">$ ls -la ~/projets/</text>
+          <text x="30" y="78"  fill="rgba(255,100,0,0.12)">total 6 projets</text>
+          <text x="30" y="112" fill="rgba(255,140,0,0.18)">drwxr--  brasserie-namur/      2025</text>
+          <text x="30" y="137" fill="rgba(255,140,0,0.18)">drwxr--  stockpilot-app/       2025</text>
+          <text x="30" y="162" fill="rgba(255,140,0,0.18)">drwxr--  cabinetmed-agenda/    2024</text>
+          <text x="30" y="187" fill="rgba(255,140,0,0.18)">drwxr--  garage-dupont/        2024</text>
+          <text x="30" y="212" fill="rgba(255,140,0,0.18)">drwxr--  workstation-creative/ 2026</text>
+          <text x="30" y="237" fill="rgba(255,140,0,0.18)">drwxr--  data-recovery/        2025</text>
+          <text x="30" y="272" fill="rgba(255,120,0,0.20)">$ git log --oneline</text>
+          <text x="30" y="297" fill="rgba(255,100,0,0.16)">f1a2b3c feat: cabinetmed v2 deploy</text>
+          <text x="30" y="322" fill="rgba(255,100,0,0.14)">d4e5f6g fix: mobile responsive nav</text>
+          <text x="30" y="347" fill="rgba(255,100,0,0.14)">a7b8c9d feat: stockpilot csv export</text>
+          <text x="30" y="372" fill="rgba(255,100,0,0.14)">3c2d1e0 feat: garage devis form</text>
+          <text x="30" y="408" fill="rgba(255,80,0,0.12)">$ npm run build</text>
+          <text x="30" y="433" fill="rgba(255,140,0,0.22)">  ✓ 6 projets livrés</text>
+          <text x="30" y="458" fill="rgba(255,80,0,0.10)">_</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- GRID -->
+  <section class="section">
+    <div class="container">
+      <p class="section-pre mono-font fire-text">— Portfolio</p>
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:0.5rem">Ce que j'ai construit</h2>
+      <div class="fire-divider"></div>
+      <div class="projects-grid">
+        {projects.map(p => (
+          <div class="project-card card">
+            <div class="project-header" style={`background:${catColor[p.category] ?? 'rgba(255,100,0,0.08)'}`}>
+              <p.icon width={30} height={30} class="project-icon" />
+              <span class="project-cat mono-font">{p.category}</span>
+              <span class="project-year mono-font">{p.year}</span>
+            </div>
+            <div class="project-body">
+              <h3 class="display-font project-title">{p.title}</h3>
+              <p class="project-desc">{p.desc}</p>
+              <div class="project-tags">
+                {p.stack.map(t => <span class="tag">{t}</span>)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border);border-bottom:1px solid var(--dark-border)">
+    <div class="container cta-inner">
+      <div>
+        <p class="section-pre mono-font fire-text">— Votre tour</p>
+        <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem)">Un projet en tête ?</h2>
+        <p style="color:var(--text-secondary);margin-top:0.75rem;max-width:520px;line-height:1.7">Discutons de votre idée. Premier échange gratuit, sans engagement, pour évaluer ensemble la faisabilité et l'approche.</p>
+      </div>
+      <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center">
+        <a href="/emberfox-site/Contact" class="btn-fire">
+          Démarrer un projet
+          <ArrowRightLight width={16} height={16} />
+        </a>
+        <a href="/emberfox-site/A-propos" class="btn-outline">En savoir plus</a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+.page-hero { padding: 10rem 0 5rem; position: relative; overflow: hidden; }
+.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
+.page-title { font-size: clamp(3.5rem, 7vw, 6rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
+.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
+.code-bg { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); width: clamp(300px, 40vw, 520px); height: clamp(300px, 40vw, 520px); pointer-events: none; z-index: 1; }
+.code-svg { width: 100%; height: 100%; overflow: visible; }
+@media (max-width: 768px) { .code-bg { display: none; } }
+
+.code-svg g > text { animation: proj-line-in 0.35s ease both; }
+.code-svg g > text:nth-child(1)  { animation-delay: 0.20s; }
+.code-svg g > text:nth-child(2)  { animation-delay: 0.40s; }
+.code-svg g > text:nth-child(3)  { animation-delay: 0.65s; }
+.code-svg g > text:nth-child(4)  { animation-delay: 0.82s; }
+.code-svg g > text:nth-child(5)  { animation-delay: 0.99s; }
+.code-svg g > text:nth-child(6)  { animation-delay: 1.16s; }
+.code-svg g > text:nth-child(7)  { animation-delay: 1.33s; }
+.code-svg g > text:nth-child(8)  { animation-delay: 1.60s; }
+.code-svg g > text:nth-child(9)  { animation-delay: 1.80s; }
+.code-svg g > text:nth-child(10) { animation-delay: 2.00s; }
+.code-svg g > text:nth-child(11) { animation-delay: 2.18s; }
+.code-svg g > text:nth-child(12) { animation-delay: 2.36s; }
+.code-svg g > text:nth-child(13) { animation-delay: 2.65s; }
+.code-svg g > text:nth-child(14) { animation-delay: 2.85s; }
+.code-svg g > text:nth-child(15) { animation-delay: 3.10s; }
+@keyframes proj-line-in { from { opacity: 0; } to { opacity: 1; } }
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.project-card { padding: 0; overflow: hidden; }
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--dark-border);
+}
+.project-icon { color: var(--ember-2); flex-shrink: 0; }
+.project-cat {
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  color: var(--ember-3);
+  flex: 1;
+}
+.project-year {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+}
+.project-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+.project-title { font-size: 1.3rem; color: var(--text-primary); line-height: 1.1; }
+.project-desc { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.65; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+.tag {
+  padding: 0.2rem 0.6rem;
+  background: var(--dark-card-2);
+  border: 1px solid var(--dark-border);
+  color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+}
+
+.cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px) {
+  .projects-grid { grid-template-columns: 1fr; }
+  .cta-inner { flex-direction: column; align-items: flex-start; }
+}
+</style>

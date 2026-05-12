@@ -292,8 +292,8 @@ const whyItems = [
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 3rem;
   align-items: center;
   position: relative;
   z-index: 2;
@@ -364,14 +364,13 @@ const whyItems = [
   position: relative;
   display: flex;
   align-items: center;
-  /* Right padding reserves room so the logo always peeks out */
-  padding-right: 110px;
+  padding-right: 90px;
 }
 .dash-card {
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 440px;
+  max-width: 760px;
   background: var(--dark-card);
   border: 1px solid var(--dark-border);
   clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
@@ -391,14 +390,14 @@ const whyItems = [
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
+  padding: 1rem 1.75rem;
   background: var(--dark-card-2);
   border-bottom: 1px solid var(--dark-border);
-  font-size: 0.72rem;
+  font-size: 0.9rem;
   color: var(--text-muted);
 }
-.dash-dots { display: flex; gap: 5px; }
-.dash-dots span { width: 10px; height: 10px; border-radius: 50%; }
+.dash-dots { display: flex; gap: 6px; }
+.dash-dots span { width: 12px; height: 12px; border-radius: 50%; }
 .dash-dots span:nth-child(1) { background: #ff5f57; }
 .dash-dots span:nth-child(2) { background: #ffbd2e; }
 .dash-dots span:nth-child(3) { background: #28c840; }
@@ -412,8 +411,8 @@ const whyItems = [
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.65rem 1.25rem;
-  font-size: 0.82rem;
+  padding: 1rem 1.75rem;
+  font-size: 1rem;
 }
 .dash-row-status {
   border-bottom: 1px solid var(--dark-border);
@@ -429,14 +428,14 @@ const whyItems = [
 .dash-info-cell {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.4rem;
+  padding: 1.1rem 1.75rem;
   border-right: 1px solid var(--dark-border);
 }
 .dash-info-cell:last-child { border-right: none; }
 
-.dash-k { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.62rem; letter-spacing: 0.08em; }
-.dash-v { color: var(--text-secondary); display: flex; align-items: center; gap: 0.4rem; font-size: 0.78rem; }
+.dash-k { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.08em; }
+.dash-v { color: var(--text-secondary); display: flex; align-items: center; gap: 0.4rem; font-size: 1rem; }
 .dash-online-dot {
   width: 6px; height: 6px;
   background: #22c55e;
@@ -467,22 +466,21 @@ const whyItems = [
 }
 
 /* 4-col metrics */
-.dash-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.25rem; padding: 0 1rem 1rem; }
-.dash-metric { display: flex; flex-direction: column; gap: 0.15rem; padding: 0.5rem 0.25rem; align-items: center; text-align: center; }
-.dash-metric-val { font-size: 1.3rem; line-height: 1; }
-.dash-metric-label { font-size: 0.5rem; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; }
+.dash-metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5rem; padding: 0.25rem 1.5rem 1.5rem; }
+.dash-metric { display: flex; flex-direction: column; gap: 0.25rem; padding: 1rem 0.5rem; align-items: center; text-align: center; }
+.dash-metric-val { font-size: 2.4rem; line-height: 1; }
+.dash-metric-label { font-size: 0.65rem; letter-spacing: 0.06em; color: var(--text-muted); text-transform: uppercase; }
 
-/* FLOAT LOGO — lié au dashboard, derrière la card (ordre DOM) */
+/* FLOAT LOGO */
 .hero-logo-float {
   position: absolute;
-  right: -100px;
+  right: -70px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  /* No z-index needed: DOM order (before dash-card) keeps it behind */
 }
 .fox-float-img {
-  width: 360px; height: 360px;
+  width: 300px; height: 300px;
   object-fit: contain;
   opacity: 0.18;
   animation: fox-float 7s ease-in-out infinite;
@@ -600,7 +598,7 @@ const whyItems = [
   .hero-content { grid-template-columns: 1fr; gap: 2.5rem; }
   .hero-visual { padding-right: 0; }
   .hero-logo-float { display: none; }
-  .dash-card { max-width: 480px; }
+  .dash-card { max-width: 520px; }
 }
 
 /* ≤ 768px — grilles générales */
