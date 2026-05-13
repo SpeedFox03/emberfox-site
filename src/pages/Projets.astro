@@ -1,67 +1,79 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import StorefrontLight from 'phosphor-astro/StorefrontLight.astro';
-import ChartBarLight from 'phosphor-astro/ChartBarLight.astro';
 import CalendarLight from 'phosphor-astro/CalendarLight.astro';
+import StorefrontLight from 'phosphor-astro/StorefrontLight.astro';
 import LinkLight from 'phosphor-astro/LinkLight.astro';
 import HardDrivesLight from 'phosphor-astro/HardDrivesLight.astro';
-import BugLight from 'phosphor-astro/BugLight.astro';
+import ChartBarLight from 'phosphor-astro/ChartBarLight.astro';
+import HardDriveLight from 'phosphor-astro/HardDriveLight.astro';
 import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
 
 const projects = [
   {
-    icon: StorefrontLight,
-    category: 'Sites Web',
-    title: 'La Brasserie du Vieux Namur',
-    desc: 'Site vitrine pour un restaurant namurois — menu interactif, galerie photos, formulaire de réservation en ligne et référencement local.',
-    stack: ['Astro', 'CSS', 'Netlify'],
-    year: '2025',
-  },
-  {
-    icon: ChartBarLight,
-    category: 'Applications',
-    title: 'StockPilot',
-    desc: 'Application web de gestion de stock pour une PME de distribution — suivi en temps réel, alertes seuil, exports CSV et tableau de bord analytique.',
-    stack: ['React', 'Node.js', 'PostgreSQL', 'Supabase'],
-    year: '2025',
-  },
-  {
     icon: CalendarLight,
     category: 'Applications',
-    title: 'CabinetMed Agenda',
-    desc: 'Système de prise de rendez-vous en ligne pour un cabinet médical — gestion du planning, rappels email automatisés et espace patient sécurisé.',
-    stack: ['Next.js', 'Supabase', 'Resend', 'TypeScript'],
-    year: '2024',
+    title: 'Event Flow',
+    desc: 'Application de billetterie en ligne — création d\'événements, vente de billets, QR codes de validation et gestion des participants.',
+    stack: ['React', 'Node.js', 'Stripe', 'PostgreSQL'],
+    year: '2025',
+    id: 'event-flow',
+    photos: [] as string[],
+  },
+  {
+    icon: StorefrontLight,
+    category: 'Sites Web',
+    title: 'Moment D. Art',
+    desc: 'Site vitrine pour un artisan peintre spécialisé dans les travaux de finition haut de gamme — galerie de réalisations et prise de contact.',
+    stack: ['Astro', 'CSS', 'Netlify'],
+    year: '2025',
+    id: 'moment-d-art',
+    photos: [] as string[],
   },
   {
     icon: LinkLight,
-    category: 'Sites Web',
-    title: 'Garage Dupont',
-    desc: 'Refonte complète du site d\'un garage automobile — présentation des services, devis en ligne, intégration Google Reviews et page contact.',
-    stack: ['Astro', 'Tailwind', 'Cloudflare'],
-    year: '2024',
+    category: 'Applications',
+    title: 'Roue de fortune Twitch',
+    desc: 'Mini roue de fortune interactive pour un streamer Twitch — segments personnalisables en direct, animations fluides, prête pour overlay OBS.',
+    stack: ['JavaScript', 'Canvas API', 'CSS'],
+    year: '2025',
+    id: 'roue-fortune',
+    photos: [] as string[],
   },
   {
     icon: HardDrivesLight,
     category: 'Montage PC',
-    title: 'Workstation Créative',
-    desc: 'Montage sur mesure pour une graphiste indépendante — Ryzen 9 7950X, 64 Go DDR5, RTX 4070 Ti Super, NVMe 2 To. Câblage soigné, watercooling AIO.',
-    stack: ['AMD Ryzen 9', 'NVIDIA RTX', 'Windows 11 Pro'],
-    year: '2026',
+    title: 'Build Gaming Full Corsair',
+    desc: 'Montage PC gaming haut de gamme — RTX 5080, Ryzen 7 7800X3D, full Corsair. Câblage soigné, éclairage ARGB synchronisé via iCUE.',
+    stack: ['RTX 5080', 'Ryzen 7 7800X3D', 'Corsair', 'Windows 11'],
+    year: '2025',
+    id: 'build-gaming',
+    photos: [] as string[],
   },
   {
-    icon: BugLight,
+    icon: ChartBarLight,
+    category: 'Applications',
+    title: 'Devis & More',
+    desc: 'Application de création et gestion de devis pour les professionnels du bâtiment — multi-corps de métier, calcul automatique, export PDF.',
+    stack: ['React', 'Node.js', 'PDFKit', 'PostgreSQL'],
+    year: '2026',
+    id: 'devis-more',
+    photos: [] as string[],
+  },
+  {
+    icon: HardDriveLight,
     category: 'Dépannage',
-    title: 'Récupération de données',
-    desc: 'Récupération complète des données d\'un disque dur SATA défaillant pour un particulier — 97 % des fichiers restaurés malgré une panne mécanique.',
-    stack: ['Linux', 'TestDisk', 'PhotoRec'],
+    title: 'Migration PC à domicile',
+    desc: 'Accompagnement complet au changement de PC — migration des données, profils utilisateur, logiciels et préférences d\'un ordinateur à l\'autre.',
+    stack: ['Windows', 'Backup & Restore', 'Migration'],
     year: '2025',
+    id: 'migration-pc',
+    photos: [] as string[],
   },
 ];
 
 const catColor: Record<string, string> = {
-  'Sites Web':    'rgba(255,140,0,0.12)',
   'Applications': 'rgba(255,69,0,0.10)',
+  'Sites Web':    'rgba(255,140,0,0.12)',
   'Montage PC':   'rgba(255,184,48,0.10)',
   'Dépannage':    'rgba(255,100,0,0.10)',
 };
@@ -92,17 +104,17 @@ const catColor: Record<string, string> = {
         <g font-family="'Courier New', monospace" font-size="13">
           <text x="30" y="55"  fill="rgba(255,140,0,0.22)">$ ls -la ~/projets/</text>
           <text x="30" y="78"  fill="rgba(255,100,0,0.12)">total 6 projets</text>
-          <text x="30" y="112" fill="rgba(255,140,0,0.18)">drwxr--  brasserie-namur/      2025</text>
-          <text x="30" y="137" fill="rgba(255,140,0,0.18)">drwxr--  stockpilot-app/       2025</text>
-          <text x="30" y="162" fill="rgba(255,140,0,0.18)">drwxr--  cabinetmed-agenda/    2024</text>
-          <text x="30" y="187" fill="rgba(255,140,0,0.18)">drwxr--  garage-dupont/        2024</text>
-          <text x="30" y="212" fill="rgba(255,140,0,0.18)">drwxr--  workstation-creative/ 2026</text>
-          <text x="30" y="237" fill="rgba(255,140,0,0.18)">drwxr--  data-recovery/        2025</text>
+          <text x="30" y="112" fill="rgba(255,140,0,0.18)">drwxr--  event-flow/           2025</text>
+          <text x="30" y="137" fill="rgba(255,140,0,0.18)">drwxr--  moment-d-art/         2025</text>
+          <text x="30" y="162" fill="rgba(255,140,0,0.18)">drwxr--  roue-fortune-twitch/  2025</text>
+          <text x="30" y="187" fill="rgba(255,140,0,0.18)">drwxr--  build-gaming-corsair/ 2025</text>
+          <text x="30" y="212" fill="rgba(255,140,0,0.18)">drwxr--  devis-and-more/       2026</text>
+          <text x="30" y="237" fill="rgba(255,140,0,0.18)">drwxr--  migration-pc/         2025</text>
           <text x="30" y="272" fill="rgba(255,120,0,0.20)">$ git log --oneline</text>
-          <text x="30" y="297" fill="rgba(255,100,0,0.16)">f1a2b3c feat: cabinetmed v2 deploy</text>
-          <text x="30" y="322" fill="rgba(255,100,0,0.14)">d4e5f6g fix: mobile responsive nav</text>
-          <text x="30" y="347" fill="rgba(255,100,0,0.14)">a7b8c9d feat: stockpilot csv export</text>
-          <text x="30" y="372" fill="rgba(255,100,0,0.14)">3c2d1e0 feat: garage devis form</text>
+          <text x="30" y="297" fill="rgba(255,100,0,0.16)">a1b2c3d feat: event-flow stripe v2</text>
+          <text x="30" y="322" fill="rgba(255,100,0,0.14)">d4e5f6g feat: devis-more pdf export</text>
+          <text x="30" y="347" fill="rgba(255,100,0,0.14)">7h8i9j0 feat: twitch wheel segments</text>
+          <text x="30" y="372" fill="rgba(255,100,0,0.14)">k1l2m3n fix: moment-d-art mobile</text>
           <text x="30" y="408" fill="rgba(255,80,0,0.12)">$ npm run build</text>
           <text x="30" y="433" fill="rgba(255,140,0,0.22)">  ✓ 6 projets livrés</text>
           <text x="30" y="458" fill="rgba(255,80,0,0.10)">_</text>
@@ -119,9 +131,21 @@ const catColor: Record<string, string> = {
       <div class="fire-divider"></div>
       <div class="projects-grid">
         {projects.map(p => (
-          <div class="project-card card">
+          <div
+            class="project-card card"
+            role="button"
+            tabindex="0"
+            aria-label={`Voir le projet ${p.title}`}
+            data-id={p.id}
+            data-title={p.title}
+            data-category={p.category}
+            data-year={p.year}
+            data-desc={p.desc}
+            data-stack={JSON.stringify(p.stack)}
+            data-photos={JSON.stringify(p.photos)}
+          >
             <div class="project-header" style={`background:${catColor[p.category] ?? 'rgba(255,100,0,0.08)'}`}>
-              <p.icon width={30} height={30} class="project-icon" />
+              <p.icon width={28} height={28} class="project-icon" />
               <span class="project-cat mono-font">{p.category}</span>
               <span class="project-year mono-font">{p.year}</span>
             </div>
@@ -131,6 +155,14 @@ const catColor: Record<string, string> = {
               <div class="project-tags">
                 {p.stack.map(t => <span class="tag">{t}</span>)}
               </div>
+              <span class="project-hint mono-font">
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+                  <rect x="1" y="1.5" width="10" height="8" rx="1" stroke="currentColor" stroke-width="1.2"/>
+                  <circle cx="4" cy="4.5" r="1" stroke="currentColor" stroke-width="1"/>
+                  <path d="M1 8l2.5-2.5 2 2 1.5-1.5 3 3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Voir les photos
+              </span>
             </div>
           </div>
         ))}
@@ -144,7 +176,7 @@ const catColor: Record<string, string> = {
       <div>
         <p class="section-pre mono-font fire-text">— Votre tour</p>
         <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem)">Un projet en tête ?</h2>
-        <p style="color:var(--text-secondary);margin-top:0.75rem;max-width:520px;line-height:1.7">Discutons de votre idée. Premier échange gratuit, sans engagement, pour évaluer ensemble la faisabilité et l'approche.</p>
+        <p style="color:var(--text-secondary);margin-top:0.75rem;max-width:520px;line-height:1.7">Discutons de votre idée. Premier échange gratuit, sans engagement.</p>
       </div>
       <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:center">
         <a href="/emberfox-site/Contact" class="btn-fire">
@@ -156,6 +188,50 @@ const catColor: Record<string, string> = {
     </div>
   </section>
 
+  <!-- ═══ MODAL ═══ -->
+  <dialog class="project-modal" id="projectModal" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-inner">
+      <div class="modal-header">
+        <div>
+          <p class="modal-cat mono-font fire-text" id="modalCat"></p>
+          <h2 class="display-font modal-title" id="modalTitle"></h2>
+          <p class="modal-year mono-font" id="modalYear"></p>
+        </div>
+        <button class="modal-close" id="modalClose" aria-label="Fermer">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+            <path d="M3 3l12 12M15 3L3 15" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-gallery" id="modalGallery"></div>
+      <p class="modal-desc" id="modalDesc"></p>
+      <div class="modal-tags" id="modalTags"></div>
+    </div>
+  </dialog>
+
+  <!-- ═══ LIGHTBOX ═══ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" hidden>
+    <button class="lb-close" id="lbClose" aria-label="Fermer">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M4 4l12 12M16 4L4 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Précédent">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M13 16l-6-6 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Suivant">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    <figure class="lb-figure">
+      <img class="lb-img" id="lbImg" src="" alt="" />
+      <figcaption class="lb-caption mono-font" id="lbCaption"></figcaption>
+    </figure>
+  </div>
+
 </BaseLayout>
 
 <style>
@@ -166,8 +242,7 @@ const catColor: Record<string, string> = {
 .code-bg { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); width: clamp(300px, 40vw, 520px); height: clamp(300px, 40vw, 520px); pointer-events: none; z-index: 1; }
 .code-svg { width: 100%; height: 100%; overflow: visible; }
 @media (max-width: 768px) { .code-bg { display: none; } }
-
-.code-svg g > text { animation: proj-line-in 0.35s ease both; }
+.code-svg g > text { animation: proj-in 0.35s ease both; }
 .code-svg g > text:nth-child(1)  { animation-delay: 0.20s; }
 .code-svg g > text:nth-child(2)  { animation-delay: 0.40s; }
 .code-svg g > text:nth-child(3)  { animation-delay: 0.65s; }
@@ -183,61 +258,194 @@ const catColor: Record<string, string> = {
 .code-svg g > text:nth-child(13) { animation-delay: 2.65s; }
 .code-svg g > text:nth-child(14) { animation-delay: 2.85s; }
 .code-svg g > text:nth-child(15) { animation-delay: 3.10s; }
-@keyframes proj-line-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes proj-in { from { opacity: 0; } to { opacity: 1; } }
 
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin-top: 2rem;
-}
-.project-card { padding: 0; overflow: hidden; }
+/* Grid */
+.projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 2rem; }
+
+/* Card */
+.project-card { padding: 0; overflow: hidden; cursor: pointer; }
 .project-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid var(--dark-border);
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 1rem 1.5rem; border-bottom: 1px solid var(--dark-border);
 }
-.project-icon { color: var(--ember-2); flex-shrink: 0; }
-.project-cat {
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  color: var(--ember-3);
-  flex: 1;
-}
-.project-year {
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-}
-.project-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
+.project-icon { color: var(--ember-2); opacity: 0.8; flex-shrink: 0; }
+.project-cat { font-size: 0.72rem; letter-spacing: 0.15em; color: var(--ember-3); flex: 1; }
+.project-year { font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-muted); }
+.project-body { padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
 .project-title { font-size: 1.3rem; color: var(--text-primary); line-height: 1.1; }
 .project-desc { color: var(--text-secondary); font-size: 0.875rem; line-height: 1.65; }
-.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.25rem; }
+.project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .tag {
   padding: 0.2rem 0.6rem;
-  background: var(--dark-card-2);
-  border: 1px solid var(--dark-border);
-  color: var(--text-muted);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.05em;
+  background: var(--dark-card-2); border: 1px solid var(--dark-border);
+  color: var(--text-muted); font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem; letter-spacing: 0.05em;
 }
-
-.cta-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
+.project-hint {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  color: var(--text-muted); font-size: 0.72rem; letter-spacing: 0.1em;
+  opacity: 0; transform: translateY(4px);
+  transition: opacity 0.2s, transform 0.2s, color 0.2s;
 }
+.project-card:hover .project-hint { opacity: 1; transform: translateY(0); color: var(--ember-3); }
 
-@media (max-width: 1024px) {
-  .projects-grid { grid-template-columns: repeat(2, 1fr); }
+/* CTA row */
+.cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+
+/* ── Modal ── */
+.project-modal {
+  background: var(--dark-card);
+  border: 1px solid var(--dark-border-2);
+  color: var(--text-primary);
+  width: min(860px, 92vw);
+  max-height: 88vh;
+  padding: 0;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
+}
+.project-modal::backdrop { background: rgba(0,0,0,0.86); backdrop-filter: blur(5px); }
+.modal-inner { overflow-y: auto; max-height: 88vh; padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; }
+.modal-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--dark-border); }
+.modal-cat { font-size: 0.72rem; letter-spacing: 0.18em; margin-bottom: 0.3rem; }
+.modal-title { font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1; }
+.modal-year { font-size: 0.72rem; color: var(--text-muted); letter-spacing: 0.1em; margin-top: 0.3rem; }
+.modal-close {
+  background: transparent; border: 1px solid var(--dark-border); color: var(--text-muted);
+  cursor: pointer; min-height: unset; width: 36px; height: 36px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+  transition: border-color 0.2s, color 0.2s;
+}
+.modal-close:hover { border-color: var(--ember-2); color: var(--ember-3); }
+
+.modal-gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem; }
+.gallery-thumb {
+  aspect-ratio: 16/10; background: var(--dark-card-2); border: 1px solid var(--dark-border);
+  cursor: pointer; padding: 0; min-height: unset; overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+.gallery-thumb:hover { border-color: rgba(255,140,0,0.4); transform: scale(0.97); }
+.gallery-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s; }
+.gallery-thumb:hover img { transform: scale(1.05); }
+.gallery-placeholder {
+  grid-column: 1 / -1; height: 150px; border: 2px dashed var(--dark-border-2);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.75rem; color: var(--text-muted);
+  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem; letter-spacing: 0.12em;
+}
+.modal-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.75; margin: 0; }
+.modal-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+/* ── Lightbox ── */
+.lightbox {
+  position: fixed; inset: 0; background: rgba(4,3,2,0.95); backdrop-filter: blur(8px);
+  z-index: 9997; display: flex; align-items: center; justify-content: center;
+}
+.lightbox[hidden] { display: none; }
+.lb-close {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-primary); cursor: pointer; min-height: unset;
+  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.lb-close:hover { background: rgba(255,69,0,0.18); border-color: var(--ember-2); }
+.lb-nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-primary); cursor: pointer; min-height: unset;
+  width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+.lb-nav:hover { background: rgba(255,69,0,0.18); border-color: var(--ember-2); }
+.lb-nav:disabled { opacity: 0.2; pointer-events: none; }
+.lb-prev { left: 1.25rem; }
+.lb-next { right: 1.25rem; }
+.lb-figure { margin: 0; display: flex; flex-direction: column; align-items: center; gap: 0.875rem; max-width: calc(100vw - 9rem); }
+.lb-img { max-width: 100%; max-height: calc(100vh - 7rem); object-fit: contain; display: block; }
+.lb-caption { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.12em; }
+
+@media (max-width: 1024px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) {
+  .modal-gallery { grid-template-columns: repeat(2, 1fr); }
+  .lb-prev { left: 0.5rem; } .lb-next { right: 0.5rem; }
 }
 @media (max-width: 480px) {
   .projects-grid { grid-template-columns: 1fr; }
+  .modal-inner { padding: 1.25rem; }
   .cta-inner { flex-direction: column; align-items: flex-start; }
 }
 </style>
+
+<script>
+const modal    = document.getElementById('projectModal') as HTMLDialogElement | null;
+const mTitle   = document.getElementById('modalTitle');
+const mCat     = document.getElementById('modalCat');
+const mYear    = document.getElementById('modalYear');
+const mGallery = document.getElementById('modalGallery');
+const mDesc    = document.getElementById('modalDesc');
+const mTags    = document.getElementById('modalTags');
+const mClose   = document.getElementById('modalClose');
+
+const lb       = document.getElementById('lightbox');
+const lbImg    = document.getElementById('lbImg')  as HTMLImageElement | null;
+const lbCap    = document.getElementById('lbCaption');
+const lbClose  = document.getElementById('lbClose');
+const lbPrev   = document.getElementById('lbPrev') as HTMLButtonElement | null;
+const lbNext   = document.getElementById('lbNext') as HTMLButtonElement | null;
+
+let photos: string[] = [];
+let idx = 0;
+
+document.querySelectorAll<HTMLElement>('.project-card').forEach(card => {
+  card.addEventListener('click', () => openModal(card));
+  card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(card); } });
+});
+
+function openModal(el: HTMLElement) {
+  photos = JSON.parse(el.dataset.photos ?? '[]');
+  if (mTitle)  mTitle.textContent  = el.dataset.title    ?? '';
+  if (mCat)    mCat.textContent    = `— ${el.dataset.category ?? ''}`;
+  if (mYear)   mYear.textContent   = el.dataset.year     ?? '';
+  if (mDesc)   mDesc.textContent   = el.dataset.desc     ?? '';
+  if (mTags)   mTags.innerHTML     = JSON.parse(el.dataset.stack ?? '[]').map((t: string) => `<span class="tag">${t}</span>`).join('');
+
+  if (mGallery) {
+    mGallery.innerHTML = photos.length === 0
+      ? `<div class="gallery-placeholder">
+           <svg width="34" height="34" viewBox="0 0 34 34" fill="none"><rect x="2" y="6" width="30" height="22" rx="2" stroke="currentColor" stroke-width="1.3"/><circle cx="11" cy="14" r="2.8" stroke="currentColor" stroke-width="1.3"/><path d="M2 24l7-7 5 5 4-4 9 9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+           Photos bientôt disponibles
+         </div>`
+      : photos.map((src, i) => `<button class="gallery-thumb" data-i="${i}" aria-label="Agrandir photo ${i+1}"><img src="${src}" alt="photo ${i+1}" loading="lazy"/></button>`).join('');
+
+    mGallery.querySelectorAll<HTMLElement>('.gallery-thumb').forEach(b =>
+      b.addEventListener('click', () => openLb(parseInt(b.dataset.i ?? '0')))
+    );
+  }
+  modal?.showModal();
+}
+
+mClose?.addEventListener('click', () => modal?.close());
+modal?.addEventListener('click', e => { if (e.target === modal) modal.close(); });
+
+function openLb(i: number) { idx = i; syncLb(); if (lb) lb.hidden = false; }
+function closeLb() { if (lb) lb.hidden = true; }
+function syncLb() {
+  if (lbImg)  { lbImg.src = photos[idx]; lbImg.alt = `Photo ${idx+1}`; }
+  if (lbCap)  lbCap.textContent = `${idx+1} / ${photos.length}`;
+  if (lbPrev) lbPrev.disabled = idx === 0;
+  if (lbNext) lbNext.disabled = idx === photos.length - 1;
+}
+
+lbClose?.addEventListener('click', closeLb);
+lbPrev?.addEventListener('click', () => { if (idx > 0) { idx--; syncLb(); } });
+lbNext?.addEventListener('click', () => { if (idx < photos.length - 1) { idx++; syncLb(); } });
+lb?.addEventListener('click', e => { if (e.target === lb) closeLb(); });
+
+document.addEventListener('keydown', e => {
+  if (!lb || lb.hidden) return;
+  if (e.key === 'Escape')     closeLb();
+  if (e.key === 'ArrowLeft')  { if (idx > 0) { idx--; syncLb(); } }
+  if (e.key === 'ArrowRight') { if (idx < photos.length - 1) { idx++; syncLb(); } }
+});
+</script>
