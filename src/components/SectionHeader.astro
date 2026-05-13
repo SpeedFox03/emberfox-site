@@ -1,0 +1,16 @@
+---
+interface Props {
+  pre?: string;
+  sub?: string;
+}
+const { pre, sub } = Astro.props;
+---
+{pre && <p class="section-pre mono-font fire-text">— {pre}</p>}
+<h2 class="display-font sh-title"><slot /></h2>
+<div class="fire-divider"></div>
+{sub && <p class="sh-sub">{sub}</p>}
+
+<style>
+.sh-title { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 0.5rem; }
+.sh-sub { color: var(--text-secondary); line-height: 1.7; margin-top: 1rem; }
+</style>

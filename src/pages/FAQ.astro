@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import CTASection from '../components/CTASection.astro';
 import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
 import PhoneCallLight from 'phosphor-astro/PhoneCallLight.astro';
 
@@ -124,24 +125,22 @@ const faqs = [
   </section>
 
   <!-- CTA -->
-  <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border)">
-    <div class="container" style="display:flex;align-items:center;justify-content:space-between;gap:2rem;flex-wrap:wrap">
-      <div>
-        <h2 class="display-font" style="font-size:clamp(1.8rem,3.5vw,2.8rem)">Votre question n'est pas là ?</h2>
-        <p style="color:var(--text-secondary);margin-top:0.5rem">Je réponds en quelques heures — appelez ou écrivez.</p>
-      </div>
-      <div style="display:flex;gap:1rem;flex-wrap:wrap">
-        <a href="tel:+32498377455" class="btn-fire">
-          <PhoneCallLight width={16} height={16} />
-          Appeler
-        </a>
-        <a href="/emberfox-site/Contact" class="btn-outline">
-          Formulaire
-          <ArrowRightLight width={16} height={16} />
-        </a>
-      </div>
+  <CTASection>
+    <div>
+      <h2 class="display-font" style="font-size:clamp(1.8rem,3.5vw,2.8rem)">Votre question n'est pas là ?</h2>
+      <p style="color:var(--text-secondary);margin-top:0.5rem">Je réponds en quelques heures — appelez ou écrivez.</p>
     </div>
-  </section>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <a href="tel:+32498377455" class="btn-fire">
+        <PhoneCallLight width={16} height={16} />
+        Appeler
+      </a>
+      <a href="/emberfox-site/Contact" class="btn-outline">
+        Formulaire
+        <ArrowRightLight width={16} height={16} />
+      </a>
+    </div>
+  </CTASection>
 
 </BaseLayout>
 
@@ -243,5 +242,9 @@ const faqs = [
   .faq-nav { flex-direction: row; flex-wrap: wrap; position: static; gap: 0.5rem; }
   .faq-nav-link { border-left: none; border-bottom: 2px solid var(--dark-border); padding: 0.4rem 0.75rem; }
   .faq-nav-link:hover { border-bottom-color: var(--ember-3); padding-left: 0.75rem; }
+}
+@media (max-width: 480px) {
+  .faq-title { font-size: clamp(2.8rem, 10vw, 4rem); }
+  .faq-q-text { font-size: 1rem; }
 }
 </style>

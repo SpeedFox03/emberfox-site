@@ -15,8 +15,8 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
         <p class="page-sub">Devis gratuit, réponse sous 24h. Remplissez le formulaire ou contactez-moi directement.</p>
       </div>
     </div>
-    <div class="geo-bg" aria-hidden="true">
-      <svg class="geo-svg" viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="page-deco-bg" aria-hidden="true">
+      <svg viewBox="0 0 500 420" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="netGlow" cx="50%" cy="50%" r="55%">
             <stop offset="0%" stop-color="rgba(255,80,0,0.10)"/>
@@ -136,48 +136,40 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 </BaseLayout>
 
 <style>
-.page-hero { padding: 10rem 0 4rem; position: relative; overflow: hidden; }
-.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
+.page-hero { padding: 10rem 0 4rem; }
 .page-title { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
-.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; }
-.geo-bg { position: absolute; right: 60px; top: 50%; transform: translateY(-50%); width: clamp(320px, 42vw, 560px); height: clamp(320px, 42vw, 560px); pointer-events: none; z-index: 1; }
-.geo-svg { width: 100%; height: 100%; overflow: visible; }
 .net-pulse { animation: net-beat 2.8s ease-in-out infinite; }
 .net-ring   { animation: net-beat 2.8s ease-in-out infinite; animation-delay: 0.3s; }
 @keyframes net-beat {
   0%, 100% { opacity: 0.9; }
   50%       { opacity: 0.25; }
 }
-/* Connection lines stagger-in */
-.geo-svg line { animation: net-line-in 0.5s ease both; }
-.geo-svg line:nth-of-type(1)  { animation-delay: 0.20s; }
-.geo-svg line:nth-of-type(2)  { animation-delay: 0.32s; }
-.geo-svg line:nth-of-type(3)  { animation-delay: 0.44s; }
-.geo-svg line:nth-of-type(4)  { animation-delay: 0.56s; }
-.geo-svg line:nth-of-type(5)  { animation-delay: 0.68s; }
-.geo-svg line:nth-of-type(6)  { animation-delay: 0.80s; }
-.geo-svg line:nth-of-type(7)  { animation-delay: 0.92s; }
-.geo-svg line:nth-of-type(8)  { animation-delay: 1.04s; }
-.geo-svg line:nth-of-type(9)  { animation-delay: 1.16s; }
-.geo-svg line:nth-of-type(10) { animation-delay: 1.28s; }
-.geo-svg line:nth-of-type(11) { animation-delay: 1.40s; }
-.geo-svg line:nth-of-type(12) { animation-delay: 1.52s; }
-.geo-svg line:nth-of-type(13) { animation-delay: 1.64s; }
-.geo-svg line:nth-of-type(14) { animation-delay: 1.76s; }
+.page-deco-bg > svg line { animation: net-line-in 0.5s ease both; }
+.page-deco-bg > svg line:nth-of-type(1)  { animation-delay: 0.20s; }
+.page-deco-bg > svg line:nth-of-type(2)  { animation-delay: 0.32s; }
+.page-deco-bg > svg line:nth-of-type(3)  { animation-delay: 0.44s; }
+.page-deco-bg > svg line:nth-of-type(4)  { animation-delay: 0.56s; }
+.page-deco-bg > svg line:nth-of-type(5)  { animation-delay: 0.68s; }
+.page-deco-bg > svg line:nth-of-type(6)  { animation-delay: 0.80s; }
+.page-deco-bg > svg line:nth-of-type(7)  { animation-delay: 0.92s; }
+.page-deco-bg > svg line:nth-of-type(8)  { animation-delay: 1.04s; }
+.page-deco-bg > svg line:nth-of-type(9)  { animation-delay: 1.16s; }
+.page-deco-bg > svg line:nth-of-type(10) { animation-delay: 1.28s; }
+.page-deco-bg > svg line:nth-of-type(11) { animation-delay: 1.40s; }
+.page-deco-bg > svg line:nth-of-type(12) { animation-delay: 1.52s; }
+.page-deco-bg > svg line:nth-of-type(13) { animation-delay: 1.64s; }
+.page-deco-bg > svg line:nth-of-type(14) { animation-delay: 1.76s; }
 @keyframes net-line-in { from { opacity: 0; } to { opacity: 1; } }
-/* Outer nodes appear after lines */
-.geo-svg circle { animation: node-appear 0.35s ease both; }
-.geo-svg circle:nth-of-type(1) { animation-delay: 0.55s; }
-.geo-svg circle:nth-of-type(2) { animation-delay: 0.70s; }
-.geo-svg circle:nth-of-type(3) { animation-delay: 0.85s; }
-.geo-svg circle:nth-of-type(4) { animation-delay: 1.00s; }
-.geo-svg circle:nth-of-type(5) { animation-delay: 1.15s; }
-.geo-svg circle:nth-of-type(6) { animation-delay: 1.30s; }
-.geo-svg circle:nth-of-type(7) { animation-delay: 1.45s; }
-.geo-svg circle:nth-of-type(8) { animation-delay: 1.60s; }
-.geo-svg circle { transform-box: fill-box; transform-origin: center; }
+.page-deco-bg > svg circle { animation: node-appear 0.35s ease both; transform-box: fill-box; transform-origin: center; }
+.page-deco-bg > svg circle:nth-of-type(1) { animation-delay: 0.55s; }
+.page-deco-bg > svg circle:nth-of-type(2) { animation-delay: 0.70s; }
+.page-deco-bg > svg circle:nth-of-type(3) { animation-delay: 0.85s; }
+.page-deco-bg > svg circle:nth-of-type(4) { animation-delay: 1.00s; }
+.page-deco-bg > svg circle:nth-of-type(5) { animation-delay: 1.15s; }
+.page-deco-bg > svg circle:nth-of-type(6) { animation-delay: 1.30s; }
+.page-deco-bg > svg circle:nth-of-type(7) { animation-delay: 1.45s; }
+.page-deco-bg > svg circle:nth-of-type(8) { animation-delay: 1.60s; }
 @keyframes node-appear { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: scale(1); } }
-@media (max-width: 768px) { .geo-bg { display: none; } }
 
 .contact-section { padding-top: 0; }
 .contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
@@ -250,6 +242,11 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 
 @media (max-width: 768px) {
   .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+}
+@media (max-width: 480px) {
+  .contact-grid { gap: 2rem; }
+  .info-value { font-size: 1.4rem; }
+  .contact-form button[type="submit"] { width: 100%; justify-content: center; }
 }
 </style>
 

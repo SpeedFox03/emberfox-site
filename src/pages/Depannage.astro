@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
 import BugLight from 'phosphor-astro/BugLight.astro';
 import HardDriveLight from 'phosphor-astro/HardDriveLight.astro';
 import WifiSlashLight from 'phosphor-astro/WifiSlashLight.astro';
@@ -23,6 +25,12 @@ const problems = [
   { icon: DeviceMobileLight, title: 'Smartphone & tablette',     desc: 'Synchro, configuration, problèmes de mise à jour.' },
 ];
 
+const howSteps: [string, string][] = [
+  ['Vous appelez', 'Décrivez le problème par téléphone ou formulaire — je fais un premier diagnostic.'],
+  ['Je me déplace', 'Intervention à votre domicile dans les plus brefs délais.'],
+  ['Diagnostic & réparation', 'Explications claires, solution durable — pas de jargon inutile.'],
+  ['Facturation transparente', 'Tarif annoncé à l\'avance. Pas de surprise.'],
+];
 ---
 <BaseLayout title="Dépannage" description="Dépannage informatique à domicile chez particuliers — EmberFox">
 
@@ -44,8 +52,8 @@ const problems = [
         </div>
       </div>
     </div>
-    <div class="code-bg" aria-hidden="true">
-      <svg class="code-svg" viewBox="0 0 500 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="page-deco-bg" aria-hidden="true">
+      <svg viewBox="0 0 500 480" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="codeGlow" cx="50%" cy="50%" r="55%">
             <stop offset="0%" stop-color="rgba(255,80,0,0.10)"/>
@@ -89,9 +97,7 @@ const problems = [
   <!-- PROBLEMS -->
   <section class="section">
     <div class="container">
-      <p class="section-pre mono-font fire-text">— Problèmes résolus</p>
-      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:0.5rem">Ce que je règle</h2>
-      <div class="fire-divider"></div>
+      <SectionHeader pre="Problèmes résolus">Ce que je règle</SectionHeader>
       <div class="problems-grid">
         {problems.map(p => (
           <div class="problem-card card">
@@ -108,21 +114,7 @@ const problems = [
   <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border);border-bottom:1px solid var(--dark-border)">
     <div class="container">
       <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2.5rem">Comment ça se passe ?</h2>
-      <div class="how-steps">
-        {[
-          ['Vous appelez', 'Décrivez le problème par téléphone ou formulaire — je fais un premier diagnostic.'],
-          ['Je me déplace', 'Intervention à votre domicile dans les plus brefs délais.'],
-          ['Diagnostic & réparation', 'Explications claires, solution durable — pas de jargon inutile.'],
-          ['Facturation transparente', 'Tarif annoncé à l\'avance. Pas de surprise.'],
-        ].map(([title, desc], i) => (
-          <div class="how-step">
-            <div class="how-num display-font fire-text">{String(i + 1).padStart(2, '0')}</div>
-            <div class="how-line"></div>
-            <strong class="display-font" style="font-size:1.3rem;color:var(--text-primary);display:block;margin-bottom:0.5rem">{title}</strong>
-            <p style="color:var(--text-secondary);font-size:0.875rem">{desc}</p>
-          </div>
-        ))}
-      </div>
+      <ProcessSteps steps={howSteps} />
     </div>
   </section>
 
@@ -152,29 +144,23 @@ const problems = [
 </BaseLayout>
 
 <style>
-.page-hero { padding: 10rem 0 5rem; position: relative; overflow: hidden; }
-.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
 .page-title { font-size: clamp(3rem, 6vw, 5.5rem); line-height: 0.9; margin: 1rem 0 1.5rem; }
-.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
-.code-bg { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); width: clamp(300px, 40vw, 520px); height: clamp(300px, 40vw, 520px); pointer-events: none; z-index: 1; }
-.code-svg { width: 100%; height: 100%; overflow: visible; }
-@media (max-width: 768px) { .code-bg { display: none; } }
-.code-svg g > text { animation: term-line-in 0.35s ease both; }
-.code-svg g > text:nth-child(1)  { animation-delay: 0.20s; }
-.code-svg g > text:nth-child(2)  { animation-delay: 0.42s; }
-.code-svg g > text:nth-child(3)  { animation-delay: 0.70s; }
-.code-svg g > text:nth-child(4)  { animation-delay: 0.90s; }
-.code-svg g > text:nth-child(5)  { animation-delay: 1.10s; }
-.code-svg g > text:nth-child(6)  { animation-delay: 1.40s; }
-.code-svg g > text:nth-child(7)  { animation-delay: 1.60s; }
-.code-svg g > text:nth-child(8)  { animation-delay: 1.80s; }
-.code-svg g > text:nth-child(9)  { animation-delay: 2.00s; }
-.code-svg g > text:nth-child(10) { animation-delay: 2.25s; }
-.code-svg g > text:nth-child(11) { animation-delay: 2.50s; }
-.code-svg g > text:nth-child(12) { animation-delay: 2.72s; }
-.code-svg g > text:nth-child(13) { animation-delay: 3.00s; }
-.code-svg g > text:nth-child(14) { animation-delay: 3.20s; }
-.code-svg g > text:nth-child(15) { animation-delay: 3.55s; }
+.page-deco-bg g > text { animation: term-line-in 0.35s ease both; }
+.page-deco-bg g > text:nth-child(1)  { animation-delay: 0.20s; }
+.page-deco-bg g > text:nth-child(2)  { animation-delay: 0.42s; }
+.page-deco-bg g > text:nth-child(3)  { animation-delay: 0.70s; }
+.page-deco-bg g > text:nth-child(4)  { animation-delay: 0.90s; }
+.page-deco-bg g > text:nth-child(5)  { animation-delay: 1.10s; }
+.page-deco-bg g > text:nth-child(6)  { animation-delay: 1.40s; }
+.page-deco-bg g > text:nth-child(7)  { animation-delay: 1.60s; }
+.page-deco-bg g > text:nth-child(8)  { animation-delay: 1.80s; }
+.page-deco-bg g > text:nth-child(9)  { animation-delay: 2.00s; }
+.page-deco-bg g > text:nth-child(10) { animation-delay: 2.25s; }
+.page-deco-bg g > text:nth-child(11) { animation-delay: 2.50s; }
+.page-deco-bg g > text:nth-child(12) { animation-delay: 2.72s; }
+.page-deco-bg g > text:nth-child(13) { animation-delay: 3.00s; }
+.page-deco-bg g > text:nth-child(14) { animation-delay: 3.20s; }
+.page-deco-bg g > text:nth-child(15) { animation-delay: 3.55s; }
 @keyframes term-line-in { from { opacity: 0; } to { opacity: 1; } }
 
 .urgency-band {
@@ -183,51 +169,31 @@ const problems = [
   border-bottom: 1px solid rgba(255,69,0,0.2);
   padding: 1rem 0;
 }
-.urgency-inner {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  flex-wrap: wrap;
-}
+.urgency-inner { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
 .urgency-label {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  color: var(--ember-3);
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  white-space: nowrap;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  color: var(--ember-3); font-size: 0.8rem; letter-spacing: 0.15em; white-space: nowrap;
 }
 
 .problems-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; margin-top: 2rem; }
 .problem-card { padding: 1.75rem; }
 .problem-icon { color: var(--ember-2); opacity: 0.8; }
 
-.how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-.how-num { font-size: 3rem; line-height: 1; }
-.how-line { width: 40px; height: 2px; background: var(--gradient-fire); margin: 0.75rem 0; }
-
 .tarifs-grid { display: flex; flex-direction: column; gap: 0; max-width: 640px; }
 .tarif-row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.25rem 1.5rem;
-  border: 1px solid var(--dark-border);
-  margin-top: -1px;
-  transition: background 0.2s;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem; border: 1px solid var(--dark-border);
+  margin-top: -1px; transition: background 0.2s;
 }
 .tarif-row:hover { background: var(--dark-card); }
 .tarif-price { font-size: 1.4rem; }
 
 @media (max-width: 768px) {
   .problems-grid { grid-template-columns: 1fr 1fr; }
-  .how-steps { grid-template-columns: 1fr 1fr; }
   .urgency-inner { flex-direction: column; align-items: flex-start; gap: 1rem; }
 }
 @media (max-width: 480px) {
   .problems-grid { grid-template-columns: 1fr; }
-  .how-steps { grid-template-columns: 1fr; }
   .tarif-row { padding: 1rem; gap: 0.75rem; }
 }
 </style>

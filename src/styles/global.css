@@ -176,6 +176,15 @@ body::before {
 }
 .section-pre { font-size: 0.78rem; letter-spacing: 0.22em; margin-bottom: 0.5rem; }
 
+/* Shared hero SVG decoration */
+.page-deco-bg {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  width: clamp(300px, 42vw, 550px); height: clamp(300px, 42vw, 550px);
+  pointer-events: none; z-index: 1;
+}
+.page-deco-bg > svg { width: 100%; height: 100%; overflow: visible; }
+@media (max-width: 768px) { .page-deco-bg { display: none; } }
+
 /* Fade-in on scroll */
 .fade-in {
   opacity: 0;
@@ -237,4 +246,13 @@ a.btn-fire, a.btn-outline { min-height: 44px; }
   .section { padding: 3.5rem 0; }
   h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
   .fire-divider { margin: 0.75rem 0 1.25rem; }
+  .btn-fire, .btn-outline { padding: 0.75rem 1.5rem; font-size: 1rem; }
+  .card { padding: 1.5rem; }
+  .page-hero { padding: 7rem 0 2.5rem !important; }
+  .page-sub { font-size: 0.95rem; }
+}
+
+/* Touch devices — always show interactive hints */
+@media (hover: none) {
+  .project-hint { opacity: 1 !important; transform: none !important; color: var(--ember-3) !important; }
 }

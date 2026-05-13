@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import ProcessSteps from '../components/ProcessSteps.astro';
+import CTASection from '../components/CTASection.astro';
 import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
 import ChatLight from 'phosphor-astro/ChatLight.astro';
 import ShieldCheckLight from 'phosphor-astro/ShieldCheckLight.astro';
@@ -29,10 +32,10 @@ const values = [
   },
 ];
 
-const steps = [
-  ['Écoute & analyse', 'On discute de votre besoin, de votre budget, de votre contexte. Je pose les bonnes questions.'],
-  ['Proposition claire', 'Devis détaillé, délai estimé, approche technique expliquée simplement. Vous savez exactement ce que vous achetez.'],
-  ['Réalisation', 'Je travaille, vous suivez l\'avancement. Retours pris en compte, ajustements inclus.'],
+const steps: [string, string][] = [
+  ['Écoute & analyse',    'On discute de votre besoin, de votre budget, de votre contexte. Je pose les bonnes questions.'],
+  ['Proposition claire',  'Devis détaillé, délai estimé, approche technique expliquée simplement. Vous savez exactement ce que vous achetez.'],
+  ['Réalisation',         'Je travaille, vous suivez l\'avancement. Retours pris en compte, ajustements inclus.'],
   ['Livraison & support', 'Mise en production, formation si besoin, et disponibilité pour la suite.'],
 ];
 ---
@@ -53,8 +56,8 @@ const steps = [
         </div>
       </div>
     </div>
-    <div class="code-bg" aria-hidden="true">
-      <svg class="code-svg" viewBox="0 0 500 480" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div class="page-deco-bg" aria-hidden="true">
+      <svg viewBox="0 0 500 480" fill="none" xmlns="http://www.w3.org/2000/svg">
         <defs>
           <radialGradient id="aboutGlow" cx="50%" cy="50%" r="55%">
             <stop offset="0%" stop-color="rgba(255,80,0,0.10)"/>
@@ -87,9 +90,7 @@ const steps = [
   <section class="section">
     <div class="container intro-grid">
       <div class="intro-text fade-in-left">
-        <p class="section-pre mono-font fire-text">— Mon histoire</p>
-        <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem">Passionné depuis<br/>toujours</h2>
-        <div class="fire-divider"></div>
+        <SectionHeader pre="Mon histoire">Passionné depuis<br/>toujours</SectionHeader>
         <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:1rem">Passionné d'informatique depuis l'enfance, j'ai transformé cette curiosité en métier. Après une formation en développement et plusieurs années d'expérience en support technique et développement web, j'ai fondé <strong style="color:var(--text-primary)">EmberFox</strong> pour proposer des services IT accessibles, de qualité, aux particuliers et aux petites entreprises de la région namuroise.</p>
         <p style="color:var(--text-secondary);line-height:1.8">Je travaille seul — ce qui signifie que vous avez toujours affaire à la même personne, du premier appel à la livraison finale. Pas d'intermédiaire, pas de délégation, pas de mauvaise surprise.</p>
       </div>
@@ -112,9 +113,7 @@ const steps = [
   <!-- VALUES -->
   <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border);border-bottom:1px solid var(--dark-border)">
     <div class="container">
-      <p class="section-pre mono-font fire-text">— Ce qui me guide</p>
-      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:0.5rem">Mes valeurs</h2>
-      <div class="fire-divider"></div>
+      <SectionHeader pre="Ce qui me guide">Mes valeurs</SectionHeader>
       <div class="values-grid">
         {values.map(v => (
           <div class="value-card card">
@@ -132,79 +131,50 @@ const steps = [
     <div class="container">
       <p class="section-pre mono-font fire-text">— Process</p>
       <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2.5rem">Comment je travaille</h2>
-      <div class="work-steps">
-        {steps.map(([title, desc], i) => (
-          <div class="work-step">
-            <div class="work-num display-font fire-text">{String(i + 1).padStart(2, '0')}</div>
-            <div class="work-line"></div>
-            <strong class="display-font" style="font-size:1.3rem;color:var(--text-primary);display:block;margin-bottom:0.5rem">{title}</strong>
-            <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.6">{desc}</p>
-          </div>
-        ))}
-      </div>
+      <ProcessSteps steps={steps} />
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="section" style="background:var(--dark-card);border-top:1px solid var(--dark-border)">
-    <div class="container" style="text-align:center;max-width:640px">
-      <p class="section-pre mono-font fire-text" style="justify-content:center;display:flex">— Parlons-nous</p>
-      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem">Prêt à démarrer ?</h2>
-      <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem">Que ce soit pour un devis, une question ou juste pour voir si on est sur la même longueur d'onde — je réponds toujours.</p>
-      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
-        <a href="/emberfox-site/Contact" class="btn-fire">
-          Prendre contact
-          <ArrowRightLight width={16} height={16} />
-        </a>
-        <a href="/emberfox-site/Projets" class="btn-outline">Voir les projets</a>
-      </div>
+  <CTASection centered>
+    <p class="section-pre mono-font fire-text" style="justify-content:center;display:flex">— Parlons-nous</p>
+    <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:1rem">Prêt à démarrer ?</h2>
+    <p style="color:var(--text-secondary);line-height:1.8;margin-bottom:2rem">Que ce soit pour un devis, une question ou juste pour voir si on est sur la même longueur d'onde — je réponds toujours.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+      <a href="/emberfox-site/Contact" class="btn-fire">
+        Prendre contact
+        <ArrowRightLight width={16} height={16} />
+      </a>
+      <a href="/emberfox-site/Projets" class="btn-outline">Voir les projets</a>
     </div>
-  </section>
+  </CTASection>
 
 </BaseLayout>
 
 <style>
-.page-hero { padding: 10rem 0 5rem; position: relative; overflow: hidden; }
-.page-hero-inner { max-width: 680px; position: relative; z-index: 2; }
 .page-title { font-size: clamp(3rem, 5.5vw, 5rem); line-height: 0.95; margin: 1rem 0 1.5rem; }
-.page-sub { color: var(--text-secondary); font-size: 1.1rem; line-height: 1.7; margin-bottom: 2.5rem; }
-.code-bg { position: absolute; right: 40px; top: 50%; transform: translateY(-50%); width: clamp(300px, 40vw, 520px); height: clamp(300px, 40vw, 520px); pointer-events: none; z-index: 1; }
-.code-svg { width: 100%; height: 100%; overflow: visible; }
-@media (max-width: 768px) { .code-bg { display: none; } }
-
-.code-svg g > text { animation: about-line-in 0.4s ease both; }
-.code-svg g > text:nth-child(1)  { animation-delay: 0.20s; }
-.code-svg g > text:nth-child(2)  { animation-delay: 0.40s; }
-.code-svg g > text:nth-child(3)  { animation-delay: 0.58s; }
-.code-svg g > text:nth-child(4)  { animation-delay: 0.74s; }
-.code-svg g > text:nth-child(5)  { animation-delay: 0.90s; }
-.code-svg g > text:nth-child(6)  { animation-delay: 1.06s; }
-.code-svg g > text:nth-child(7)  { animation-delay: 1.25s; }
-.code-svg g > text:nth-child(8)  { animation-delay: 1.42s; }
-.code-svg g > text:nth-child(9)  { animation-delay: 1.58s; }
-.code-svg g > text:nth-child(10) { animation-delay: 1.74s; }
-.code-svg g > text:nth-child(11) { animation-delay: 1.90s; }
-.code-svg g > text:nth-child(12) { animation-delay: 2.08s; }
-.code-svg g > text:nth-child(13) { animation-delay: 2.26s; }
-.code-svg g > text:nth-child(14) { animation-delay: 2.50s; }
-.code-svg g > text:nth-child(15) { animation-delay: 2.70s; }
+.page-deco-bg g > text { animation: about-line-in 0.4s ease both; }
+.page-deco-bg g > text:nth-child(1)  { animation-delay: 0.20s; }
+.page-deco-bg g > text:nth-child(2)  { animation-delay: 0.40s; }
+.page-deco-bg g > text:nth-child(3)  { animation-delay: 0.58s; }
+.page-deco-bg g > text:nth-child(4)  { animation-delay: 0.74s; }
+.page-deco-bg g > text:nth-child(5)  { animation-delay: 0.90s; }
+.page-deco-bg g > text:nth-child(6)  { animation-delay: 1.06s; }
+.page-deco-bg g > text:nth-child(7)  { animation-delay: 1.25s; }
+.page-deco-bg g > text:nth-child(8)  { animation-delay: 1.42s; }
+.page-deco-bg g > text:nth-child(9)  { animation-delay: 1.58s; }
+.page-deco-bg g > text:nth-child(10) { animation-delay: 1.74s; }
+.page-deco-bg g > text:nth-child(11) { animation-delay: 1.90s; }
+.page-deco-bg g > text:nth-child(12) { animation-delay: 2.08s; }
+.page-deco-bg g > text:nth-child(13) { animation-delay: 2.26s; }
+.page-deco-bg g > text:nth-child(14) { animation-delay: 2.50s; }
+.page-deco-bg g > text:nth-child(15) { animation-delay: 2.70s; }
 @keyframes about-line-in { from { opacity: 0; } to { opacity: 1; } }
 
-.intro-grid {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: 5rem;
-  align-items: start;
-}
-.intro-stats {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
+.intro-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 5rem; align-items: start; }
+.intro-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 .stat-block {
-  background: var(--dark-card);
-  border: 1px solid var(--dark-border);
-  padding: 1.5rem;
+  background: var(--dark-card); border: 1px solid var(--dark-border); padding: 1.5rem;
   clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
 }
 .stat-val { font-size: 2.5rem; line-height: 1; margin-bottom: 0.35rem; }
@@ -213,18 +183,14 @@ const steps = [
 .value-card { padding: 1.75rem; }
 .value-icon { color: var(--ember-2); opacity: 0.85; }
 
-.work-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; }
-.work-num { font-size: 3rem; line-height: 1; }
-.work-line { width: 40px; height: 2px; background: var(--gradient-fire); margin: 0.75rem 0; }
-
 @media (max-width: 768px) {
   .intro-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .values-grid { grid-template-columns: 1fr 1fr; }
-  .work-steps { grid-template-columns: 1fr 1fr; gap: 1.5rem; }
 }
 @media (max-width: 480px) {
+  .page-title { font-size: clamp(2.8rem, 10vw, 4rem); }
   .values-grid { grid-template-columns: 1fr; }
-  .work-steps { grid-template-columns: 1fr; }
   .intro-stats { grid-template-columns: 1fr 1fr; }
+  .stat-block { padding: 1.25rem; }
 }
 </style>
