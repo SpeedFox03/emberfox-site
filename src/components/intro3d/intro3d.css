@@ -1,0 +1,133 @@
+/* ===== Intro 3D — couche au-dessus du site, isolée du design existant ===== */
+
+.intro3d-fixed {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;           /* au-dessus de la nav (z-index 100) */
+  background: radial-gradient(ellipse at 50% 40%, #0a1020 0%, #04060c 55%, #000 100%);
+  pointer-events: none;     /* ne bloque jamais le scroll ni les clics */
+  will-change: opacity, filter;
+}
+
+.intro3d-canvas {
+  position: absolute !important;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+  cursor: grab;
+  pointer-events: auto;
+  touch-action: pan-y;
+}
+
+.intro3d-canvas:active {
+  cursor: grabbing;
+}
+
+/* ----- Overlay texte ----- */
+.intro3d-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;     /* le texte ne bloque rien */
+  color: #fff;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.intro3d-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  transform: translateY(-24vh);
+}
+
+.intro3d-pre {
+  margin: 0;
+  font-size: clamp(0.7rem, 1.4vw, 0.9rem);
+  letter-spacing: 0.45em;
+  text-indent: 0.45em;
+  color: rgba(255, 160, 80, 0.85);
+  text-transform: uppercase;
+}
+
+.intro3d-title {
+  margin: 0;
+  font-size: clamp(2.8rem, 9vw, 6rem);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-shadow: 0 0 40px rgba(0, 0, 0, 0.6);
+}
+
+.intro3d-sub {
+  margin: 0.2rem 0 0;
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.75);
+  letter-spacing: 0.08em;
+}
+
+/* ----- Indice de scroll (souris animée) ----- */
+.intro3d-scroll-hint {
+  margin-top: 1.8rem;
+}
+.intro3d-mouse {
+  display: inline-block;
+  width: 24px;
+  height: 38px;
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 14px;
+  position: relative;
+}
+.intro3d-wheel {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  width: 3px;
+  height: 7px;
+  margin-left: -1.5px;
+  border-radius: 2px;
+  background: rgba(255, 180, 100, 0.95);
+  animation: intro3d-wheel 1.5s ease-in-out infinite;
+}
+@keyframes intro3d-wheel {
+  0% { opacity: 0; transform: translateY(0); }
+  30% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(12px); }
+}
+
+/* ----- Bouton "Passer l'intro" ----- */
+.intro3d-skip {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  pointer-events: auto;     /* seul élément cliquable de la couche */
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  padding: 0.6rem 1.2rem;
+  border-radius: 999px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+.intro3d-skip:hover {
+  background: rgba(255, 140, 0, 0.18);
+  border-color: rgba(255, 140, 0, 0.6);
+  color: #fff;
+}
+
+.intro3d-spacer {
+  width: 100%;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .intro3d-skip { bottom: 1.2rem; right: 1.2rem; }
+}

@@ -164,7 +164,7 @@ const arcPhotos = photos;
 .detail-arc-stage {
   position: relative;
   z-index: 0;
-  height: clamp(390px, 45vw, 680px);
+  height: clamp(460px, 54vw, 760px);
   width: 100vw;
   margin-left: calc(50% - 50vw);
   overflow: hidden;
@@ -183,7 +183,7 @@ const arcPhotos = photos;
   z-index: 1;
   top: 0;
   left: 0;
-  width: clamp(330px, 39vw, 640px);
+  width: clamp(390px, 48vw, 780px);
   aspect-ratio: 16 / 10;
   margin: 0;
   padding: 0;
@@ -213,21 +213,21 @@ const arcPhotos = photos;
 
 @media (max-width: 900px) {
   .detail-arc-stage {
-    height: 390px;
+    height: 430px;
     width: 100vw;
     margin-left: calc(50% - 50vw);
   }
-  .detail-arc-card { width: 380px; }
+  .detail-arc-card { width: 460px; }
 }
 @media (max-width: 560px) {
   .project-detail-header { padding-top: 7.5rem; }
   .project-arc-section { padding-bottom: 3.5rem; }
   .detail-arc-stage {
-    height: 330px;
+    height: 360px;
     width: 100vw;
     margin-left: calc(50% - 50vw);
   }
-  .detail-arc-card { width: 305px; }
+  .detail-arc-card { width: 340px; }
   .meta-row { align-items: flex-start; flex-direction: column; gap: 0.35rem; }
   .meta-row span + span::before { display: none; }
 }
@@ -256,13 +256,13 @@ if (detailArcStage && detailArcCards.length > 0) {
   };
 
   const placeCards = (progress: number) => {
-    const travel = width + cardWidth * 3.14;
+    const travel = width + cardWidth * 5.2;
     const baseline = height * 0.74;
     const arcHeight = height * 0.60;
 
     detailArcCards.forEach((card, index) => {
       const local = (index / detailArcCards.length + progress) % 1;
-      const x = -cardWidth * 1.55 + local * travel;
+      const x = -cardWidth * 2.6 + local * travel;
       const arc = Math.sin(local * Math.PI);
       const y = baseline - arc * arcHeight;
       const rotation = (local - 0.5) * 9;

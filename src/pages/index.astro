@@ -11,6 +11,7 @@ import PhoneLight from 'phosphor-astro/PhoneLight.astro';
 import TargetLight from 'phosphor-astro/TargetLight.astro';
 import HandshakeLight from 'phosphor-astro/HandshakeLight.astro';
 import HeartLight from 'phosphor-astro/HeartLight.astro';
+import Intro3D from '../components/intro3d/Intro3D.jsx';
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
@@ -64,6 +65,9 @@ const whyItems = [
 ];
 ---
 <BaseLayout title="Accueil" description="EmberFox — Solutions informatiques sur mesure en Belgique">
+
+  <!-- INTRO 3D — couche au-dessus du site (page d'accueil uniquement) -->
+  <Intro3D client:only="react" />
 
   <!-- HERO -->
   <section class="hero">
