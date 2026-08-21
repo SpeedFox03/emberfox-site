@@ -90,6 +90,7 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
             Envoyer ma demande
             <PaperPlaneTiltLight width={18} height={18} />
           </button>
+          <p class="form-privacy">Les informations envoyées servent uniquement à traiter votre demande et transitent par Formspree. <a href="/emberfox-site/Mentions-legales">En savoir plus</a>.</p>
           <div class="form-success" id="formSuccess">
             ✅ Message envoyé ! Je vous réponds sous 24h.
           </div>
@@ -212,6 +213,13 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
   text-align: center;
 }
 .form-success.visible { display: block; }
+.form-privacy {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  line-height: 1.6;
+  text-align: center;
+}
+.form-privacy a { color: var(--ember-3); }
 
 /* INFOS */
 .contact-infos { display: flex; flex-direction: column; gap: 2.5rem; padding-top: 0.5rem; }

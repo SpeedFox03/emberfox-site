@@ -7,7 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="container">
       <p class="section-pre mono-font fire-text">— Légal</p>
       <h1 class="display-font ml-title">Mentions<br/><span class="fire-text">Légales</span></h1>
-      <p style="color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:0.78rem;margin-top:0.5rem">Dernière mise à jour : mai 2026</p>
+      <p style="color:var(--text-muted);font-family:'JetBrains Mono',monospace;font-size:0.78rem;margin-top:0.5rem">Dernière mise à jour : 21 août 2026</p>
     </div>
   </section>
 
@@ -17,12 +17,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="ml-block">
         <h2 class="display-font ml-heading">1. Éditeur du site</h2>
         <div class="ml-body">
-          <p>Le site <strong>emberfox.be</strong> est édité par :</p>
+          <p>Le site <strong>emberfox.be</strong> est édité par Jordan Jacob, entrepreneur individuel. <strong>EmberFox</strong> est le nom utilisé pour présenter ses services sur ce site.</p>
           <ul>
-            <li><strong>Nom :</strong> Jordan <span class="placeholder">[Nom de famille]</span></li>
-            <li><strong>Statut :</strong> Indépendant en personne physique</li>
-            <li><strong>Numéro BCE :</strong> <span class="placeholder">[Numéro BCE à compléter]</span></li>
-            <li><strong>Adresse :</strong> Ciney, Belgique</li>
+            <li><strong>Nom :</strong> Jordan Jacob</li>
+            <li><strong>Forme d'entreprise :</strong> Entreprise individuelle (personne physique)</li>
+            <li><strong>Numéro d'entreprise (BCE) :</strong> 1041.521.167</li>
+            <li><strong>Numéro de TVA :</strong> BE 1041.521.167 — régime de la franchise de taxe</li>
+            <li><strong>Siège :</strong> Quai de l'Industrie 24, boîte 0011, 5590 Ciney, Belgique</li>
             <li><strong>Email :</strong> <a href="mailto:contact@emberfox.be">contact@emberfox.be</a></li>
             <li><strong>Téléphone :</strong> <a href="tel:+32498377455">+32 498 37 74 55</a></li>
           </ul>
@@ -45,7 +46,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="ml-block">
         <h2 class="display-font ml-heading">3. Propriété intellectuelle</h2>
         <div class="ml-body">
-          <p>L'ensemble du contenu de ce site (textes, images, design, code source) est la propriété exclusive d'EmberFox, sauf mention contraire. Toute reproduction, distribution ou utilisation sans autorisation préalable écrite est interdite.</p>
+          <p>L'ensemble du contenu de ce site (textes, images, design, code source) est la propriété exclusive de Jordan Jacob, sauf mention contraire. Toute reproduction, distribution ou utilisation sans autorisation préalable écrite est interdite.</p>
           <p>Les icônes utilisées sont issues de la bibliothèque <a href="https://phosphoricons.com" target="_blank" rel="noopener">Phosphor Icons</a>, sous licence MIT.</p>
         </div>
       </div>
@@ -53,8 +54,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="ml-block">
         <h2 class="display-font ml-heading">4. Données personnelles</h2>
         <div class="ml-body">
-          <p>Les données collectées via le formulaire de contact (nom, email, message) sont utilisées uniquement pour répondre à vos demandes. Elles ne sont pas transmises à des tiers.</p>
-          <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer ce droit, contactez : <a href="mailto:contact@emberfox.be">contact@emberfox.be</a>.</p>
+          <p>Jordan Jacob est responsable du traitement des données personnelles collectées via le formulaire de contact. Les informations saisies (nom, email, service souhaité et message) sont utilisées uniquement pour traiter votre demande et vous répondre.</p>
+          <p>Le formulaire est exploité par <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener">Formspree, Inc.</a>, prestataire technique qui reçoit et stocke les soumissions et dont l'infrastructure peut traiter des données aux États-Unis.</p>
+          <p>Conformément au Règlement Général sur la Protection des Données (RGPD), vous disposez notamment d'un droit d'accès, de rectification et de suppression de vos données. Pour exercer vos droits, contactez : <a href="mailto:contact@emberfox.be">contact@emberfox.be</a>.</p>
         </div>
       </div>
 
@@ -68,7 +70,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="ml-block">
         <h2 class="display-font ml-heading">6. Limitation de responsabilité</h2>
         <div class="ml-body">
-          <p>EmberFox s'efforce de maintenir les informations de ce site à jour et exactes. Cependant, la responsabilité d'EmberFox ne saurait être engagée en cas d'erreur ou d'omission dans le contenu, ni pour tout dommage résultant de l'utilisation de ce site.</p>
+          <p>Jordan Jacob s'efforce de maintenir les informations de ce site à jour et exactes. Sa responsabilité ne saurait toutefois être engagée en cas d'erreur ou d'omission dans le contenu, ni pour tout dommage résultant de l'utilisation de ce site.</p>
         </div>
       </div>
 
@@ -149,12 +151,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   border-bottom-color: var(--ember-2);
 }
 .ml-body strong { color: var(--text-primary); }
-.placeholder {
-  color: var(--ember-1);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85em;
-  background: rgba(255,69,0,0.08);
-  padding: 0.1em 0.4em;
-  border: 1px dashed rgba(255,69,0,0.3);
-}
 </style>
