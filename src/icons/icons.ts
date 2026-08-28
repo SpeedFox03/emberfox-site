@@ -1,5 +1,5 @@
 /**
- * EmberFox — Bibliothèque d'icônes
+ * Enkotech — Bibliothèque d'icônes
  * Package : phosphor-astro (npm install phosphor-astro)
  * Poids utilisé : "light" — trait fin, cohérent avec la DA
  *
