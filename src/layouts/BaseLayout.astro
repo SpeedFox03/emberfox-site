@@ -9,17 +9,17 @@ const { title = 'Enkotech', description = 'Solutions informatiques sur mesure' }
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const navLinks = [
-  { href: '/emberfox-site', label: 'Accueil' },
-  { href: '/emberfox-site/A-propos', label: 'À propos' },
-  { href: '/emberfox-site/Projets', label: 'Projets' },
-  { href: '/emberfox-site/Contact', label: 'Contact' },
+  { href: '/', label: 'Accueil' },
+  { href: '/A-propos', label: 'À propos' },
+  { href: '/Projets', label: 'Projets' },
+  { href: '/Contact', label: 'Contact' },
 ];
 
 const services = [
-  { href: '/emberfox-site/Sites-web', label: 'Sites Web' },
-  { href: '/emberfox-site/Applications', label: 'Applications' },
-  { href: '/emberfox-site/Montage-pc', label: 'Montage PC' },
-  { href: '/emberfox-site/Depannage', label: 'Dépannage' },
+  { href: '/Sites-web', label: 'Sites Web' },
+  { href: '/Applications', label: 'Applications' },
+  { href: '/Montage-pc', label: 'Montage PC' },
+  { href: '/Depannage', label: 'Dépannage' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -54,7 +54,7 @@ const isServicesActive = services.some(s => currentPath === s.href);
   <!-- NAV -->
   <nav class="nav" id="nav" aria-label="Navigation principale">
     <div class="nav-inner container">
-      <a href="/emberfox-site" class="nav-logo">
+      <a href="/" class="nav-logo">
         <Image src={logo} alt="Enkotech" width={36} height={45} class="nav-logo-img" format="png" />
         <span class="nav-logo-text"><span class="fire-text">ENKO</span>TECH</span>
       </a>
@@ -141,11 +141,11 @@ const isServicesActive = services.some(s => currentPath === s.href);
         <div class="footer-col">
           <p class="footer-heading display-font">Services</p>
           <ul>
-            <li><a href="/emberfox-site/Sites-web">Sites Web</a></li>
-            <li><a href="/emberfox-site/Applications">Applications</a></li>
-            <li><a href="/emberfox-site/Montage-pc">Montage PC</a></li>
-            <li><a href="/emberfox-site/Depannage">Dépannage</a></li>
-            <li><a href="/emberfox-site/Projets">Projets</a></li>
+            <li><a href="/Sites-web">Sites Web</a></li>
+            <li><a href="/Applications">Applications</a></li>
+            <li><a href="/Montage-pc">Montage PC</a></li>
+            <li><a href="/Depannage">Dépannage</a></li>
+            <li><a href="/Projets">Projets</a></li>
           </ul>
         </div>
         <div class="footer-col">
@@ -161,9 +161,9 @@ const isServicesActive = services.some(s => currentPath === s.href);
       <div class="footer-bottom">
         <span class="mono-font" style="color:var(--text-muted);font-size:0.75rem">Conçu avec feu & passion — <span class="fire-text">Enkotech</span></span>
         <div class="footer-bottom-links">
-          <a href="/emberfox-site/A-propos" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">À propos</a>
-          <a href="/emberfox-site/FAQ" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">FAQ</a>
-          <a href="/emberfox-site/Mentions-legales" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">Mentions légales</a>
+          <a href="/A-propos" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">À propos</a>
+          <a href="/FAQ" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">FAQ</a>
+          <a href="/Mentions-legales" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">Mentions légales</a>
         </div>
       </div>
     </div>
