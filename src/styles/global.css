@@ -27,6 +27,7 @@
 
 html {
   scroll-behavior: smooth;
+  text-size-adjust: 100%;
 }
 
 body {
@@ -36,6 +37,9 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
+
+img, svg, video { max-width: 100%; }
+input, select, textarea, button { font: inherit; }
 
 /* Scrollbar */
 ::-webkit-scrollbar { width: 3px; }
@@ -126,6 +130,7 @@ body::before {
 }
 
 .container {
+  width: 100%;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
@@ -236,23 +241,39 @@ a.btn-fire, a.btn-outline { min-height: 44px; }
 @media (max-width: 768px) {
   html { font-size: 100%; }
   .container { padding: 0 1.25rem; }
-  .section { padding: 5rem 0; }
-  .page-hero { padding: 8rem 0 3rem !important; }
+  .section { padding: 4.5rem 0; }
+  .page-hero { padding: 7.5rem 0 3rem !important; }
+  .page-hero-inner { max-width: none; }
+  .page-title { font-size: clamp(3rem, 14vw, 4.75rem); }
+  .page-sub { max-width: 42rem; margin-bottom: 2rem; }
 }
 
 @media (max-width: 480px) {
   html { font-size: 100%; }
   .container { padding: 0 1rem; }
-  .section { padding: 3.5rem 0; }
-  h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
+  .section { padding: 3.75rem 0; }
+  h1, h2, h3 { overflow-wrap: normal; word-break: normal; }
   .fire-divider { margin: 0.75rem 0 1.25rem; }
-  .btn-fire, .btn-outline { padding: 0.75rem 1.5rem; font-size: 1rem; }
-  .card { padding: 1.5rem; }
-  .page-hero { padding: 7rem 0 2.5rem !important; }
-  .page-sub { font-size: 0.95rem; }
+  .btn-fire, .btn-outline { padding: 0.8rem 1.25rem; font-size: 1rem; }
+  .card { padding: 1.25rem; }
+  .page-hero { padding: 6.5rem 0 2.5rem !important; }
+  .page-title { font-size: clamp(2.8rem, 15vw, 4rem); }
+  .page-sub { font-size: 0.95rem; line-height: 1.65; }
+  input, select, textarea { font-size: 1rem !important; }
 }
 
 /* Touch devices — always show interactive hints */
 @media (hover: none) {
   .project-hint { opacity: 1 !important; transform: none !important; color: var(--ember-3) !important; }
+  .card:hover { transform: none; box-shadow: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }

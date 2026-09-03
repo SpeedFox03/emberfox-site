@@ -1,4 +1,20 @@
-# Astro Starter Kit: Minimal
+# Site Enkotech
+
+Site vitrine Astro avec configurateur d'offres et formulaires envoyés par Resend via une fonction Netlify.
+
+## Déploiement Netlify
+
+La variable d'environnement obligatoire est :
+
+```text
+RESEND_API_KEY=re_xxxxxxxxx
+```
+
+Le domaine `enkotech.be` doit être vérifié dans Resend pour utiliser l'expéditeur par défaut `Enkotech <contact@enkotech.be>`. Les variables facultatives `CONTACT_TO_EMAIL` et `RESEND_FROM_EMAIL` permettent de remplacer le destinataire ou l'expéditeur.
+
+Netlify détecte la configuration dans `netlify.toml`, construit le site dans `dist` et déploie la fonction située dans `netlify/functions`.
+
+## Développement
 
 ```sh
 npm create astro@latest -- --template minimal

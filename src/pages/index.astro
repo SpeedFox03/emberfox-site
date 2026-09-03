@@ -605,6 +605,8 @@ const whyItems = [
 @media (max-width: 768px) {
   .services-grid { grid-template-columns: 1fr; }
   .why-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .why-right { gap: 1.75rem; }
+  .why-item { gap: 1rem; }
   .cta-band { padding: 4rem 0; }
   .cta-inner { flex-direction: column; align-items: flex-start; padding: 2.5rem; gap: 2rem; }
   .cta-actions { width: 100%; flex-direction: column; }
@@ -614,7 +616,7 @@ const whyItems = [
 
 /* ≤ 480px — mobile compact */
 @media (max-width: 480px) {
-  .hero { padding: 7rem 0 3rem; }
+  .hero { padding: 6.5rem 0 3rem; }
   .hero-badge { font-size: 0.7rem; letter-spacing: 0.08em; padding: 0.35rem 0.75rem; }
   .hero-title { font-size: clamp(2.8rem, 11vw, 3.5rem); }
   .hero-sub { font-size: 0.95rem; }
@@ -624,15 +626,27 @@ const whyItems = [
   /* Terminal masqué → on réaffiche les stats */
   .hero-visual { display: none; }
   .hero-stats {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.25rem 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--dark-border);
     animation: title-in 0.8s ease 0.4s both;
   }
+  .stat {
+    min-width: 0;
+    padding: 0.85rem;
+    background: rgba(255, 100, 0, 0.035);
+    border: 1px solid var(--dark-border);
+  }
+  .stat-value { font-size: 1.55rem; }
+  .stat-label { color: var(--text-secondary); line-height: 1.35; }
   /* Services */
   .service-card { padding: 1.5rem; min-height: unset; }
+  .service-header { margin-bottom: 1rem; }
+  .service-footer { padding-top: 1rem; }
+  .why-item { align-items: stretch; }
+  .why-num { padding-top: 0.15rem; }
   /* CTA */
   .cta-inner { padding: 1.75rem 1.25rem; }
 }

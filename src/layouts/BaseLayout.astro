@@ -32,7 +32,8 @@ const isServicesActive = services.some(s => currentPath === s.href);
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title} | Enkotech</title>
   <meta name="description" content={description} />
-  <link rel="icon" type="image/png" href={`${basePath}/logo.png`} />
+  <link rel="icon" type="image/png" href={logo.src} />
+  <link rel="apple-touch-icon" href={logo.src} />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Enkotech" />
@@ -441,8 +442,7 @@ const isServicesActive = services.some(s => currentPath === s.href);
 @media (max-width: 1200px) {
   .nav-links {
     display: grid;
-    grid-template-columns: max-content;
-    justify-content: center;
+    grid-template-columns: minmax(0, 1fr);
     position: absolute;
     top: 100%; left: 0; right: 0;
     background: rgba(10, 8, 4, 0.97);
@@ -455,6 +455,9 @@ const isServicesActive = services.some(s => currentPath === s.href);
     visibility: hidden;
     transform: translateY(-10px);
     transition: opacity 0.22s ease, transform 0.22s ease, visibility 0s 0.22s;
+    max-height: calc(100svh - 72px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
   }
   .nav-links.open {
     opacity: 1;
@@ -548,9 +551,16 @@ const isServicesActive = services.some(s => currentPath === s.href);
 
 /* ≤ 768px — footer stack */
 @media (max-width: 768px) {
+  .nav { padding: 0.75rem 0; }
+  .nav.scrolled { padding: 0.5rem 0; }
+  .nav-logo { gap: 0.55rem; }
+  .nav-logo-img { width: 30px; height: auto; }
+  .nav-logo-text { font-size: 1.4rem; }
+  .nav-links { padding: 0.5rem 1rem 1rem; }
   .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
   .footer-bottom-links { justify-content: center; }
+  .footer-col ul { gap: 0.5rem; }
 }
 
 /* ≤ 480px — footer compact */
@@ -559,6 +569,7 @@ const isServicesActive = services.some(s => currentPath === s.href);
   .footer-grid { gap: 1.5rem; }
   .footer-bottom-links { flex-wrap: wrap; gap: 1rem; }
   .nav-cta { font-size: 0.95rem; padding: 0.7rem 1.25rem; }
+  .footer-col a, .footer-col span { overflow-wrap: anywhere; }
 }
 </style>
 
@@ -635,7 +646,7 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.10 });
-document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => observer.observe(el));
 
 // Auto-stagger grid/list items
 [

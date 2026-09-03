@@ -61,19 +61,18 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 
       <!-- FORM -->
       <div class="contact-form-wrap">
-        <!-- Remplace YOUR_FORM_ID par ton ID Formspree (formspree.io → New Form) -->
-        <form class="contact-form" id="contactForm" action="https://formspree.io/f/xrejjypq" method="POST">
+        <form class="contact-form" id="contactForm">
           <div class="form-group">
-            <label class="form-label mono-font">Votre nom</label>
-            <input type="text" class="form-input" placeholder="Jean Dupont" required />
+            <label class="form-label mono-font" for="contactName">Votre nom</label>
+            <input type="text" class="form-input" id="contactName" name="name" autocomplete="name" maxlength="100" placeholder="Jean Dupont" required />
           </div>
           <div class="form-group">
-            <label class="form-label mono-font">Email</label>
-            <input type="email" class="form-input" placeholder="jean@exemple.be" required />
+            <label class="form-label mono-font" for="contactEmail">Email</label>
+            <input type="email" class="form-input" id="contactEmail" name="email" autocomplete="email" maxlength="200" placeholder="jean@exemple.be" required />
           </div>
           <div class="form-group">
-            <label class="form-label mono-font">Service souhaité</label>
-            <select class="form-input form-select">
+            <label class="form-label mono-font" for="contactService">Service souhaité</label>
+            <select class="form-input form-select" id="contactService" name="service">
               <option value="">Choisir un service</option>
               <option>Site web</option>
               <option>Application sur mesure</option>
@@ -83,17 +82,19 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
             </select>
           </div>
           <div class="form-group">
-            <label class="form-label mono-font">Message</label>
-            <textarea class="form-input form-textarea" placeholder="Décrivez votre projet ou votre problème..." required></textarea>
+            <label class="form-label mono-font" for="contactMessage">Message</label>
+            <textarea class="form-input form-textarea" id="contactMessage" name="message" maxlength="5000" placeholder="Décrivez votre projet ou votre problème..." required></textarea>
           </div>
+          <label class="website-field" aria-hidden="true">
+            <span>Votre site web</span>
+            <input type="text" name="website" tabindex="-1" autocomplete="off" />
+          </label>
           <button type="submit" class="btn-fire" style="width:100%;justify-content:center;font-size:1.1rem">
             Envoyer ma demande
             <PaperPlaneTiltLight width={18} height={18} />
           </button>
-          <p class="form-privacy">Les informations envoyées servent uniquement à traiter votre demande et transitent par Formspree. <a href="/Mentions-legales">En savoir plus</a>.</p>
-          <div class="form-success" id="formSuccess">
-            ✅ Message envoyé ! Je vous réponds sous 24h.
-          </div>
+          <p class="form-privacy">Les informations envoyées servent uniquement à traiter votre demande et sont transmises par email via Resend. <a href="/Mentions-legales">En savoir plus</a>.</p>
+          <div class="form-feedback" id="formFeedback" role="status"></div>
         </form>
       </div>
 
@@ -203,7 +204,7 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 .form-select { cursor: pointer; }
 .form-select option { background: var(--dark-card); }
 .form-textarea { resize: vertical; min-height: 160px; }
-.form-success {
+.form-feedback {
   display: none;
   padding: 1rem;
   background: rgba(255,140,0,0.1);
@@ -212,7 +213,9 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
   font-size: 0.9rem;
   text-align: center;
 }
-.form-success.visible { display: block; }
+.form-feedback.visible { display: block; }
+.form-feedback.error { color: #fca5a5; border-color: rgba(239,68,68,0.35); background: rgba(239,68,68,0.06); }
+.website-field { position: absolute !important; left: -10000px !important; width: 1px; height: 1px; overflow: hidden; }
 .form-privacy {
   color: var(--text-muted);
   font-size: 0.75rem;
@@ -250,10 +253,16 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 
 @media (max-width: 768px) {
   .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-infos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; padding-top: 0; }
+  .info-block, .availability-card { padding: 1rem; border: 1px solid var(--dark-border); background: var(--dark-card); min-width: 0; }
+  .availability-card { grid-column: 1 / -1; }
 }
 @media (max-width: 480px) {
   .contact-grid { gap: 2rem; }
-  .info-value { font-size: 1.4rem; }
+  .contact-infos { grid-template-columns: 1fr; }
+  .availability-card { grid-column: auto; }
+  .info-value { font-size: 1.3rem; overflow-wrap: anywhere; }
+  .form-textarea { min-height: 130px; }
   .contact-form button[type="submit"] { width: 100%; justify-content: center; }
 }
 </style>
@@ -261,34 +270,47 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 <script>
 const form = document.getElementById('contactForm') as HTMLFormElement | null;
 const btn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
-const success = document.getElementById('formSuccess');
+const feedback = document.getElementById('formFeedback');
 
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
   if (!btn) return;
 
-  const originalText = btn.textContent ?? '';
+  if (!form.reportValidity()) return;
+  const originalHtml = btn.innerHTML;
   btn.disabled = true;
   btn.textContent = 'Envoi en cours…';
+  feedback?.classList.remove('visible', 'error');
 
   try {
-    const res = await fetch(form.action, {
+    const data = new FormData(form);
+    const res = await fetch('/.netlify/functions/contact', {
       method: 'POST',
-      body: new FormData(form),
-      headers: { Accept: 'application/json' },
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        type: 'contact',
+        name: data.get('name'),
+        email: data.get('email'),
+        service: data.get('service'),
+        message: data.get('message'),
+        website: data.get('website'),
+      }),
     });
+    const result = await res.json().catch(() => ({}));
 
     if (res.ok) {
-      success?.classList.add('visible');
+      if (feedback) feedback.textContent = '✓ Message envoyé ! Je vous réponds sous 24 h.';
+      feedback?.classList.add('visible');
       form.reset();
     } else {
-      alert("Une erreur est survenue. Merci de me contacter directement à contact@enkotech.be");
+      throw new Error(result.error || 'Impossible d’envoyer le message.');
     }
-  } catch {
-    alert("Erreur réseau. Merci de réessayer ou de me contacter par email.");
+  } catch (error) {
+    if (feedback) feedback.textContent = error instanceof Error ? error.message : 'Erreur réseau. Écrivez-moi à contact@enkotech.be.';
+    feedback?.classList.add('visible', 'error');
   } finally {
     btn.disabled = false;
-    btn.textContent = originalText;
+    btn.innerHTML = originalHtml;
   }
 });
 </script>
