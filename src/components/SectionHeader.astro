@@ -5,7 +5,7 @@ interface Props {
 }
 const { pre, sub } = Astro.props;
 ---
-{pre && <p class="section-pre mono-font fire-text">— {pre}</p>}
+{pre && <p class="section-pre mono-font fire-text">- {pre}</p>}
 <h2 class="display-font sh-title"><slot /></h2>
 <div class="fire-divider"></div>
 {sub && <p class="sh-sub">{sub}</p>}

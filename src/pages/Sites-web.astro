@@ -55,13 +55,13 @@ const processSteps: [string, string][] = [
   ['Livraison',     "Tests, mise en ligne, formation et suivi post-lancement."],
 ];
 ---
-<BaseLayout title="Sites Web" description="Création de sites web professionnels sur mesure — Enkotech">
+<BaseLayout title="Sites Web" description="Création de sites web professionnels sur mesure - Enkotech">
 
   <!-- HERO PAGE -->
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-inner">
-        <p class="section-pre mono-font fire-text">— Service 01</p>
+        <p class="section-pre mono-font fire-text">- Service 01</p>
         <h1 class="display-font page-title">Sites<br/><span class="fire-text">Web</span></h1>
         <p class="page-sub">Des sites qui ne passent pas inaperçus. Du design au code, je crée des expériences web qui reflètent votre identité et convertissent vos visiteurs.</p>
         <a href="#configurateur" class="btn-fire">
@@ -126,7 +126,7 @@ const processSteps: [string, string][] = [
   <!-- OFFERS -->
   <section class="section pricing-section" id="formules">
     <div class="container">
-      <p class="section-pre mono-font fire-text">— Un site qui reste vivant</p>
+      <p class="section-pre mono-font fire-text">- Un site qui reste vivant</p>
       <h2 class="display-font pricing-title">Votre site, suivi dans la durée</h2>
       <div class="fire-divider"></div>
       <p class="pricing-intro">Un budget de départ léger, puis un accompagnement continu : hébergement, maintenance, sécurité et modifications sont inclus dans chaque abonnement.</p>
@@ -162,7 +162,7 @@ const processSteps: [string, string][] = [
       <div class="configurator" id="configurateur">
         <div class="configurator-heading">
           <div>
-            <p class="section-pre mono-font fire-text">— Estimation instantanée</p>
+            <p class="section-pre mono-font fire-text">- Estimation instantanée</p>
             <h2 class="display-font">Configurez votre formule</h2>
           </div>
           <p>Choisissez votre base, ajoutez ce qui vous est utile et envoyez-moi directement la configuration.</p>
@@ -379,16 +379,28 @@ const processSteps: [string, string][] = [
 .option-price small { color: var(--ember-3); font-size: 0.66rem; }
 .quote-summary { position: sticky; top: 6.5rem; background: var(--dark-bg); border: 1px solid rgba(255, 107, 0, 0.35); padding: 1.5rem; min-width: 0; }
 .quote-summary::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: var(--gradient-fire); }
-.quote-summary h3 { font-size: 1.9rem; margin: 0.5rem 0 1.25rem; }
+.quote-summary h3 { font-size: 1.7rem; margin: 0.4rem 0 1.1rem; }
 .summary-prices { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-.summary-prices > div { display: flex; flex-direction: column; padding: 0.85rem; border: 1px solid var(--dark-border); background: var(--dark-card); min-width: 0; }
-.summary-prices span { color: var(--text-muted); font-size: 0.68rem; }
-.summary-prices strong { color: var(--text-primary); font-size: 1.65rem; line-height: 1.1; }
+.summary-prices > div { display: flex; flex-direction: column; padding: 0.75rem; border: 1px solid var(--dark-border); background: var(--dark-card); min-width: 0; }
+.summary-prices span { color: var(--text-muted); font-size: 0.64rem; }
+.summary-prices strong { color: var(--text-primary); font-size: 1.45rem; line-height: 1.1; }
 .summary-prices [hidden] { display: none; }
-.summary-lines { list-style: none; display: flex; flex-direction: column; gap: 0.35rem; padding: 1rem 0; border-bottom: 1px solid var(--dark-border); }
-.summary-lines li { color: var(--text-secondary); font-size: 0.75rem; display: flex; justify-content: space-between; gap: 1rem; }
-.summary-lines li span:last-child { color: var(--text-primary); white-space: nowrap; }
-.summary-note { color: var(--text-muted); font-size: 0.68rem; line-height: 1.5; margin: 0.85rem 0 1.25rem; }
+.summary-lines { list-style: none; display: flex; flex-direction: column; padding: 0.8rem 0; border-bottom: 1px solid var(--dark-border); }
+.summary-lines :global(li) {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) max-content;
+  align-items: start;
+  gap: 0.65rem;
+  padding: 0.4rem 0;
+  color: var(--text-secondary);
+  font-size: 0.68rem;
+  line-height: 1.35;
+  border-bottom: 1px solid rgba(84, 55, 34, 0.45);
+}
+.summary-lines :global(li:last-child) { border-bottom: 0; }
+.summary-lines :global(li span:first-child) { min-width: 0; }
+.summary-lines :global(li span:last-child) { color: var(--text-primary); font-size: 0.66rem; text-align: right; white-space: nowrap; }
+.summary-note { color: var(--text-muted); font-size: 0.64rem; line-height: 1.5; margin: 0.8rem 0 1.1rem; }
 .quote-contact { display: flex; flex-direction: column; gap: 0.75rem; }
 .quote-contact label { display: flex; flex-direction: column; gap: 0.3rem; }
 .quote-contact label > span { color: var(--ember-3); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
@@ -445,8 +457,10 @@ const processSteps: [string, string][] = [
   .option-choice { gap: 0.6rem; }
   .option-price { font-family: 'DM Sans', sans-serif; }
   .summary-prices { gap: 0.5rem; }
-  .summary-prices > div { padding: 0.7rem; }
-  .summary-prices strong { font-size: 1.4rem; }
+  .summary-prices > div { padding: 0.65rem; }
+  .summary-prices strong { font-size: 1.3rem; }
+  .summary-lines :global(li) { gap: 0.45rem; font-size: 0.64rem; }
+  .summary-lines :global(li span:last-child) { font-size: 0.62rem; }
   .tech-grid { gap: 0.5rem; }
   .tech-pill { font-size: 0.72rem; padding: 0.4rem 0.7rem; }
 }
@@ -494,7 +508,7 @@ if (quoteForm) {
     let setup = billing === 'subscription' ? offer.launch : offer.purchase;
     let monthly = billing === 'subscription' ? offer.monthly : 0;
     const lines: { label: string; price: string }[] = [
-      { label: billing === 'subscription' ? `Lancement — ${offer.title}` : `Achat — ${offer.title}`, price: euro.format(setup) },
+      { label: billing === 'subscription' ? `Lancement - ${offer.title}` : `Achat - ${offer.title}`, price: euro.format(setup) },
     ];
 
     const quantityPrice = panel?.querySelector<HTMLElement>('.quantity-price');

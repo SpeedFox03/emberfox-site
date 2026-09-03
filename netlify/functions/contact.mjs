@@ -47,7 +47,7 @@ function buildQuoteContent(payload) {
   ];
 
   return {
-    subjectPrefix: `Configuration web — ${plan || 'nouvelle demande'}`,
+    subjectPrefix: `Configuration web - ${plan || 'nouvelle demande'}`,
     html: `
       <h2 style="margin:24px 0 12px;color:#ff6b00">Configuration demandée</h2>
       <table style="width:100%;border-collapse:collapse">
@@ -100,7 +100,7 @@ export default async (request) => {
   const to = process.env.CONTACT_TO_EMAIL || 'contact@enkotech.be';
   const from = process.env.RESEND_FROM_EMAIL || 'Enkotech <contact@enkotech.be>';
   const quoteContent = type === 'quote' ? buildQuoteContent(payload) : null;
-  const subject = quoteContent?.subjectPrefix || `Contact — ${service || 'demande générale'}`;
+  const subject = quoteContent?.subjectPrefix || `Contact - ${service || 'demande générale'}`;
   const safeMessage = escapeHtml(message || 'Aucun message ajouté.').replaceAll('\n', '<br>');
 
   const html = `
@@ -142,7 +142,7 @@ export default async (request) => {
         from,
         to: [to],
         reply_to: email,
-        subject: `[Enkotech] ${subject} — ${name}`,
+        subject: `[Enkotech] ${subject} - ${name}`,
         html,
         text,
       }),
@@ -160,4 +160,3 @@ export default async (request) => {
     return json({ error: 'L’envoi a échoué. Vous pouvez écrire à contact@enkotech.be.' }, 502);
   }
 };
-
