@@ -48,7 +48,7 @@ const included = [
         <p class="section-pre mono-font fire-text">— Service 03</p>
         <h1 class="display-font page-title">Montage<br/><span class="fire-text">PC</span></h1>
         <p class="page-sub">Un PC monté à la main, pièce par pièce, selon vos besoins et votre budget. Gaming, création, workstation — je sélectionne les composants les mieux adaptés.</p>
-        <a href="/Contact" class="btn-fire">
+        <a href="/Contact?service=Montage%20PC" class="btn-fire">
           Configurer mon PC
           <ArrowRightLight width={16} height={16} />
         </a>
@@ -124,7 +124,7 @@ const included = [
             <ul class="config-specs">
               {c.specs.map(s => <li><span style="color:var(--ember-3)">▸</span> {s}</li>)}
             </ul>
-            <a href="/Contact" class={c.highlight ? 'btn-fire' : 'btn-outline'} style="margin-top:auto;justify-content:center">Demander un devis</a>
+            <a href="/Contact?service=Montage%20PC" class={c.highlight ? 'btn-fire' : 'btn-outline'} style="margin-top:auto;justify-content:center">Demander un devis</a>
           </div>
         ))}
       </div>

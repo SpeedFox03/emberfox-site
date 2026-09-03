@@ -271,6 +271,12 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 const form = document.getElementById('contactForm') as HTMLFormElement | null;
 const btn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
 const feedback = document.getElementById('formFeedback');
+const serviceSelect = form?.querySelector<HTMLSelectElement>('select[name="service"]');
+const requestedService = new URLSearchParams(window.location.search).get('service');
+
+if (serviceSelect && requestedService && Array.from(serviceSelect.options).some(option => option.value === requestedService)) {
+  serviceSelect.value = requestedService;
+}
 
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
