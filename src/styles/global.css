@@ -28,6 +28,8 @@
 html {
   scroll-behavior: smooth;
   text-size-adjust: 100%;
+  /* Keep decorative overflow from widening the mobile layout viewport. */
+  overflow-x: clip;
 }
 
 body {
