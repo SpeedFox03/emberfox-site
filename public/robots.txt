@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://enkotech.be/sitemap-index.xml

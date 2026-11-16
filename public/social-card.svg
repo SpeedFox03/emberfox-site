@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs><linearGradient id="fire"><stop stop-color="#ff4500"/><stop offset="1" stop-color="#ffb830"/></linearGradient></defs>
+  <path fill="#15110d" d="M0 0h1200v630H0z"/>
+  <path fill="none" stroke="#543722" d="M60 60h1080v510H60z"/>
+  <path fill="url(#fire)" d="M60 60h1080v5H60z"/>
+  <text x="105" y="200" fill="url(#fire)" font-family="Arial,sans-serif" font-weight="bold" font-size="78">ENKOTECH</text>
+  <text x="105" y="315" fill="#f5ede0" font-family="Arial,sans-serif" font-size="50">Votre site. Votre activité.</text>
+  <text x="105" y="385" fill="#cfc5b9" font-family="Arial,sans-serif" font-size="34">Création web et accompagnement à Ciney</text>
+  <text x="105" y="510" fill="#ffb830" font-family="Arial,sans-serif" font-size="30">enkotech.be</text>
+</svg>

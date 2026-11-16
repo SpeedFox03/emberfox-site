@@ -10,7 +10,6 @@ import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
 const projectTypes = [
   {
     icon: GlobeLight,
-    number: '01',
     title: 'Site web',
     description: 'Landing page, site vitrine ou boutique en ligne avec accompagnement mensuel.',
     href: '/Sites-web#configurateur',
@@ -19,7 +18,6 @@ const projectTypes = [
   },
   {
     icon: LightningLight,
-    number: '02',
     title: 'Application',
     description: 'Application métier, outil interne ou solution mobile adaptée à votre façon de travailler.',
     href: '/Contact?service=Application%20sur%20mesure',
@@ -27,7 +25,6 @@ const projectTypes = [
   },
   {
     icon: DesktopLight,
-    number: '03',
     title: 'Montage PC',
     description: 'Configuration gaming, création ou professionnelle pensée selon votre budget.',
     href: '/Contact?service=Montage%20PC',
@@ -35,7 +32,6 @@ const projectTypes = [
   },
   {
     icon: WrenchLight,
-    number: '04',
     title: 'Dépannage',
     description: 'Diagnostic, réparation ou intervention rapide à domicile et à distance.',
     href: '/Contact?service=D%C3%A9pannage%20%C3%A0%20domicile',
@@ -60,7 +56,6 @@ const projectTypes = [
           <a href={project.href} class={`project-choice ${project.highlight ? 'project-choice-highlight' : ''}`}>
             <div class="project-choice-top">
               <span class="project-choice-icon"><project.icon width={30} height={30} /></span>
-              <span class="project-choice-number mono-font">{project.number}</span>
             </div>
             <div>
               <h2 class="display-font">{project.title}</h2>
@@ -132,14 +127,13 @@ const projectTypes = [
   padding: 0.35rem 0.75rem;
   color: #080604;
   background: var(--gradient-fire);
-  font-family: 'JetBrains Mono', monospace;
+  font-family: 'JetBrains Mono Variable', monospace;
   font-size: 0.6rem;
   letter-spacing: 0.1em;
 }
 .project-choice { position: relative; }
 .project-choice-top { display: flex; align-items: flex-start; justify-content: space-between; }
 .project-choice-icon { color: var(--ember-2); display: flex; }
-.project-choice-number { color: var(--text-muted); font-size: 0.75rem; }
 .project-choice h2 { font-size: 2rem; color: var(--text-primary); margin-bottom: 0.55rem; }
 .project-choice p { color: var(--text-secondary); line-height: 1.7; max-width: 44ch; }
 .project-choice-action { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--ember-3); letter-spacing: 0.1em; margin-top: auto; }

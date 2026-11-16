@@ -1,0 +1,34 @@
+<section class="consent-panel" id="cookiePanel" aria-label="Préférences de confidentialité" hidden>
+  <div class="consent-copy">
+    <p class="section-pre mono-font fire-text">- Votre confidentialité</p>
+    <h2 class="display-font">Vous gardez le choix.</h2>
+    <p>Le site fonctionne sans suivi. Avec votre accord, les services Google servent à mesurer les visites ou les campagnes publicitaires. <a href="/Confidentialite">Détails et données personnelles</a>.</p>
+  </div>
+  <div id="cookieOptions" hidden>
+    <label><input type="checkbox" id="consentAnalytics" /> Mesure d’audience</label>
+    <label><input type="checkbox" id="consentMarketing" /> Publicité et mesure des campagnes</label>
+    <p>Les préférences sont conservées six mois. Vous pouvez les modifier depuis le pied de page.</p>
+  </div>
+  <div class="consent-actions">
+    <button type="button" class="consent-button" data-consent="reject">Tout refuser</button>
+    <button type="button" class="consent-button" data-consent="accept">Tout accepter</button>
+    <button type="button" class="consent-button" data-consent="customize">Personnaliser</button>
+    <button type="button" class="consent-button" data-consent="save" hidden>Enregistrer mes choix</button>
+  </div>
+</section>
+<script>
+  import '../scripts/privacy';
+</script>
+<style>
+  .consent-panel { position: fixed; inset: auto 1rem 1rem; z-index: 2000; max-width: 980px; margin-inline: auto; padding: 1.5rem; border: 1px solid var(--ember-2); background: var(--dark-bg); box-shadow: 0 12px 70px #000a; max-height: 80svh; overflow-y: auto; }
+  .consent-copy h2 { font-size: 1.7rem; margin-bottom: .6rem; }
+  .consent-panel p { color: var(--text-secondary); font-size: .9rem; line-height: 1.65; }
+  .consent-panel a { color: var(--ember-3); }
+  .consent-actions { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+  .consent-button { cursor: pointer; padding: .7rem 1rem; border: 1px solid var(--dark-border-2); color: var(--text-primary); background: var(--dark-card); font-weight: 500; }
+  .consent-button:hover { border-color: var(--ember-2); }
+  #cookieOptions { margin-top: 1rem; }
+  #cookieOptions label { display: flex; gap: .7rem; align-items: center; padding: .4rem 0; }
+  #cookieOptions input { width: 20px; height: 20px; accent-color: var(--ember-2); }
+  @media (max-width: 560px) { .consent-panel { inset-inline: .5rem; padding: 1rem; } .consent-actions { display: grid; grid-template-columns: 1fr 1fr; } }
+</style>

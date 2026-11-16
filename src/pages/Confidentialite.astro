@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Confidentialité et cookies" description="Utilisation des formulaires, préférences de confidentialité et services Google sur le site Enkotech.">
+  <section class="page-hero"><div class="container"><p class="section-pre mono-font fire-text">- Vos données</p><h1 class="display-font page-title">Votre<br/><span class="fire-text">confidentialité.</span></h1><p class="page-sub">Les informations utiles pour comprendre les formulaires et choisir les services optionnels.</p></div></section>
+  <section class="section"><div class="container policy-copy">
+    <p>Dernière mise à jour : 16 novembre 2026.</p>
+    <h2>Qui est responsable ?</h2>
+    <p>Jordan Jacob, Enkotech, Quai de l’Industrie 24, boîte 0011, 5590 Ciney, Belgique. Pour toute question sur vos données : <a href="mailto:contact@enkotech.be">contact@enkotech.be</a>.</p>
+    <h2>Vos demandes et configurations</h2>
+    <p>Les formulaires transmettent votre nom, votre adresse email, votre message et, pour une demande de devis, les choix de configuration. Ces informations permettent de répondre à votre demande et de préparer une proposition. Elles ne vous inscrivent pas à une newsletter.</p>
+    <p>Le traitement sert à répondre à votre demande et à préparer, à votre initiative, une éventuelle prestation. Les échanges sont conservés pendant le traitement et le suivi de votre demande ; si une prestation est conclue, les documents nécessaires sont conservés selon les obligations contractuelles et légales applicables. Vous pouvez demander la suppression des informations qui ne sont plus nécessaires.</p>
+    <p>Netlify héberge le site et la fonction de formulaire. Resend achemine les demandes par email. Ces prestataires peuvent traiter des données aux États-Unis ; leurs documents décrivent leurs engagements et les garanties de transfert : <a href="https://www.netlify.com/privacy/" target="_blank" rel="noopener noreferrer">Netlify</a> et <a href="https://resend.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer">Resend</a>. Les données techniques nécessaires à la sécurité et à l’acheminement des requêtes peuvent être traitées par l’hébergeur.</p>
+    <h2>Préférences enregistrées sur votre appareil</h2>
+    <p>Votre choix de confidentialité est enregistré dans le navigateur pendant six mois. Les choix du configurateur peuvent être enregistrés localement pour les retrouver lors d’une prochaine visite. Ce brouillon ne contient ni votre nom, ni votre email, ni votre message. Le bouton « Réinitialiser » permet de supprimer le brouillon ; vous pouvez aussi effacer les données du site dans votre navigateur.</p>
+    <p>Les liens de partage du configurateur contiennent uniquement la formule, le mode de paiement, les quantités et les options. Toute personne disposant de ce lien peut consulter ces choix.</p>
+    <h2>Services Google optionnels</h2>
+    <p>Les conteneurs Google Tag Manager GTM-TVHL3SZ2 et GTM-P32K4HZS sont chargés uniquement après un accord à au moins une catégorie optionnelle. Vos choix de mesure d’audience et de publicité sont transmis aux services Google. Les préférences initiales refusent le stockage analytique, publicitaire, les données publicitaires et la personnalisation publicitaire.</p>
+    <p>La mesure d’audience sert à comprendre les visites et les étapes du configurateur. Les événements prévus portent sur les clics, le choix des formules, les demandes envoyées et les erreurs ; les événements ajoutés par Enkotech ne contiennent pas les coordonnées ni les messages des formulaires. La publicité et la mesure des campagnes constituent une catégorie distincte. Les traitements Google dépendent également des balises configurées dans les conteneurs. Consultez les <a href="https://policies.google.com/privacy?hl=fr" target="_blank" rel="noopener noreferrer">informations de Google</a>.</p>
+    <p>Refuser les services optionnels ne bloque pas la consultation du site ni l’envoi d’une demande. Vous pouvez revenir sur votre choix à tout moment.</p>
+    <button type="button" class="btn-outline" data-cookie-settings>Modifier mes préférences</button>
+    <h2>Vos droits</h2>
+    <p>Selon votre situation, vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données, vous opposer à certains traitements et retirer votre consentement. Contactez <a href="mailto:contact@enkotech.be">contact@enkotech.be</a>. Vous pouvez également vous adresser à l’<a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer">Autorité de protection des données belge</a>.</p>
+  </div></section>
+</BaseLayout>
+<style>
+  .policy-copy { max-width: 880px; }
+  .policy-copy h2 { font-size: 2rem; color: var(--ember-3); margin: 2.5rem 0 1rem; }
+  .policy-copy p { color: var(--text-secondary); line-height: 1.85; margin-bottom: 1rem; }
+  .policy-copy a { color: var(--ember-3); overflow-wrap: anywhere; }
+</style>

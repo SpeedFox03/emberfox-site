@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   --ember-1: #FF4500;
@@ -13,7 +12,7 @@
   --dark-border-2: #543722;
   --text-primary: #F5EDE0;
   --text-secondary: #CFC5B9;
-  --text-muted: #8F8276;
+  --text-muted: #A89A8C;
   --gradient-fire: linear-gradient(135deg, #FF4500, #FF8C00, #FFB830);
   --gradient-fire-h: linear-gradient(90deg, #FF4500, #FF8C00, #FFB830);
   --gradient-dark: linear-gradient(180deg, #1A130F 0%, #15110D 100%);
@@ -33,7 +32,7 @@ html {
 }
 
 body {
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans Variable', sans-serif;
   background:
     radial-gradient(circle at 50% -10%, rgba(255, 120, 32, 0.055), transparent 36rem),
     var(--dark-bg);
@@ -53,7 +52,7 @@ input, select, textarea, button { font: inherit; }
 
 /* Typography */
 .display-font { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; }
-.mono-font { font-family: 'JetBrains Mono', monospace; }
+.mono-font { font-family: 'JetBrains Mono Variable', monospace; }
 
 h1, h2, h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing: 0.05em; line-height: 1; }
 
@@ -232,22 +231,22 @@ body::before {
 
 /* Fade-in on scroll */
 .fade-in {
-  opacity: 0;
-  transform: translateY(20px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 .fade-in-left {
-  opacity: 0;
-  transform: translateX(-24px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-in-left.visible { opacity: 1; transform: translateX(0); }
 
 .fade-in-right {
-  opacity: 0;
-  transform: translateX(24px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 .fade-in-right.visible { opacity: 1; transform: translateX(0); }
@@ -338,4 +337,17 @@ a.btn-fire, a.btn-outline { min-height: 44px; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+[hidden] { display: none !important; }
+:focus-visible { outline: 2px solid var(--ember-3) !important; outline-offset: 4px; }
+section[id], h2[id] { scroll-margin-top: 7rem; }
+.form-reassurance { color: var(--text-secondary); font-size: .88rem; line-height: 1.7; }
+@media (max-width: 768px) {
+  .hero-orb { filter: blur(35px) !important; }
+  .hero-scanline, .cursor-glow { display: none !important; }
+  body { background-attachment: scroll; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fade-in, .fade-in-left, .fade-in-right { opacity: 1 !important; transform: none !important; }
 }

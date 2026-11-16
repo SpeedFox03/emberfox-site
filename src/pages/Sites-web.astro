@@ -5,48 +5,7 @@ import CheckCircleLight from 'phosphor-astro/CheckCircleLight.astro';
 import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
 import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 
-const offers = [
-  {
-    id: 'landing', title: 'Landing page', kicker: 'Pour lancer une offre',
-    launch: 150, monthly: 75, purchase: 600,
-    features: ['Une page sur mesure', 'Hébergement & maintenance', 'SEO essentiel', 'Formulaire de contact', '1 h de modifications / mois', 'Refonte offerte après 5 ans'],
-    quantity: { label: 'Sections supplémentaires', unit: 'section', monthly: 5, purchase: 50, max: 8 },
-    options: [
-      { id: 'seo-local', label: 'SEO local renforcé', desc: 'Structure, mots-clés et fiche locale', setup: 250, monthly: 0 },
-      { id: 'copywriting', label: 'Rédaction des contenus', desc: 'Textes de vente optimisés pour convertir', setup: 120, monthly: 0 },
-      { id: 'booking', label: 'Prise de rendez-vous', desc: 'Agenda et confirmation automatisée', setup: 100, monthly: 10 },
-      { id: 'multilingual', label: 'Version bilingue', desc: 'Une langue supplémentaire', setup: 150, monthly: 15 },
-    ],
-  },
-  {
-    id: 'site', title: 'Site 4 pages', kicker: 'Pour présenter votre activité',
-    launch: 250, monthly: 125, purchase: 1200, highlight: true,
-    features: ['4 pages sur mesure', 'Hébergement, sécurité & sauvegardes', 'SEO essentiel', 'Formulaire & statistiques', '2 h de modifications / mois', 'Refonte offerte après 5 ans'],
-    quantity: { label: 'Pages supplémentaires', unit: 'page', monthly: 10, purchase: 100, max: 20 },
-    options: [
-      { id: 'seo-complet', label: 'SEO approfondi', desc: 'Audit, recherche de mots-clés et optimisation', setup: 250, monthly: 0 },
-      { id: 'blog', label: 'Blog administrable', desc: 'Publiez vos actualités en autonomie', setup: 150, monthly: 15 },
-      { id: 'booking', label: 'Réservation en ligne', desc: 'Agenda, créneaux et confirmations', setup: 120, monthly: 10 },
-      { id: 'multilingual', label: 'Version bilingue', desc: 'Une langue supplémentaire', setup: 250, monthly: 20 },
-      { id: 'newsletter', label: 'Newsletter', desc: 'Inscription et outil d’envoi connecté', setup: 100, monthly: 10 },
-    ],
-  },
-  {
-    id: 'ecommerce', title: 'E-commerce', kicker: 'Pour vendre en ligne',
-    launch: 500, monthly: 195, purchase: 2400,
-    features: ['Boutique jusqu’à 20 produits', 'Paiement sécurisé', 'Commandes & stock', 'Hébergement & maintenance', '3 h de modifications / mois', 'Refonte offerte après 5 ans'],
-    quantity: { label: 'Packs de 10 produits en plus', unit: 'pack', monthly: 12, purchase: 120, max: 20 },
-    options: [
-      { id: 'seo-shop', label: 'SEO e-commerce avancé', desc: 'Catégories, produits et données structurées', setup: 350, monthly: 0 },
-      { id: 'catalog', label: 'Import du catalogue', desc: 'Reprise et nettoyage de vos produits', setup: 250, monthly: 0 },
-      { id: 'shipping', label: 'Transporteurs connectés', desc: 'Tarifs, étiquettes et suivi automatisés', setup: 200, monthly: 15 },
-      { id: 'multilingual', label: 'Boutique bilingue', desc: 'Une langue supplémentaire', setup: 300, monthly: 25 },
-      { id: 'recovery', label: 'Relance des paniers abandonnés', desc: 'Scénario email automatisé', setup: 120, monthly: 15 },
-    ],
-  },
-];
-
-const techs = ['Astro', 'Next.js', 'WordPress', 'Shopify', 'Tailwind CSS', 'Figma', 'Vercel', 'Netlify'];
+import { offers } from '../data/web-offers.mjs';
 
 const processSteps: [string, string][] = [
   ['Brief',         "On discute de votre projet, vos besoins, votre cible et votre identité."],
@@ -61,11 +20,11 @@ const processSteps: [string, string][] = [
   <section class="page-hero">
     <div class="container">
       <div class="page-hero-inner">
-        <p class="section-pre mono-font fire-text">- Service 01</p>
+        <p class="section-pre mono-font fire-text">- Création de sites web</p>
         <h1 class="display-font page-title">Sites<br/><span class="fire-text">Web</span></h1>
         <p class="page-sub">Des sites qui ne passent pas inaperçus. Du design au code, je crée des expériences web qui reflètent votre identité et convertissent vos visiteurs.</p>
         <a href="#configurateur" class="btn-fire">
-          Demander un devis
+          Configurer mon site
           <ArrowRightLight width={16} height={16} />
         </a>
       </div>
@@ -127,52 +86,67 @@ const processSteps: [string, string][] = [
   <section class="section pricing-section" id="formules">
     <div class="container">
       <p class="section-pre mono-font fire-text">- Un site qui reste vivant</p>
-      <h2 class="display-font pricing-title">Votre site, suivi dans la durée</h2>
+      <h2 class="display-font pricing-title">Un site. Deux façons de démarrer.</h2>
       <div class="fire-divider"></div>
       <p class="pricing-intro">Un budget de départ léger, puis un accompagnement continu : hébergement, maintenance, sécurité et modifications sont inclus dans chaque abonnement.</p>
+      <p class="pricing-tax">Prix nets : TVA non applicable, régime de la franchise de taxe.</p>
+      <div class="offer-billing" role="group" aria-label="Comparer les modes de paiement">
+        <button type="button" data-billing-mode="subscription" aria-pressed="true">Abonnement & suivi</button>
+        <button type="button" data-billing-mode="purchase" aria-pressed="false">Achat du site</button>
+      </div>
       <div class="offers-grid">
         {offers.map(o => (
-          <div class={`offer-wrapper ${o.highlight ? 'offer-wrapper-highlight' : ''}`}>
-            {o.highlight && <div class="offer-badge mono-font">Populaire</div>}
+          <div data-offer={o.id} class={`offer-wrapper ${o.highlight ? 'offer-wrapper-highlight' : ''}`}>
+            {o.highlight && <div class="offer-badge mono-font">Site vitrine</div>}
             <div class={`offer-card card ${o.highlight ? 'offer-highlight' : ''}`}>
               <div>
                 <p class="offer-kicker mono-font">{o.kicker}</p>
                 <h3 class="display-font offer-name">{o.title}</h3>
               </div>
               <div class="offer-price-row">
-                <span class="offer-price fire-text display-font">{o.monthly} €</span>
-                <span class="offer-period">/ mois</span>
+                <span data-card-price class="offer-price fire-text display-font">{o.monthly} €</span>
+                <span data-card-period class="offer-period">/ mois</span>
               </div>
-              <p class="offer-launch"><strong>{o.launch} €</strong> au lancement</p>
-              <p class="offer-purchase">ou {o.purchase.toLocaleString('fr-BE')} € en achat unique</p>
+              <p data-card-launch class="offer-launch"><strong>{o.launch} €</strong> au lancement</p>
+              <p data-card-alternative class="offer-purchase">ou {o.purchase.toLocaleString('fr-BE')} € en achat unique</p>
               <ul class="offer-features">
                 {o.features.map(f => (
                   <li>
                     <CheckCircleLight width={14} height={14} class="feature-check" />
-                    {f}
+                    <span data-card-feature>{f}</span>
                   </li>
                 ))}
               </ul>
-              <button type="button" class={`select-offer ${o.highlight ? 'btn-fire' : 'btn-outline'}`} data-plan={o.id}>Configurer cette formule</button>
+              <a href="#configurateur" class={`select-offer ${o.highlight ? 'btn-fire' : 'btn-outline'}`} data-plan={o.id}>Configurer cette formule</a>
             </div>
           </div>
         ))}
       </div>
 
+      <div class="offer-terms">
+        <p><strong>Abonnement résiliable à tout moment.</strong> Le site vous appartient après un an d’abonnement. Le temps mensuel de modifications ne se reporte pas.</p>
+        <p>L’achat unique comprend la conception et la livraison du site. Hébergement, maintenance et services tiers sont précisés dans le devis ; ils ne sont pas inclus dans le prix de création. Certaines options choisies comportent un coût mensuel, affiché dans le récapitulatif.</p>
+        <p>Les modalités de remise des fichiers, de transfert du domaine et d’arrêt des services sont définies dans le devis. Une refonte après cinq ans d’abonnement est incluse selon le périmètre convenu.</p>
+      </div>
       <div class="configurator" id="configurateur">
         <div class="configurator-heading">
           <div>
             <p class="section-pre mono-font fire-text">- Estimation instantanée</p>
             <h2 class="display-font">Configurez votre formule</h2>
           </div>
-          <p>Choisissez votre base, ajoutez ce qui vous est utile et envoyez-moi directement la configuration.</p>
+          <p>Choisissez votre base et vos options. Votre estimation est gratuite et sans engagement. Un devis confirme le périmètre avant tout démarrage.</p>
         </div>
 
-        <form class="quote-form" id="quoteForm" data-pricing={JSON.stringify(offers)}>
+        <noscript>
+          <p class="form-reassurance">Le calcul instantané nécessite JavaScript. Vous pouvez envoyer votre demande avec ce formulaire ; je confirmerai votre estimation par email.</p>
+          <style is:inline>.summary-prices,.summary-year,.summary-tools,.offer-billing{display:none!important}</style>
+        </noscript>
+        <form class="quote-form" id="quoteForm" method="post" action="/.netlify/functions/contact">
+          <input type="hidden" name="type" value="quote" />
           <div class="config-layout">
             <div class="config-main">
               <fieldset class="config-fieldset">
-                <legend class="config-legend mono-font">1. Votre formule</legend>
+                <legend class="config-legend mono-font">Votre formule</legend>
                 <div class="plan-picker">
                   {offers.map((offer, index) => (
                     <label class="plan-choice">
@@ -187,7 +161,7 @@ const processSteps: [string, string][] = [
               </fieldset>
 
               <fieldset class="config-fieldset">
-                <legend class="config-legend mono-font">2. Votre mode de paiement</legend>
+                <legend class="config-legend mono-font">Votre mode de paiement</legend>
                 <div class="billing-picker">
                   <label class="billing-choice">
                     <input type="radio" name="billing" value="subscription" checked />
@@ -195,13 +169,13 @@ const processSteps: [string, string][] = [
                   </label>
                   <label class="billing-choice">
                     <input type="radio" name="billing" value="purchase" />
-                    <span><strong>Achat unique</strong><small>Livraison du site, suivi sur devis</small></span>
+                    <span><strong>Achat unique</strong><small>Création et livraison, suivi séparé</small></span>
                   </label>
                 </div>
               </fieldset>
 
               <fieldset class="config-fieldset">
-                <legend class="config-legend mono-font">3. Ajustez le contenu</legend>
+                <legend class="config-legend mono-font">Ajustez le contenu</legend>
                 {offers.map((offer, index) => (
                   <div class="plan-options" data-options-for={offer.id} hidden={index !== 1}>
                     <div class="quantity-control">
@@ -211,7 +185,7 @@ const processSteps: [string, string][] = [
                       </div>
                       <div class="stepper">
                         <button type="button" class="stepper-btn" data-step="-1" aria-label={`Retirer un ${offer.quantity.unit}`}>−</button>
-                        <input type="number" class="quantity-input" value="0" min="0" max={offer.quantity.max} inputmode="numeric" aria-label={offer.quantity.label} />
+                        <input name={`quantity_${offer.id}`} type="number" class="quantity-input" value="0" min="0" max={offer.quantity.max} inputmode="numeric" aria-label={offer.quantity.label} />
                         <button type="button" class="stepper-btn" data-step="1" aria-label={`Ajouter un ${offer.quantity.unit}`}>+</button>
                       </div>
                     </div>
@@ -219,7 +193,7 @@ const processSteps: [string, string][] = [
                     <div class="options-list">
                       {offer.options.map(option => (
                         <label class="option-choice">
-                          <input type="checkbox" value={option.id} data-setup={option.setup} data-monthly={option.monthly} />
+                          <input name={`options_${offer.id}`} type="checkbox" value={option.id} data-setup={option.setup} data-monthly={option.monthly} />
                           <span class="option-copy">
                             <strong>{option.label}</strong>
                             <small>{option.desc}</small>
@@ -236,9 +210,9 @@ const processSteps: [string, string][] = [
               </fieldset>
             </div>
 
-            <aside class="quote-summary" aria-live="polite">
+            <aside class="quote-summary" id="estimation" aria-labelledby="summaryPlan">
               <p class="config-legend mono-font">Votre estimation</p>
-              <h3 class="display-font" id="summaryPlan">Site 4 pages</h3>
+              <h3 class="display-font" id="summaryPlan" tabindex="-1">Site 4 pages</h3>
               <div class="summary-prices">
                 <div>
                   <span>Au lancement</span>
@@ -249,7 +223,13 @@ const processSteps: [string, string][] = [
                   <strong class="display-font fire-text" id="summaryMonthly">125 €</strong>
                 </div>
               </div>
+              <p class="summary-year" aria-live="polite">Première année : <strong id="summaryYear">1 750 €</strong></p>
+              <p class="summary-tax">TVA non applicable · Estimation sans engagement</p>
+              <p class="summary-tax">Projection sur douze mois si les services mensuels sont maintenus, sans obligation de rester abonné douze mois.</p>
               <ul class="summary-lines" id="summaryLines"></ul>
+              <div class="summary-tools"><button type="button" id="shareQuote">Partager le lien</button><button type="button" id="downloadQuote">Télécharger le résumé</button><button type="button" id="resetQuote">Réinitialiser</button></div>
+              <p id="shareFeedback" role="status" class="summary-tax"></p>
+              <input type="url" id="shareLink" aria-label="Lien de votre configuration" readonly hidden />
               <p class="summary-note" id="summaryNote">Le périmètre et les modalités finales sont confirmés ensemble avant le lancement.</p>
 
               <div class="quote-contact">
@@ -274,7 +254,8 @@ const processSteps: [string, string][] = [
                   <PaperPlaneTiltLight width={18} height={18} />
                 </button>
                 <p class="quote-feedback" id="quoteFeedback" role="status"></p>
-                <p class="quote-privacy">En envoyant ce formulaire, vous acceptez que vos données soient utilisées pour répondre à votre demande. <a href="/Mentions-legales">En savoir plus</a>.</p>
+                <p class="form-reassurance">Je vous recontacte sous 24 h ouvrables pour préciser le besoin et vous proposer un devis. Rien n’est commandé par cet envoi.</p>
+                <p class="quote-privacy">Vos coordonnées servent à répondre à cette demande. <a href="/Confidentialite">Utilisation de vos données</a>.</p>
               </div>
             </aside>
           </div>
@@ -283,14 +264,16 @@ const processSteps: [string, string][] = [
     </div>
   </section>
 
-  <!-- TECH -->
+  <div id="mobileQuote" class="mobile-quote" hidden><span><small>Votre estimation</small><strong id="mobileQuotePrice"></strong></span><a href="#estimation" class="btn-fire">Voir le détail</a></div>
+  <!-- ACCOMPAGNEMENT -->
   <section class="section">
     <div class="container">
-      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2rem">Technologies utilisées</h2>
-      <div class="tech-grid">
-        {techs.map(t => (
-          <div class="tech-pill mono-font">{t}</div>
-        ))}
+      <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:2rem">Un site, un interlocuteur.</h2>
+      <p class="form-reassurance" style="margin-bottom:1.5rem">Site vitrine à Ciney, présence locale à Namur ou boutique accessible partout en Belgique : nous partons de votre activité et des demandes que vous souhaitez recevoir.</p>
+      <div class="assurance-grid">
+        <div class="assurance-card"><h3>Un budget lisible</h3><p>La création, les options et les frais mensuels sont détaillés avant de valider votre devis.</p></div>
+        <div class="assurance-card"><h3>Un échange direct</h3><p>Vous échangez avec Jordan, de la première discussion à la mise en ligne et au suivi.</p></div>
+        <div class="assurance-card"><h3>Le choix dans la durée</h3><p>Résiliation à tout moment, propriété après un an d’abonnement et heures mensuelles non reportées.</p></div>
       </div>
     </div>
   </section>
@@ -320,7 +303,7 @@ const processSteps: [string, string][] = [
   font-size: 0.7rem; letter-spacing: 0.15em; padding: 0.25rem 0.75rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease; z-index: 999;
 }
-.offer-kicker { color: var(--text-muted); font-size: 0.66rem; letter-spacing: 0.12em; text-transform: uppercase; }
+.offer-kicker { color: var(--text-muted); font-size: 0.8rem; letter-spacing: 0.12em; text-transform: uppercase; }
 .offer-name { font-size: 1.9rem; color: var(--text-primary); margin-top: 0.2rem; }
 .offer-price-row { display: flex; align-items: baseline; gap: 0.35rem; margin-top: 0.2rem; }
 .offer-price { font-size: clamp(2.7rem, 4vw, 3.5rem); line-height: 0.9; }
@@ -341,7 +324,7 @@ const processSteps: [string, string][] = [
 .config-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(320px, 390px); gap: 1.5rem; align-items: start; }
 .config-main { display: flex; flex-direction: column; gap: 1rem; min-width: 0; }
 .config-fieldset { min-width: 0; border: 1px solid var(--dark-border); background: var(--dark-bg); padding: 1.5rem; }
-.config-legend { color: var(--ember-3); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 0.4rem; }
+.config-legend { color: var(--ember-3); font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase; padding: 0 0.4rem; }
 .plan-picker { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
 .plan-choice, .billing-choice { position: relative; cursor: pointer; min-width: 0; }
 .plan-choice input, .billing-choice input { position: absolute; opacity: 0; pointer-events: none; }
@@ -351,7 +334,7 @@ const processSteps: [string, string][] = [
   background: var(--dark-card); transition: border-color 0.2s, background 0.2s;
 }
 .plan-choice strong { color: var(--text-primary); font-size: 1.2rem; }
-.plan-choice small, .billing-choice small { color: var(--text-muted); font-size: 0.72rem; line-height: 1.4; }
+.plan-choice small, .billing-choice small { color: var(--text-muted); font-size: 0.82rem; line-height: 1.4; }
 .plan-choice input:checked + span, .billing-choice input:checked + span { border-color: var(--ember-2); background: rgba(255, 100, 0, 0.08); }
 .plan-choice input:focus-visible + span, .billing-choice input:focus-visible + span { outline: 2px solid var(--ember-3); outline-offset: 2px; }
 .plan-choice input:checked + span small { color: var(--ember-3); }
@@ -361,7 +344,7 @@ const processSteps: [string, string][] = [
 .quantity-control { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--dark-border); }
 .quantity-control > div:first-child { display: flex; flex-direction: column; min-width: 0; }
 .quantity-control strong { color: var(--text-primary); font-size: 0.9rem; }
-.quantity-control small { color: var(--text-muted); font-size: 0.72rem; }
+.quantity-control small { color: var(--text-muted); font-size: 0.82rem; }
 .stepper { display: grid; grid-template-columns: 44px 52px 44px; flex-shrink: 0; }
 .stepper-btn, .quantity-input { height: 44px; border: 1px solid var(--dark-border-2); background: var(--dark-card); color: var(--text-primary); text-align: center; }
 .stepper-btn { cursor: pointer; color: var(--ember-3); font-size: 1.15rem; }
@@ -374,15 +357,15 @@ const processSteps: [string, string][] = [
 .option-choice input { width: 18px; height: 18px; margin-top: 0.15rem; accent-color: var(--ember-2); flex-shrink: 0; }
 .option-copy { display: flex; flex-direction: column; min-width: 0; flex: 1; }
 .option-copy strong { color: var(--text-primary); font-size: 0.88rem; }
-.option-copy small { color: var(--text-muted); font-size: 0.72rem; line-height: 1.45; }
-.option-price { display: flex; flex-direction: column; align-items: flex-end; color: var(--text-secondary); font-size: 0.72rem; white-space: nowrap; }
-.option-price small { color: var(--ember-3); font-size: 0.66rem; }
+.option-copy small { color: var(--text-muted); font-size: 0.82rem; line-height: 1.45; }
+.option-price { display: flex; flex-direction: column; align-items: flex-end; color: var(--text-secondary); font-size: 0.82rem; white-space: nowrap; }
+.option-price small { color: var(--ember-3); font-size: 0.8rem; }
 .quote-summary { position: sticky; top: 6.5rem; background: var(--dark-bg); border: 1px solid rgba(255, 107, 0, 0.35); padding: 1.5rem; min-width: 0; }
 .quote-summary::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: var(--gradient-fire); }
 .quote-summary h3 { font-size: 1.7rem; margin: 0.4rem 0 1.1rem; }
 .summary-prices { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 .summary-prices > div { display: flex; flex-direction: column; padding: 0.75rem; border: 1px solid var(--dark-border); background: var(--dark-card); min-width: 0; }
-.summary-prices span { color: var(--text-muted); font-size: 0.64rem; }
+.summary-prices span { color: var(--text-muted); font-size: 0.8rem; }
 .summary-prices strong { color: var(--text-primary); font-size: 1.45rem; line-height: 1.1; }
 .summary-prices [hidden] { display: none; }
 .summary-lines { list-style: none; display: flex; flex-direction: column; padding: 0.8rem 0; border-bottom: 1px solid var(--dark-border); }
@@ -393,20 +376,20 @@ const processSteps: [string, string][] = [
   gap: 0.65rem;
   padding: 0.4rem 0;
   color: var(--text-secondary);
-  font-size: 0.68rem;
+  font-size: 0.82rem;
   line-height: 1.35;
   border-bottom: 1px solid rgba(84, 55, 34, 0.45);
 }
 .summary-lines :global(li:last-child) { border-bottom: 0; }
 .summary-lines :global(li span:first-child) { min-width: 0; }
-.summary-lines :global(li span:last-child) { color: var(--text-primary); font-size: 0.66rem; text-align: right; white-space: nowrap; }
-.summary-note { color: var(--text-muted); font-size: 0.64rem; line-height: 1.5; margin: 0.8rem 0 1.1rem; }
+.summary-lines :global(li span:last-child) { color: var(--text-primary); font-size: 0.8rem; text-align: right; white-space: nowrap; }
+.summary-note { color: var(--text-muted); font-size: 0.8rem; line-height: 1.5; margin: 0.8rem 0 1.1rem; }
 .quote-contact { display: flex; flex-direction: column; gap: 0.75rem; }
 .quote-contact label { display: flex; flex-direction: column; gap: 0.3rem; }
-.quote-contact label > span { color: var(--ember-3); font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.quote-contact label > span { color: var(--ember-3); font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .quote-contact input, .quote-contact textarea {
   width: 100%; border: 1px solid var(--dark-border); background: var(--dark-card); color: var(--text-primary);
-  padding: 0.75rem 0.8rem; outline: none; resize: vertical; font-family: 'DM Sans', sans-serif; font-size: 0.85rem;
+  padding: 0.75rem 0.8rem; outline: none; resize: vertical; font-family: 'DM Sans Variable', sans-serif; font-size: 0.85rem;
 }
 .quote-contact input:focus, .quote-contact textarea:focus { border-color: var(--ember-2); }
 .quote-contact input::placeholder, .quote-contact textarea::placeholder { color: var(--text-muted); }
@@ -417,7 +400,7 @@ const processSteps: [string, string][] = [
 .quote-feedback.visible { display: block; }
 .quote-feedback.success { color: #86efac; border-color: rgba(34, 197, 94, 0.35); background: rgba(34, 197, 94, 0.06); }
 .quote-feedback.error { color: #fca5a5; border-color: rgba(239, 68, 68, 0.35); background: rgba(239, 68, 68, 0.06); }
-.quote-privacy { color: var(--text-muted); font-size: 0.65rem; line-height: 1.45; text-align: center; }
+.quote-privacy { color: var(--text-muted); font-size: 0.8rem; line-height: 1.45; text-align: center; }
 .quote-privacy a { color: var(--ember-3); }
 
 .tech-grid { display: flex; flex-wrap: wrap; gap: 0.75rem; }
@@ -455,176 +438,45 @@ const processSteps: [string, string][] = [
   .stepper { width: 100%; grid-template-columns: 44px 1fr 44px; }
   .quantity-input { width: 100%; }
   .option-choice { gap: 0.6rem; }
-  .option-price { font-family: 'DM Sans', sans-serif; }
+  .option-price { font-family: 'DM Sans Variable', sans-serif; }
   .summary-prices { gap: 0.5rem; }
   .summary-prices > div { padding: 0.65rem; }
   .summary-prices strong { font-size: 1.3rem; }
-  .summary-lines :global(li) { gap: 0.45rem; font-size: 0.64rem; }
+  .summary-lines :global(li) { gap: 0.45rem; font-size: 0.8rem; }
   .summary-lines :global(li span:last-child) { font-size: 0.62rem; }
   .tech-grid { gap: 0.5rem; }
-  .tech-pill { font-size: 0.72rem; padding: 0.4rem 0.7rem; }
+  .tech-pill { font-size: 0.82rem; padding: 0.4rem 0.7rem; }
 }
+.pricing-tax { color: var(--text-muted); font-size: .85rem; margin-top: .8rem; }
+.offer-billing { display: inline-flex; flex-wrap: wrap; gap: .4rem; padding: .4rem; margin-top: 1.5rem; border: 1px solid var(--dark-border-2); background: var(--dark-bg); }
+.offer-billing button { padding: .7rem 1rem; background: transparent; color: var(--text-secondary); border: 1px solid transparent; cursor: pointer; }
+.offer-billing button[aria-pressed="true"] { border-color: var(--ember-2); color: var(--ember-3); background: var(--dark-card-2); }
+.offer-terms { margin-top: 2rem; padding: 1.5rem; background: var(--dark-bg); border-left: 2px solid var(--ember-2); color: var(--text-secondary); font-size: .9rem; line-height: 1.75; }
+.offer-terms p + p { margin-top: .8rem; }
+.summary-year { padding: 1rem 0 .4rem; color: var(--text-secondary); font-size: .9rem; }
+.summary-year strong { color: var(--ember-3); }
+.summary-tax { color: var(--text-muted); font-size: .8rem; line-height: 1.6; }
+.summary-tools { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: .8rem; }
+.summary-tools button { padding: .4rem .6rem; background: var(--dark-card); border: 1px solid var(--dark-border-2); color: var(--text-primary); font-size: .8rem; cursor: pointer; }
+#shareLink { width: 100%; padding: .7rem; margin-top: .6rem; color: var(--text-primary); background: var(--dark-card); border: 1px solid var(--dark-border-2); }
+#estimation { scroll-margin-top: 7rem; }
+.mobile-quote { display: none; }
+.assurance-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
+.assurance-card { padding: 1.5rem; border: 1px solid var(--dark-border); border-top: 2px solid var(--ember-2); background: var(--dark-card); }
+.assurance-card h3 { color: var(--ember-3); font-size: 1.5rem; margin-bottom: .8rem; }
+.assurance-card p { color: var(--text-secondary); font-size: .9rem; line-height: 1.75; }
+@media (max-width: 768px) { .assurance-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .mobile-quote { position: fixed; z-index: 90; bottom: 0; left: 0; right: 0; padding: .7rem 1rem max(.7rem, env(safe-area-inset-bottom)); background: var(--dark-bg); border-top: 1px solid var(--ember-2); display: flex; justify-content: space-between; align-items: center; gap: .8rem; box-shadow: 0 -8px 30px #0005; }
+  .mobile-quote span { display: flex; flex-direction: column; font-size: .85rem; }
+  .mobile-quote small { color: var(--text-muted); }
+  .mobile-quote strong { color: var(--ember-3); }
+  .mobile-quote .btn-fire { padding: .65rem .8rem; font-size: .9rem; }
+  .quote-summary { margin-bottom: 2rem; }
+}
+@media (max-height: 500px) { .mobile-quote { display: none; } }
 </style>
 
 <script>
-const quoteForm = document.getElementById('quoteForm') as HTMLFormElement | null;
-
-if (quoteForm) {
-  type PriceOption = { id: string; label: string; setup: number; monthly: number };
-  type Offer = {
-    id: string; title: string; launch: number; monthly: number; purchase: number;
-    quantity: { label: string; unit: string; monthly: number; purchase: number; max: number };
-    options: PriceOption[];
-  };
-
-  const pricing = JSON.parse(quoteForm.dataset.pricing || '[]') as Offer[];
-  const summaryPlan = document.getElementById('summaryPlan');
-  const summarySetup = document.getElementById('summarySetup');
-  const summaryMonthly = document.getElementById('summaryMonthly');
-  const monthlySummary = document.getElementById('monthlySummary');
-  const summaryLines = document.getElementById('summaryLines');
-  const summaryNote = document.getElementById('summaryNote');
-  const feedback = document.getElementById('quoteFeedback');
-  const submitButton = quoteForm.querySelector<HTMLButtonElement>('.quote-submit');
-  const euro = new Intl.NumberFormat('fr-BE', { style: 'currency', currency: 'EUR', maximumFractionDigits: 0 });
-
-  const selectedValue = (name: string) => quoteForm.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`)?.value || '';
-  const selectedOffer = () => pricing.find((offer) => offer.id === selectedValue('plan')) || pricing[1] || pricing[0];
-  const activePanel = () => quoteForm.querySelector<HTMLElement>(`.plan-options[data-options-for="${selectedOffer().id}"]`);
-
-  function renderPricing() {
-    const offer = selectedOffer();
-    const billing = selectedValue('billing');
-
-    quoteForm.querySelectorAll<HTMLElement>('.plan-options').forEach((panel) => {
-      panel.hidden = panel.dataset.optionsFor !== offer.id;
-    });
-
-    const panel = activePanel();
-    const quantityInput = panel?.querySelector<HTMLInputElement>('.quantity-input');
-    const quantity = Math.max(0, Math.min(Number(quantityInput?.max || offer.quantity.max), Number(quantityInput?.value || 0)));
-    if (quantityInput) quantityInput.value = String(quantity);
-
-    let setup = billing === 'subscription' ? offer.launch : offer.purchase;
-    let monthly = billing === 'subscription' ? offer.monthly : 0;
-    const lines: { label: string; price: string }[] = [
-      { label: billing === 'subscription' ? `Lancement - ${offer.title}` : `Achat - ${offer.title}`, price: euro.format(setup) },
-    ];
-
-    const quantityPrice = panel?.querySelector<HTMLElement>('.quantity-price');
-    if (quantityPrice) {
-      quantityPrice.textContent = billing === 'subscription'
-        ? `+${euro.format(offer.quantity.monthly)}/mois par ${offer.quantity.unit}`
-        : `+${euro.format(offer.quantity.purchase)} par ${offer.quantity.unit}`;
-    }
-
-    if (quantity > 0) {
-      if (billing === 'subscription') {
-        monthly += quantity * offer.quantity.monthly;
-        lines.push({ label: `${offer.quantity.label} × ${quantity}`, price: `+${euro.format(quantity * offer.quantity.monthly)}/mois` });
-      } else {
-        setup += quantity * offer.quantity.purchase;
-        lines.push({ label: `${offer.quantity.label} × ${quantity}`, price: `+${euro.format(quantity * offer.quantity.purchase)}` });
-      }
-    }
-
-    const selectedOptions: string[] = [];
-    panel?.querySelectorAll<HTMLInputElement>('input[type="checkbox"]:checked').forEach((input) => {
-      const option = offer.options.find((item) => item.id === input.value);
-      if (!option) return;
-      setup += option.setup;
-      monthly += option.monthly;
-      selectedOptions.push(option.label);
-      const parts = [option.setup ? `+${euro.format(option.setup)}` : '', option.monthly ? `+${euro.format(option.monthly)}/mois` : ''].filter(Boolean);
-      lines.push({ label: option.label, price: parts.join(' · ') });
-    });
-
-    if (summaryPlan) summaryPlan.textContent = offer.title;
-    if (summarySetup) summarySetup.textContent = euro.format(setup);
-    if (summaryMonthly) summaryMonthly.textContent = euro.format(monthly);
-    if (monthlySummary) monthlySummary.hidden = monthly === 0;
-    if (summaryLines) summaryLines.innerHTML = lines.map((line) => `<li><span>${line.label}</span><span>${line.price}</span></li>`).join('');
-    if (summaryNote) summaryNote.textContent = billing === 'subscription'
-      ? 'Le périmètre et les modalités finales sont confirmés ensemble avant le lancement.'
-      : 'L’achat unique n’inclut pas le suivi mensuel. Hébergement et maintenance peuvent être ajoutés sur devis.';
-
-    quoteForm.dataset.summary = JSON.stringify({
-      plan: offer.title,
-      billing: billing === 'subscription' ? 'Abonnement' : 'Achat unique',
-      quantityLabel: offer.quantity.label,
-      quantity,
-      options: selectedOptions,
-      setup,
-      monthly,
-    });
-  }
-
-  document.querySelectorAll<HTMLButtonElement>('.select-offer').forEach((button) => {
-    button.addEventListener('click', () => {
-      const radio = quoteForm.querySelector<HTMLInputElement>(`input[name="plan"][value="${button.dataset.plan}"]`);
-      if (radio) radio.checked = true;
-      renderPricing();
-      document.getElementById('configurateur')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-
-  quoteForm.addEventListener('change', renderPricing);
-  quoteForm.addEventListener('input', (event) => {
-    if ((event.target as HTMLElement).classList.contains('quantity-input')) renderPricing();
-  });
-
-  quoteForm.querySelectorAll<HTMLButtonElement>('.stepper-btn').forEach((button) => {
-    button.addEventListener('click', () => {
-      const input = button.closest('.stepper')?.querySelector<HTMLInputElement>('.quantity-input');
-      if (!input) return;
-      const next = Number(input.value || 0) + Number(button.dataset.step || 0);
-      input.value = String(Math.max(Number(input.min), Math.min(Number(input.max), next)));
-      renderPricing();
-    });
-  });
-
-  quoteForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-    if (!submitButton || !quoteForm.reportValidity()) return;
-
-    const formData = new FormData(quoteForm);
-    const originalHtml = submitButton.innerHTML;
-    submitButton.disabled = true;
-    submitButton.textContent = 'Envoi en cours…';
-    feedback?.classList.remove('visible', 'success', 'error');
-
-    try {
-      const response = await fetch('/.netlify/functions/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          type: 'quote',
-          name: formData.get('name'),
-          email: formData.get('email'),
-          message: formData.get('message'),
-          website: formData.get('website'),
-          quote: JSON.parse(quoteForm.dataset.summary || '{}'),
-        }),
-      });
-      const result = await response.json().catch(() => ({}));
-      if (!response.ok) throw new Error(result.error || 'Impossible d’envoyer la demande.');
-
-      if (feedback) {
-        feedback.textContent = 'Configuration envoyée ! Je reviens vers vous sous 24 h.';
-        feedback.classList.add('visible', 'success');
-      }
-      quoteForm.querySelector<HTMLInputElement>('input[name="name"]')?.focus();
-    } catch (error) {
-      if (feedback) {
-        feedback.textContent = error instanceof Error ? error.message : 'Une erreur est survenue. Écrivez-moi à contact@enkotech.be.';
-        feedback.classList.add('visible', 'error');
-      }
-    } finally {
-      submitButton.disabled = false;
-      submitButton.innerHTML = originalHtml;
-    }
-  });
-
-  renderPricing();
-}
+import '../scripts/configurator';
 </script>

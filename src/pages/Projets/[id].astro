@@ -1,296 +1,55 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectImage from '../../components/ProjectImage.astro';
 import { projects, type Project } from '../../data/projects';
-
-export function getStaticPaths() {
-  return projects.map((project) => ({
-    params: { id: project.id },
-    props: { project },
-  }));
-}
-
+export function getStaticPaths() { return projects.map(project => ({ params: { id: project.id }, props: { project } })); }
 const { project } = Astro.props as { project: Project };
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const photos = project.photos.map((photo) => `${base}${photo}`);
-const arcPhotos = photos;
 ---
-
-<BaseLayout title={project.title} description={project.desc}>
-  <section class="project-detail-header">
+<BaseLayout title={`${project.title} : réalisation d’un site vitrine`} description={project.desc}>
+  <section class="page-hero case-hero">
     <div class="container">
-      <a href={`${base}/Projets`} class="back-link mono-font">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M19 12H5M12 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        Retour aux projets
-      </a>
-
-      <div class="project-detail-meta">
-        <span class="category-pill mono-font">{project.category}</span>
-        <h1 class="display-font">{project.title}</h1>
-        <div class="meta-row mono-font">
-          <span>{project.year}</span>
-          <span>{photos.length} photo{photos.length > 1 ? 's' : ''}</span>
-          <span>{project.stack.join(' / ')}</span>
-        </div>
-        <p class="project-detail-desc">{project.desc}</p>
+      <a href="/Projets" class="back-link">← Toutes les réalisations</a>
+      <p class="section-pre mono-font fire-text">- Site vitrine · artisan peintre</p>
+      <h1 class="display-font page-title">Moment <span class="fire-text">D. Art</span></h1>
+      <p class="page-sub">{project.desc}</p>
+      <a href={project.url} target="_blank" rel="noopener noreferrer" class="btn-fire">Visiter momentdart.be ↗</a>
+    </div>
+  </section>
+  <section class="section case-overview">
+    <div class="container case-columns">
+      <div><h2 class="display-font">Le besoin</h2><p>{project.brief}</p><h2 class="display-font">L’approche</h2><p>{project.approach}</p></div>
+      <div class="case-delivered card"><p class="section-pre mono-font fire-text">- Ce qui a été réalisé</p><ul>{project.delivered.map(item => <li>{item}</li>)}</ul><p class="case-stack">{project.stack.join(' · ')}</p></div>
+    </div>
+  </section>
+  <section class="section">
+    <div class="container">
+      <p class="section-pre mono-font fire-text">- En images</p><h2 class="display-font gallery-title">Le site, de plus près</h2>
+      <div class="case-gallery">
+        {project.photos.map((photo, index) => <a class="gallery-image" href={project.url} target="_blank" rel="noopener noreferrer" aria-label="Voir le site Moment D. Art en ligne"><ProjectImage source={photo} alt={project.photoDescriptions[index]} loading={index === 0 ? 'eager' : 'lazy'} /></a>)}
       </div>
     </div>
   </section>
-
-  <section class="project-arc-section" aria-label={`Galerie animee du projet ${project.title}`}>
-    {arcPhotos.length > 0 ? (
-      <>
-        <div class="container">
-          <div class="project-arc-head">
-            <p class="section-pre mono-font fire-text">- Galerie</p>
-            <h2 class="display-font project-arc-title">Images du projet</h2>
-          </div>
-        </div>
-
-        <div class="detail-arc-stage" data-detail-arc-stage>
-          {arcPhotos.map((src, index) => (
-            <figure
-              class="detail-arc-card"
-              data-detail-arc-card
-              aria-label={`${project.title} - photo ${index + 1}`}
-            >
-              <img
-                src={src}
-                alt={`${project.title} - photo ${index + 1}`}
-                loading={index < 3 ? 'eager' : 'lazy'}
-                draggable="false"
-              />
-            </figure>
-          ))}
-        </div>
-      </>
-    ) : (
-      <div class="container">
-        <div class="empty-photos mono-font">
-          <span>Photos a venir</span>
-        </div>
-      </div>
-    )}
-  </section>
+  <section class="section"><div class="container case-next card"><h2 class="display-font">Un site pour votre activité ?</h2><p>Partez de vos besoins et découvrez le budget de votre projet.</p><a href="/Sites-web#configurateur" class="btn-fire">Configurer mon site</a></div></section>
 </BaseLayout>
-
 <style>
-:global(.nav) {
-  z-index: 1000;
-}
-
-.project-detail-header {
-  padding: 9rem 0 2rem;
-  border-bottom: 1px solid var(--dark-border);
-  background:
-    radial-gradient(circle at 18% 20%, rgba(255,100,0,0.08), transparent 32%),
-    var(--dark-bg);
-}
-.back-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  color: var(--text-muted);
-  text-decoration: none;
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
-  margin-bottom: 1.4rem;
-  transition: color 0.2s ease;
-}
-.back-link:hover { color: var(--ember-3); }
-
-.project-detail-meta {
-  max-width: 760px;
-}
-.category-pill {
-  display: inline-flex;
-  color: var(--ember-3);
-  background: rgba(255,140,0,0.10);
-  border: 1px solid rgba(255,140,0,0.20);
-  padding: 0.34rem 0.8rem;
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-bottom: 0.85rem;
-}
-.project-detail-meta h1 {
-  margin: 0 0 0.75rem;
-  font-size: clamp(2.1rem, 4.8vw, 4rem);
-  line-height: 0.95;
-}
-.meta-row {
-  display: flex;
-  align-items: center;
-  gap: 0.7rem;
-  flex-wrap: wrap;
-  color: var(--text-muted);
-  font-size: 0.76rem;
-  letter-spacing: 0.08em;
-  margin-bottom: 1rem;
-}
-.meta-row span + span::before {
-  content: '-';
-  margin-right: 0.7rem;
-  color: var(--dark-border-2);
-}
-.project-detail-desc {
-  margin: 0;
-  color: var(--text-secondary);
-  font-size: 0.98rem;
-  line-height: 1.7;
-  max-width: 64ch;
-}
-
-.project-arc-section {
-  position: relative;
-  z-index: 0;
-  isolation: isolate;
-  padding: 2.4rem 0 5rem;
-  overflow: hidden;
-  border-top: 1px solid rgba(255, 100, 0, 0.08);
-  background:
-    radial-gradient(ellipse at 50% 100%, rgba(255,100,0,0.08), transparent 58%),
-    linear-gradient(180deg, rgba(16, 11, 6, 0.18), rgba(5, 3, 2, 0));
-}
-.project-arc-head {
-  margin-bottom: 0.3rem;
-}
-.project-arc-title {
-  color: var(--text-primary);
-  font-size: clamp(1.8rem, 3.2vw, 2.8rem);
-  line-height: 1;
-}
-.detail-arc-stage {
-  position: relative;
-  z-index: 0;
-  height: clamp(460px, 54vw, 760px);
-  width: 100vw;
-  margin-left: calc(50% - 50vw);
-  overflow: hidden;
-  pointer-events: none;
-}
-.detail-arc-stage::before {
-  content: '';
-  display: none;
-}
-.detail-arc-stage::after {
-  content: '';
-  display: none;
-}
-.detail-arc-card {
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: clamp(390px, 48vw, 780px);
-  aspect-ratio: 16 / 10;
-  margin: 0;
-  padding: 0;
-  overflow: visible;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-  will-change: transform, opacity;
-}
-.detail-arc-card img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  object-position: top center;
-  background: transparent;
-  user-select: none;
-  pointer-events: none;
-}
-.empty-photos {
-  border: 1px dashed var(--dark-border-2);
-  color: var(--text-muted);
-  padding: 3rem;
-  text-align: center;
-  letter-spacing: 0.12em;
-}
-
-@media (max-width: 900px) {
-  .detail-arc-stage {
-    height: 430px;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-  }
-  .detail-arc-card { width: 460px; }
-}
-@media (max-width: 560px) {
-  .project-detail-header { padding-top: 7.5rem; }
-  .project-arc-section { padding-bottom: 3.5rem; }
-  .detail-arc-stage {
-    height: 360px;
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-  }
-  .detail-arc-card { width: 340px; }
-  .meta-row { align-items: flex-start; flex-direction: column; gap: 0.35rem; }
-  .meta-row span + span::before { display: none; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .detail-arc-card { transition: none; }
-}
+.back-link { display: inline-block; margin-bottom: 2rem; color: var(--text-muted); }
+.case-hero .page-sub { max-width: 65ch; }
+.case-overview { border-block: 1px solid var(--dark-border); background: var(--dark-card); }
+.case-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.case-columns h2 { font-size: 2.2rem; margin-bottom: .8rem; }
+.case-columns h2:not(:first-child) { margin-top: 2rem; }
+.case-columns p { color: var(--text-secondary); line-height: 1.8; }
+.case-delivered { padding: 2rem; }
+.case-delivered ul { list-style: none; display: grid; gap: 1rem; margin-top: 1rem; }
+.case-delivered li { border-left: 2px solid var(--ember-2); padding-left: .8rem; }
+.case-stack { margin-top: 1.5rem; font-size: .85rem; color: var(--text-muted); }
+.gallery-title { font-size: 3rem; margin-bottom: 2rem; }
+.case-gallery { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.gallery-image { display: block; overflow: hidden; border: 1px solid var(--dark-border-2); background: var(--dark-card); transition: border-color .2s; }
+.gallery-image:hover { border-color: var(--ember-2); }
+.gallery-image :global(img) { display: block; width: 100%; height: auto; }
+.case-next { padding: 2.5rem; text-align: center; }
+.case-next h2 { font-size: clamp(2rem,4vw,3rem); }
+.case-next p { color: var(--text-secondary); margin: 1rem 0 1.5rem; }
+@media (max-width: 768px) { .case-columns, .case-gallery { grid-template-columns: 1fr; gap: 1.5rem; } }
 </style>
-
-<script>
-const detailArcStage = document.querySelector<HTMLElement>('[data-detail-arc-stage]');
-const detailArcCards = Array.from(document.querySelectorAll<HTMLElement>('[data-detail-arc-card]'));
-
-if (detailArcStage && detailArcCards.length > 0) {
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  let width = 0;
-  let height = 0;
-  let cardWidth = 0;
-  const startTime = performance.now();
-  const duration = 36000;
-
-  const measure = () => {
-    const rect = detailArcStage.getBoundingClientRect();
-    width = rect.width;
-    height = rect.height;
-    cardWidth = detailArcCards[0]?.getBoundingClientRect().width || 220;
-  };
-
-  const placeCards = (progress: number) => {
-    const travel = width + cardWidth * 5.2;
-    const baseline = height * 0.74;
-    const arcHeight = height * 0.60;
-
-    detailArcCards.forEach((card, index) => {
-      const local = (index / detailArcCards.length + progress) % 1;
-      const x = -cardWidth * 2.6 + local * travel;
-      const arc = Math.sin(local * Math.PI);
-      const y = baseline - arc * arcHeight;
-      const rotation = (local - 0.5) * 9;
-      const scale = 0.92 + arc * 0.10;
-      const edgeFade = Math.min(local, 1 - local) * 7;
-      const opacity = Math.max(0, Math.min(1, edgeFade));
-
-      card.style.transform = `translate3d(${x}px, ${y}px, 0) rotate(${rotation}deg) scale(${scale})`;
-      card.style.opacity = String(opacity);
-      card.style.zIndex = String(1 + Math.round(arc * 18));
-    });
-  };
-
-  const tick = (now: number) => {
-    const progress = ((now - startTime) % duration) / duration;
-    placeCards(progress);
-    requestAnimationFrame(tick);
-  };
-
-  measure();
-  placeCards(0);
-  window.addEventListener('resize', () => {
-    measure();
-    placeCards(reduceMotion ? 0 : ((performance.now() - startTime) % duration) / duration);
-  });
-
-  if (!reduceMotion) {
-    requestAnimationFrame(tick);
-  }
-}
-</script>

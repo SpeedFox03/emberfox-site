@@ -12,7 +12,7 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
       <div class="page-hero-inner">
         <p class="section-pre mono-font fire-text">- Contact</p>
         <h1 class="display-font page-title">Parlons de<br/><span class="fire-text">votre projet</span></h1>
-        <p class="page-sub">Devis gratuit, réponse sous 24h. Remplissez le formulaire ou contactez-moi directement.</p>
+        <p class="page-sub">Devis gratuit, réponse sous 24 h ouvrables. Remplissez le formulaire ou contactez-moi directement.</p>
       </div>
     </div>
     <div class="page-deco-bg" aria-hidden="true">
@@ -61,7 +61,8 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
 
       <!-- FORM -->
       <div class="contact-form-wrap">
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" action="/.netlify/functions/contact" method="post">
+          <input type="hidden" name="type" value="contact" />
           <div class="form-group">
             <label class="form-label mono-font" for="contactName">Votre nom</label>
             <input type="text" class="form-input" id="contactName" name="name" autocomplete="name" maxlength="100" placeholder="Jean Dupont" required />
@@ -93,7 +94,7 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
             Envoyer ma demande
             <PaperPlaneTiltLight width={18} height={18} />
           </button>
-          <p class="form-privacy">Les informations envoyées servent uniquement à traiter votre demande et sont transmises par email via Resend. <a href="/Mentions-legales">En savoir plus</a>.</p>
+          <p class="form-privacy">Les informations envoyées servent uniquement à traiter votre demande et sont transmises par email via Resend. <a href="/Confidentialite">En savoir plus</a>.</p>
           <div class="form-feedback" id="formFeedback" role="status"></div>
         </form>
       </div>
@@ -114,7 +115,7 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
             Email
           </p>
           <a href="mailto:contact@enkotech.be" class="info-value display-font">contact@enkotech.be</a>
-          <p class="info-note" style="color:var(--text-muted);font-size:0.85rem">Réponse sous 24h</p>
+          <p class="info-note" style="color:var(--text-muted);font-size:0.85rem">Réponse sous 24 h ouvrables</p>
         </div>
         <div class="info-block">
           <p class="info-label mono-font fire-text">
@@ -192,7 +193,7 @@ import PaperPlaneTiltLight from 'phosphor-astro/PaperPlaneTiltLight.astro';
   border: 1px solid var(--dark-border);
   color: var(--text-primary);
   padding: 0.875rem 1rem;
-  font-family: 'DM Sans', sans-serif;
+  font-family: 'DM Sans Variable', sans-serif;
   font-size: 0.95rem;
   outline: none;
   transition: border-color 0.2s;
@@ -272,18 +273,23 @@ const form = document.getElementById('contactForm') as HTMLFormElement | null;
 const btn = form?.querySelector('button[type="submit"]') as HTMLButtonElement | null;
 const feedback = document.getElementById('formFeedback');
 const serviceSelect = form?.querySelector<HTMLSelectElement>('select[name="service"]');
+let requestId = crypto.randomUUID();
+let sending = false;
 const requestedService = new URLSearchParams(window.location.search).get('service');
 
 if (serviceSelect && requestedService && Array.from(serviceSelect.options).some(option => option.value === requestedService)) {
   serviceSelect.value = requestedService;
 }
 
+form?.addEventListener('input', () => { requestId = crypto.randomUUID(); });
+
 form?.addEventListener('submit', async (e) => {
   e.preventDefault();
-  if (!btn) return;
+  if (!btn || sending) return;
 
   if (!form.reportValidity()) return;
   const originalHtml = btn.innerHTML;
+  sending = true;
   btn.disabled = true;
   btn.textContent = 'Envoi en cours…';
   feedback?.classList.remove('visible', 'error');
@@ -292,9 +298,11 @@ form?.addEventListener('submit', async (e) => {
     const data = new FormData(form);
     const res = await fetch('/.netlify/functions/contact', {
       method: 'POST',
+      signal: AbortSignal.timeout(20000),
       headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
       body: JSON.stringify({
         type: 'contact',
+        requestId,
         name: data.get('name'),
         email: data.get('email'),
         service: data.get('service'),
@@ -305,16 +313,20 @@ form?.addEventListener('submit', async (e) => {
     const result = await res.json().catch(() => ({}));
 
     if (res.ok) {
-      if (feedback) feedback.textContent = '✓ Message envoyé ! Je vous réponds sous 24 h.';
+      if (feedback) feedback.textContent = '✓ Message envoyé ! Je vous réponds sous 24 h ouvrables.';
       feedback?.classList.add('visible');
       form.reset();
+      requestId = crypto.randomUUID();
+      window.enkotechTrack?.('generate_lead', { source: 'contact' });
     } else {
       throw new Error(result.error || 'Impossible d’envoyer le message.');
     }
   } catch (error) {
     if (feedback) feedback.textContent = error instanceof Error ? error.message : 'Erreur réseau. Écrivez-moi à contact@enkotech.be.';
     feedback?.classList.add('visible', 'error');
+    window.enkotechTrack?.('form_error', { source: 'contact' });
   } finally {
+    sending = false;
     btn.disabled = false;
     btn.innerHTML = originalHtml;
   }

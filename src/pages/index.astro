@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { Image } from 'astro:assets';
 import logo from '../images/logo2.png';
+import ProjectImage from '../components/ProjectImage.astro';
 import GlobeLight from 'phosphor-astro/GlobeLight.astro';
 import LightningLight from 'phosphor-astro/LightningLight.astro';
 import DesktopLight from 'phosphor-astro/DesktopLight.astro';
@@ -21,7 +22,6 @@ const services = [
     desc: 'Des sites vitrines, e-commerce et landing pages qui convertissent.',
     href: `${base}/Sites-web`,
     tag: 'Design & Dev',
-    num: '01'
   },
   {
     icon: LightningLight,
@@ -29,7 +29,6 @@ const services = [
     desc: 'Des apps métier sur mesure adaptées à vos besoins spécifiques.',
     href: `${base}/Applications`,
     tag: 'Sur mesure',
-    num: '02'
   },
   {
     icon: DesktopLight,
@@ -37,7 +36,6 @@ const services = [
     desc: 'Configurations gaming, workstation et home office sur mesure.',
     href: `${base}/Montage-pc`,
     tag: 'Hardware',
-    num: '03'
   },
   {
     icon: WrenchLight,
@@ -45,19 +43,18 @@ const services = [
     desc: 'Intervention rapide chez vous - virus, panne, configuration.',
     href: `${base}/Depannage`,
     tag: 'Particuliers',
-    num: '04'
   },
 ];
 
 const stats = [
-  { value: '150+', label: 'Clients satisfaits' },
-  { value: '8 ans', label: "D'expérience" },
-  { value: '24h', label: 'Délai de réponse' },
-  { value: '100%', label: 'Passion tech' },
+  { value: 'Ciney', label: 'Basé en Belgique' },
+  { value: 'Sur mesure', label: 'Selon votre activité' },
+  { value: 'Direct', label: 'Un seul interlocuteur' },
+  { value: 'Clair', label: 'Budget estimé en ligne' },
 ];
 
 const whyItems = [
-  { icon: LightningLight, title: 'Réactivité', desc: "Réponse sous 24h garantie, intervention rapide pour les urgences." },
+  { icon: LightningLight, title: 'Échange direct', desc: "Nous précisons ensemble votre besoin, votre budget et vos délais." },
   { icon: TargetLight,    title: 'Sur mesure', desc: "Pas de templates génériques - chaque solution est pensée pour vous." },
   { icon: HandshakeLight, title: 'Transparent', desc: "Devis clair, suivi régulier, aucune mauvaise surprise." },
   { icon: HeartLight,     title: 'Passionné',  desc: "La technologie est ma passion depuis toujours - ça se sent." },
@@ -78,20 +75,20 @@ const whyItems = [
     <div class="container hero-content">
       <div class="hero-copy">
         <h1 class="hero-title display-font">
-          L'informatique<br/>
-          <span class="fire-text">qui embrase</span><br/>
-          vos projets
+          Votre site web,<br/>
+          <span class="fire-text">À votre image.</span><br/>
+          Un suivi humain.
         </h1>
         <p class="hero-sub">
-          Sites web, applications, montage PC, dépannage - Enkotech vous accompagne
-          avec expertise et passion dans tous vos besoins informatiques.
+          J’accompagne les indépendants et petites entreprises depuis Ciney :
+          un site professionnel, un budget clair et la même personne de la conception au suivi.
         </p>
         <div class="hero-actions">
-          <a href={`${base}/Demarrer-un-projet`} class="btn-fire">
-            Démarrer un projet
+          <a href={`${base}/Sites-web#configurateur`} class="btn-fire">
+            Configurer mon site
             <ArrowRightLight width={16} height={16} />
           </a>
-          <a href="#services" class="btn-outline">Voir les services</a>
+          <a href={`${base}/Projets/moment-d-art`} class="btn-outline">Voir ma réalisation</a>
         </div>
         <!-- Stats visibles seulement sur mobile (terminal masqué) -->
         <div class="hero-stats">
@@ -124,7 +121,7 @@ const whyItems = [
           <div class="dash-body">
             <div class="dash-row dash-row-status">
               <span class="dash-k">status</span>
-              <span class="dash-v"><span class="dash-online-dot"></span>disponible</span>
+              <span class="dash-v">conception & suivi</span>
             </div>
             <div class="dash-info-grid">
               <div class="dash-info-cell">
@@ -136,8 +133,8 @@ const whyItems = [
                 <span class="dash-v fire-text">web · apps · pc · it</span>
               </div>
               <div class="dash-info-cell">
-                <span class="dash-k">délai réponse</span>
-                <span class="dash-v">{"< "}24h</span>
+                <span class="dash-k">premier échange</span>
+                <span class="dash-v">sans engagement</span>
               </div>
             </div>
             <div class="dash-sep"></div>
@@ -156,6 +153,21 @@ const whyItems = [
 
   </section>
 
+  <section class="section featured-project">
+    <div class="container featured-grid">
+      <a href="/Projets/moment-d-art" class="featured-image" aria-label="Découvrir la réalisation Moment D. Art">
+        <ProjectImage source="01.png" alt="Aperçu du site Moment D. Art, artisan peintre" sizes="(max-width: 768px) 100vw, 55vw" />
+      </a>
+      <div>
+        <p class="section-pre mono-font fire-text">- Une réalisation À découvrir</p>
+        <h2 class="display-font">Moment D. Art</h2>
+        <p>Un site vitrine pour présenter le travail d’un artisan peintre, ses prestations et ses réalisations, avec un accès direct ? la demande de devis.</p>
+        <a href="/Projets/moment-d-art" class="btn-outline">Découvrir le projet</a>
+        <a href="https://www.momentdart.be" class="featured-live" target="_blank" rel="noopener noreferrer">Visiter le site ↗</a>
+      </div>
+    </div>
+  </section>
+
   <!-- SERVICES -->
   <section class="section" id="services">
     <div class="container">
@@ -170,7 +182,6 @@ const whyItems = [
           <a href={s.href} class="service-card card fade-in" style={`transition-delay:${i * 0.08}s`}>
             <div class="service-header">
               <div class="service-tag mono-font">{s.tag}</div>
-              <div class="service-num display-font">{s.num}</div>
             </div>
             <div class="service-icon-wrap">
               <s.icon width={32} height={32} class="service-icon" />
@@ -194,11 +205,11 @@ const whyItems = [
       <div class="why-grid">
         <div class="why-left">
           <p class="section-pre mono-font fire-text">- Pourquoi Enkotech ?</p>
-          <h2 class="display-font" style="font-size:clamp(2.5rem,4vw,3.5rem)">Expertise locale,<br/>passion globale</h2>
+          <h2 class="display-font" style="font-size:clamp(2.5rem,4vw,3.5rem)">Votre activité,<br/>mon point de départ</h2>
           <div class="fire-divider"></div>
           <p style="color:var(--text-secondary);margin-bottom:2rem;line-height:1.8">
             Basé à Ciney, j'interviens rapidement chez vous ou à distance.
-            Chaque projet est traité avec la même exigence et le même feu sacré.
+            Pour votre site, vous échangez avec la personne qui le conçoit et le fait évoluer.
           </p>
           <a href={`${base}/Contact`} class="btn-fire">
             Me contacter
@@ -208,7 +219,7 @@ const whyItems = [
         <div class="why-right">
           {whyItems.map((item, i) => (
             <div class="why-item fade-in" style={`transition-delay:${i * 0.1}s`}>
-              <div class="why-num mono-font">{String(i + 1).padStart(2, '0')}</div>
+              <div class="why-icon-wrap" aria-hidden="true"><item.icon width={24} height={24} /></div>
               <div class="why-content">
                 <strong class="display-font" style="font-size:1.3rem;color:var(--ember-3)">{item.title}</strong>
                 <p style="color:var(--text-secondary);font-size:0.9rem;margin-top:0.25rem">{item.desc}</p>
@@ -228,11 +239,11 @@ const whyItems = [
         <div>
           <p class="mono-font fire-text" style="font-size:0.8rem;letter-spacing:0.2em;margin-bottom:0.5rem">- Prêt à démarrer ?</p>
           <h2 class="display-font" style="font-size:clamp(2rem,4vw,3rem)">Lançons votre projet</h2>
-          <p style="color:var(--text-secondary);margin-top:0.25rem">Devis gratuit · Réponse sous 24h</p>
+          <p style="color:var(--text-secondary);margin-top:0.25rem">Estimation gratuite · Réponse sous 24 h ouvrables</p>
         </div>
         <div class="cta-actions">
-          <a href={`${base}/Demarrer-un-projet`} class="btn-fire">
-            Demander un devis
+          <a href={`${base}/Sites-web#configurateur`} class="btn-fire">
+            Configurer mon site
             <ArrowRightLight width={16} height={16} />
           </a>
           <a href="tel:+32498377455" class="btn-outline">
@@ -292,7 +303,7 @@ const whyItems = [
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr 1.4fr;
+  grid-template-columns: 1.15fr 1fr;
   gap: 3rem;
   align-items: center;
   position: relative;
@@ -326,7 +337,7 @@ const whyItems = [
   50% { opacity: 0.4; box-shadow: 0 0 0 6px rgba(34,197,94,0.08); }
 }
 .hero-title {
-  font-size: clamp(3.5rem, 7vw, 6.5rem);
+  font-size: clamp(3.3rem, 5.8vw, 6rem);
   line-height: 0.92;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
@@ -434,7 +445,7 @@ const whyItems = [
 }
 .dash-info-cell:last-child { border-right: none; }
 
-.dash-k { font-family: 'JetBrains Mono', monospace; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.08em; }
+.dash-k { font-family: 'JetBrains Mono Variable', monospace; color: var(--text-muted); font-size: 0.75rem; letter-spacing: 0.08em; }
 .dash-v { color: var(--text-secondary); display: flex; align-items: center; gap: 0.4rem; font-size: 1rem; }
 .dash-online-dot {
   width: 6px; height: 6px;
@@ -522,12 +533,6 @@ const whyItems = [
   color: var(--ember-3);
   text-transform: uppercase;
 }
-.service-num {
-  font-size: 1rem;
-  color: var(--text-muted);
-  transition: color 0.3s;
-}
-.service-card:hover .service-num { color: var(--ember-3); }
 .service-icon-wrap { }
 .service-icon {
   color: var(--ember-2);
@@ -551,14 +556,6 @@ const whyItems = [
 .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
 .why-right { display: flex; flex-direction: column; gap: 2.5rem; }
 .why-item { display: flex; gap: 1.5rem; align-items: flex-start; }
-.why-num {
-  font-size: 0.7rem;
-  color: var(--ember-2);
-  letter-spacing: 0.1em;
-  min-width: 28px;
-  padding-top: 0.25rem;
-  opacity: 0.7;
-}
 .why-icon-wrap { padding-top: 0.1rem; color: var(--ember-3); flex-shrink: 0; }
 .why-content { flex: 1; }
 
@@ -646,8 +643,14 @@ const whyItems = [
   .service-header { margin-bottom: 1rem; }
   .service-footer { padding-top: 1rem; }
   .why-item { align-items: stretch; }
-  .why-num { padding-top: 0.15rem; }
   /* CTA */
   .cta-inner { padding: 1.75rem 1.25rem; }
 }
+.featured-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 3rem; align-items: center; }
+.featured-image { display: block; overflow: hidden; border: 1px solid var(--dark-border-2); border-top: 2px solid var(--ember-2); }
+.featured-image :global(img) { width: 100%; height: auto; display: block; }
+.featured-grid h2 { font-size: clamp(2.5rem,4vw,3.5rem); margin-bottom: 1rem; }
+.featured-grid p:not(.section-pre) { color: var(--text-secondary); line-height: 1.8; margin-bottom: 1.5rem; }
+.featured-live { display: inline-block; margin: 1rem; color: var(--ember-3); }
+@media (max-width: 768px) { .featured-grid { grid-template-columns: 1fr; gap: 1.5rem; } .hero-visual { display: none; } }
 </style>

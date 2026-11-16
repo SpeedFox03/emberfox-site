@@ -1,440 +1,54 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import CalendarLight from 'phosphor-astro/CalendarLight.astro';
-import StorefrontLight from 'phosphor-astro/StorefrontLight.astro';
-import LinkLight from 'phosphor-astro/LinkLight.astro';
-import HardDrivesLight from 'phosphor-astro/HardDrivesLight.astro';
-import ChartBarLight from 'phosphor-astro/ChartBarLight.astro';
-import HardDriveLight from 'phosphor-astro/HardDriveLight.astro';
-import ArrowRightLight from 'phosphor-astro/ArrowRightLight.astro';
+import ProjectImage from '../components/ProjectImage.astro';
 import { projects } from '../data/projects';
-
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-
-const iconByProject = {
-  'event-flow': CalendarLight,
-  'moment-d-art': StorefrontLight,
-  'roue-fortune': LinkLight,
-  'build-gaming': HardDrivesLight,
-  'devis-more': ChartBarLight,
-  'migration-pc': HardDriveLight,
-};
-
-const catColor: Record<string, string> = {
-  Applications: 'rgba(255,69,0,0.10)',
-  'Sites Web': 'rgba(255,140,0,0.12)',
-  'Montage PC': 'rgba(255,184,48,0.10)',
-  Depannage: 'rgba(255,100,0,0.10)',
-};
+const project = projects[0];
 ---
-
-<BaseLayout title="Projets" description="Réalisations et projets - Enkotech">
+<BaseLayout title="Projets" description="Découvrez Moment D. Art, un site vitrine réalisé par Enkotech pour un artisan peintre. Structure, prestations et demande de devis.">
   <section class="page-hero">
     <div class="container">
-      <div class="page-hero-inner">
-        <p class="section-pre mono-font fire-text">- Realisations</p>
-        <h1 class="display-font page-title">Mes<br/><span class="fire-text">Projets</span></h1>
-        <p class="page-sub">Sites web, applications, PC montes sur mesure, depannage - chaque projet est une nouvelle occasion de construire quelque chose qui fonctionne vraiment.</p>
-        <a href={`${base}/Demarrer-un-projet`} class="btn-fire">
-          Parler de mon projet
-          <ArrowRightLight width={16} height={16} />
-        </a>
-      </div>
-    </div>
-
-    <div class="page-deco-bg" aria-hidden="true">
-      <svg viewBox="0 0 500 480" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <radialGradient id="projGlow" cx="50%" cy="50%" r="55%">
-            <stop offset="0%" stop-color="rgba(255,80,0,0.10)"/>
-            <stop offset="100%" stop-color="rgba(255,60,0,0)"/>
-          </radialGradient>
-        </defs>
-        <ellipse cx="250" cy="240" rx="220" ry="200" fill="url(#projGlow)"/>
-        <g font-family="'Courier New', monospace" font-size="13">
-          <text x="30" y="55"  fill="rgba(255,140,0,0.22)">$ ls -la ~/projets/</text>
-          <text x="30" y="78"  fill="rgba(255,100,0,0.12)">total 6 projets</text>
-          <text x="30" y="112" fill="rgba(255,140,0,0.18)">drwxr--  event-flow/           2025</text>
-          <text x="30" y="137" fill="rgba(255,140,0,0.18)">drwxr--  moment-d-art/         2025</text>
-          <text x="30" y="162" fill="rgba(255,140,0,0.18)">drwxr--  roue-fortune-twitch/  2025</text>
-          <text x="30" y="187" fill="rgba(255,140,0,0.18)">drwxr--  build-gaming-corsair/ 2025</text>
-          <text x="30" y="212" fill="rgba(255,140,0,0.18)">drwxr--  devis-and-more/       2026</text>
-          <text x="30" y="237" fill="rgba(255,140,0,0.18)">drwxr--  migration-pc/         2025</text>
-          <text x="30" y="272" fill="rgba(255,120,0,0.20)">$ npm run build</text>
-          <text x="30" y="297" fill="rgba(255,140,0,0.22)">  ok 6 projets livres</text>
-        </g>
-      </svg>
+      <p class="section-pre mono-font fire-text">- Réalisation web</p>
+      <h1 class="display-font page-title">Du concret.<br/><span class="fire-text">À découvrir.</span></h1>
+      <p class="page-sub">Un aperçu du travail réalisé, avec le site en ligne et les choix qui ont guidé sa conception.</p>
     </div>
   </section>
-
+  <section class="section project-feature">
+    <div class="container project-case-grid">
+      <a class="project-preview" href="/Projets/moment-d-art" aria-label="Découvrir le projet Moment D. Art">
+        <div class="preview-bar mono-font"><span aria-hidden="true">● ● ●</span><span>momentdart.be</span></div>
+        <ProjectImage source={project.photos[0]} alt="Aperçu du site vitrine Moment D. Art, artisan peintre" loading="eager" />
+      </a>
+      <div class="project-case-copy">
+        <p class="section-pre mono-font fire-text">- Artisanat & création web</p>
+        <h2 class="display-font">{project.title}</h2>
+        <p>{project.desc}</p>
+        <ul>{project.delivered.slice(0, 4).map(item => <li>{item}</li>)}</ul>
+        <div class="case-actions"><a class="btn-fire" href="/Projets/moment-d-art">Découvrir le projet</a><a class="btn-outline" href={project.url} target="_blank" rel="noopener noreferrer">Voir le site ↗</a></div>
+      </div>
+    </div>
+  </section>
   <section class="section">
-    <div class="container">
-      <p class="section-pre mono-font fire-text">- Portfolio</p>
-      <h2 class="display-font section-title">Ce que j'ai construit</h2>
-      <div class="fire-divider"></div>
-
-      <div class="projects-grid">
-        {projects.map((project) => {
-          const Icon = iconByProject[project.id as keyof typeof iconByProject] ?? LinkLight;
-          const photos = project.photos.map((photo) => `${base}${photo}`);
-          const hasMultiple = photos.length > 1;
-
-          return (
-            <article class="project-card" data-project-card data-category={project.category}>
-              <a href={`${base}/Projets/${project.id}`} class="project-link" aria-label={`Voir le projet ${project.title}`}>
-                <div class="project-media">
-                  {photos.length > 0 ? (
-                    photos.map((src, index) => (
-                      <img
-                        src={src}
-                        alt={`${project.title} - photo ${index + 1}`}
-                        class={`project-photo${index === 0 ? ' is-active' : ''}`}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        draggable="false"
-                      />
-                    ))
-                  ) : (
-                    <div class="project-placeholder" style={`background:${catColor[project.category] ?? 'rgba(255,100,0,0.08)'}`}>
-                      <Icon width={46} height={46} />
-                    </div>
-                  )}
-
-                  <div class="project-overlay">
-                    <span class="project-badge mono-font">{project.category}</span>
-                    {photos.length > 0 && (
-                      <span class="project-count mono-font">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                          <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" stroke-width="2"/>
-                          <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
-                          <path d="M21 15l-5-5L5 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        {photos.length}
-                      </span>
-                    )}
-                  </div>
-
-                  <div class="project-hover-cta">
-                    <span class="mono-font">Voir le projet</span>
-                  </div>
-
-                  {hasMultiple && (
-                    <div class="project-dots" aria-hidden="true">
-                      {photos.map((_, index) => <span class={`project-dot${index === 0 ? ' is-active' : ''}`} />)}
-                    </div>
-                  )}
-                </div>
-
-                <div class="project-info">
-                  <h3 class="display-font project-title">{project.title}</h3>
-                  <p class="project-meta mono-font">
-                    <span>{project.category}</span>
-                    <span>{project.year}</span>
-                  </p>
-                  <p class="project-desc">{project.desc}</p>
-                  <div class="project-tags">
-                    {project.stack.map((tag) => <span class="tag">{tag}</span>)}
-                  </div>
-                </div>
-              </a>
-            </article>
-          );
-        })}
-      </div>
-    </div>
-  </section>
-
-  <section class="section project-cta-band">
-    <div class="container cta-inner">
-      <div>
-        <p class="section-pre mono-font fire-text">- Votre tour</p>
-        <h2 class="display-font cta-title">Un projet en tete ?</h2>
-        <p class="cta-copy">Discutons de votre idee. Premier echange gratuit, sans engagement.</p>
-      </div>
-      <div class="cta-actions">
-        <a href={`${base}/Demarrer-un-projet`} class="btn-fire">
-          Démarrer un projet
-          <ArrowRightLight width={16} height={16} />
-        </a>
-        <a href={`${base}/A-propos`} class="btn-outline">En savoir plus</a>
-      </div>
+    <div class="container project-invitation card">
+      <div><p class="section-pre mono-font fire-text">- Votre activité mérite sa place</p><h2 class="display-font">Et votre site ?</h2><p>Choisissez une formule et les options utiles à votre activité. Vous obtenez une estimation avant de prendre contact.</p></div>
+      <a href="/Sites-web#configurateur" class="btn-fire">Configurer mon site</a>
     </div>
   </section>
 </BaseLayout>
-
 <style>
-.page-deco-bg g > text { animation: proj-in 0.35s ease both; }
-.page-deco-bg g > text:nth-child(1) { animation-delay: 0.20s; }
-.page-deco-bg g > text:nth-child(2) { animation-delay: 0.40s; }
-.page-deco-bg g > text:nth-child(3) { animation-delay: 0.65s; }
-.page-deco-bg g > text:nth-child(4) { animation-delay: 0.82s; }
-.page-deco-bg g > text:nth-child(5) { animation-delay: 0.99s; }
-.page-deco-bg g > text:nth-child(6) { animation-delay: 1.16s; }
-.page-deco-bg g > text:nth-child(7) { animation-delay: 1.33s; }
-.page-deco-bg g > text:nth-child(8) { animation-delay: 1.60s; }
-.page-deco-bg g > text:nth-child(9) { animation-delay: 1.80s; }
-.page-deco-bg g > text:nth-child(10) { animation-delay: 2.00s; }
-@keyframes proj-in { from { opacity: 0; } to { opacity: 1; } }
-
-.section-title {
-  font-size: clamp(2rem, 4vw, 3rem);
-  margin-bottom: 0.5rem;
-}
-
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-
-.project-card {
-  background: var(--dark-card);
-  border: 1px solid var(--dark-border);
-  overflow: hidden;
-  transition: border-color 0.28s ease, transform 0.28s ease, box-shadow 0.28s ease;
-  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
-}
-.project-card:hover {
-  border-color: rgba(255, 140, 0, 0.42);
-  transform: translateY(-3px);
-  box-shadow: 0 18px 46px rgba(0,0,0,0.42), 0 0 34px rgba(255,69,0,0.07);
-}
-.project-link {
-  display: block;
-  color: inherit;
-  text-decoration: none;
-}
-
-.project-media {
-  position: relative;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  background: var(--dark-card-2);
-}
-.project-photo {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  opacity: 0;
-  transition: opacity 0.75s ease, transform 0.45s ease, filter 0.25s ease;
-  user-select: none;
-  pointer-events: none;
-}
-.project-photo.is-active { opacity: 1; }
-.project-card:hover .project-photo.is-active {
-  transform: scale(1.035);
-  filter: brightness(1.04);
-}
-.project-placeholder {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--ember-3);
-}
-.project-placeholder svg {
-  opacity: 0.8;
-  filter: drop-shadow(0 0 18px rgba(255,100,0,0.28));
-}
-
-.project-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.85rem;
-  pointer-events: none;
-  background: linear-gradient(180deg, rgba(5,3,2,0.58) 0%, transparent 44%, rgba(5,3,2,0.32) 100%);
-}
-.project-badge,
-.project-count {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  border: 1px solid rgba(255,140,0,0.28);
-  background: rgba(10,7,4,0.74);
-  color: var(--ember-3);
-  backdrop-filter: blur(12px);
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.34rem 0.65rem;
-}
-.project-count {
-  color: var(--text-primary);
-  border-color: rgba(255,255,255,0.14);
-}
-
-.project-hover-cta {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  background: rgba(5,3,2,0.18);
-}
-.project-card:hover .project-hover-cta { opacity: 1; }
-.project-hover-cta span {
-  color: #0A0804;
-  background: var(--gradient-fire);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0.65rem 1.2rem;
-  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
-  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
-}
-
-.project-dots {
-  position: absolute;
-  left: 50%;
-  bottom: 0.72rem;
-  z-index: 4;
-  display: flex;
-  gap: 0.32rem;
-  transform: translateX(-50%);
-}
-.project-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255,255,255,0.42);
-  transition: background 0.25s ease, transform 0.25s ease;
-}
-.project-dot.is-active {
-  background: var(--ember-3);
-  transform: scale(1.35);
-}
-
-.project-info {
-  padding: 1rem 1.1rem 1.15rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-.project-title {
-  font-size: 1.25rem;
-  color: var(--text-primary);
-  line-height: 1;
-}
-.project-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  color: var(--text-muted);
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-}
-.project-meta span:first-child { color: var(--ember-3); }
-.project-desc {
-  color: var(--text-secondary);
-  font-size: 0.82rem;
-  line-height: 1.55;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.project-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-}
-.tag {
-  padding: 0.2rem 0.6rem;
-  background: var(--dark-card-2);
-  border: 1px solid var(--dark-border);
-  color: var(--text-muted);
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.68rem;
-  letter-spacing: 0.05em;
-}
-
-.project-cta-band {
-  background: var(--dark-card);
-  border-top: 1px solid var(--dark-border);
-  border-bottom: 1px solid var(--dark-border);
-}
-.cta-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-.cta-title { font-size: clamp(2rem, 4vw, 3rem); }
-.cta-copy {
-  color: var(--text-secondary);
-  margin-top: 0.75rem;
-  max-width: 520px;
-  line-height: 1.7;
-}
-.cta-actions {
-  display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-@media (max-width: 1024px) {
-  .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-}
-@media (max-width: 560px) {
-  .projects-grid { grid-template-columns: 1fr; gap: 1rem; }
-  .cta-inner { flex-direction: column; align-items: flex-start; }
-}
-@media (hover: none) {
-  .project-hover-cta { opacity: 1; background: transparent; align-items: flex-end; justify-content: flex-end; padding: 0.85rem; }
-  .project-hover-cta span { font-size: 0.64rem; padding: 0.48rem 0.75rem; }
-}
+.project-feature { border-block: 1px solid var(--dark-border); background: var(--dark-card); }
+.project-case-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 3rem; align-items: center; }
+.project-preview { display: block; background: var(--dark-bg); border: 1px solid var(--dark-border-2); overflow: hidden; }
+.preview-bar { display: flex; justify-content: space-between; padding: .8rem 1rem; color: var(--text-muted); font-size: .8rem; border-bottom: 1px solid var(--dark-border); }
+.preview-bar span:first-child { color: var(--ember-2); letter-spacing: .2rem; }
+.project-preview :global(img) { display: block; width: 100%; height: auto; }
+.project-case-copy h2 { font-size: clamp(2.7rem,5vw,4rem); margin-bottom: 1rem; }
+.project-case-copy p:not(.section-pre), .project-invitation p:not(.section-pre) { color: var(--text-secondary); line-height: 1.8; }
+.project-case-copy ul { list-style: none; display: grid; gap: .7rem; margin: 1.5rem 0; }
+.project-case-copy li { border-left: 2px solid var(--ember-2); padding-left: .8rem; color: var(--text-secondary); }
+.case-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+.project-invitation { display: flex; align-items: center; justify-content: space-between; gap: 2rem; padding: 2.5rem; }
+.project-invitation h2 { font-size: 3rem; margin-bottom: .8rem; }
+.project-invitation p { max-width: 55ch; }
+.project-invitation a { flex-shrink: 0; }
+@media (max-width: 900px) { .project-case-grid { grid-template-columns: 1fr; gap: 2rem; } .project-invitation { flex-direction: column; align-items: flex-start; } }
 </style>
-
-<script>
-document.querySelectorAll<HTMLElement>('[data-project-card]').forEach((card) => {
-  const slides = card.querySelectorAll<HTMLElement>('.project-photo');
-  const dots = card.querySelectorAll<HTMLElement>('.project-dot');
-  if (slides.length <= 1) return;
-
-  let current = 0;
-  let timer: ReturnType<typeof setInterval> | null = null;
-
-  const goTo = (n: number) => {
-    slides[current]?.classList.remove('is-active');
-    dots[current]?.classList.remove('is-active');
-    current = ((n % slides.length) + slides.length) % slides.length;
-    slides[current]?.classList.add('is-active');
-    dots[current]?.classList.add('is-active');
-  };
-
-  const start = () => {
-    if (!timer) timer = setInterval(() => goTo(current + 1), 3200);
-  };
-
-  const stop = () => {
-    if (timer) {
-      clearInterval(timer);
-      timer = null;
-    }
-  };
-
-  card.addEventListener('mouseenter', stop);
-  card.addEventListener('mouseleave', start);
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => entry.isIntersecting ? start() : stop());
-  }, { threshold: 0.3 });
-
-  observer.observe(card);
-});
-</script>

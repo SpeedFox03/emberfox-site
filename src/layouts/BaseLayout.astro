@@ -1,11 +1,27 @@
 ---
 import '../styles/global.css';
+import '@fontsource-variable/dm-sans/wght.css';
+import '@fontsource/bebas-neue/latin-400.css';
+import '@fontsource-variable/jetbrains-mono/wght.css';
+import CookieConsent from '../components/CookieConsent.astro';
 import { Image } from 'astro:assets';
 import logo from '../images/logo2.png';
 import EnvelopeLight from 'phosphor-astro/EnvelopeLight.astro';
 import PhoneLight from 'phosphor-astro/PhoneLight.astro';
 
-const { title = 'Enkotech', description = 'Solutions informatiques sur mesure' } = Astro.props;
+const { title = 'Enkotech', description = 'Création de sites web et accompagnement informatique à Ciney, Namur et en Belgique.', noindex = false } = Astro.props;
+const seoTitles: Record<string, string> = {
+  Accueil: 'Création de sites web à Ciney et en Belgique',
+  'Sites Web': 'Création de sites web à Ciney : tarifs et configurateur',
+  Applications: 'Développement d’applications sur mesure en Belgique',
+  'Dépannage': 'Dépannage informatique à domicile à Ciney et Namur',
+  'Montage PC': 'Montage de PC sur mesure à Ciney',
+  Projets: 'Réalisation web : Moment D. Art',
+};
+const pageTitle = `${seoTitles[title] || title} | Enkotech`;
+const canonical = new URL(Astro.url.pathname.toLowerCase().replace(/\/?$/, '/'), Astro.site);
+const socialImage = new URL('/social-card.png', Astro.site);
+const business = { '@context': 'https://schema.org', '@type': 'ProfessionalService', '@id': 'https://enkotech.be/#entreprise', name: 'Enkotech', url: 'https://enkotech.be', image: String(socialImage), telephone: '+32498377455', email: 'contact@enkotech.be', address: { '@type': 'PostalAddress', streetAddress: "Quai de l’Industrie 24, boîte 0011", postalCode: '5590', addressLocality: 'Ciney', addressCountry: 'BE' }, areaServed: ['Ciney', 'Namur', 'Dinant', 'Belgique'] };
 const basePath = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const navLinks = [
@@ -28,29 +44,29 @@ const isServicesActive = services.some(s => currentPath === s.href);
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <!-- Google Tag Manager -->
-  <script is:inline>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-  </script>
-  <script is:inline async src="https://www.googletagmanager.com/gtm.js?id=GTM-TVHL3SZ2"></script>
-  <script is:inline async src="https://www.googletagmanager.com/gtm.js?id=GTM-P32K4HZS"></script>
-  <!-- End Google Tag Manager -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>{title} | Enkotech</title>
+  <title>{pageTitle}</title>
+  <link rel="canonical" href={canonical} />
+  {noindex && <meta name="robots" content="noindex, follow" />}
+  <script type="application/ld+json" set:html={JSON.stringify(business).replaceAll("<", "\\u003c")} />
   <meta name="description" content={description} />
   <link rel="icon" type="image/png" href={logo.src} />
   <link rel="apple-touch-icon" href={logo.src} />
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Enkotech" />
-  <meta property="og:title" content={`${title} | Enkotech`} />
+  <meta property="og:title" content={pageTitle} />
   <meta property="og:description" content={description} />
-  <meta property="og:url" content={Astro.url.href} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={socialImage} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Enkotech — création de sites web à Ciney" />
+  <meta property="og:locale" content="fr_BE" />
+  <meta name="twitter:image" content={socialImage} />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={`${title} | Enkotech`} />
+  <meta name="twitter:title" content={pageTitle} />
   <meta name="twitter:description" content={description} />
 </head>
 <body>
@@ -111,6 +127,7 @@ const isServicesActive = services.some(s => currentPath === s.href);
           </ul>
         </li>
 
+        <li><a href={`${basePath}/Sites-web#formules`} class="nav-link">Tarifs</a></li>
         {navLinks.slice(3).map(link => (
           <li>
             <a href={link.href} class={`nav-link ${currentPath === link.href ? 'active' : ''}`}>
@@ -118,11 +135,12 @@ const isServicesActive = services.some(s => currentPath === s.href);
             </a>
           </li>
         ))}
-        <li><a href={`${basePath}/Demarrer-un-projet`} class="btn-fire nav-cta">Devis gratuit</a></li>
+        <li><a href={`${basePath}/Sites-web#configurateur`} class="btn-fire nav-cta">Configurer mon site</a></li>
       </ul>
     </div>
   </nav>
 
+  <noscript><div class="fallback-navigation"><a href="/">Accueil</a><a href="/Sites-web#configurateur">Configurer mon site</a><a href="/Projets">Réalisation</a><a href="/Contact">Contact</a><p>Les services Google optionnels restent désactivés sans JavaScript.</p></div></noscript>
   <main id="main-content">
     <slot />
   </main>
@@ -152,6 +170,7 @@ const isServicesActive = services.some(s => currentPath === s.href);
           <p class="footer-heading display-font">Services</p>
           <ul>
             <li><a href="/Sites-web">Sites Web</a></li>
+            <li><a href="/Sites-web#configurateur">Configurer mon site</a></li>
             <li><a href="/Applications">Applications</a></li>
             <li><a href="/Montage-pc">Montage PC</a></li>
             <li><a href="/Depannage">Dépannage</a></li>
@@ -173,12 +192,15 @@ const isServicesActive = services.some(s => currentPath === s.href);
         <div class="footer-bottom-links">
           <a href="/A-propos" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">À propos</a>
           <a href="/FAQ" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">FAQ</a>
+          <a href="/Confidentialite" class="mono-font footer-policy">Confidentialité</a>
+          <button type="button" data-cookie-settings class="mono-font footer-policy">Mes cookies</button>
           <a href="/Mentions-legales" class="mono-font" style="color:var(--text-muted);font-size:0.75rem;text-decoration:none;transition:color 0.2s">Mentions légales</a>
         </div>
       </div>
     </div>
   </footer>
 
+  <CookieConsent />
 </body>
 </html>
 
@@ -215,6 +237,9 @@ const isServicesActive = services.some(s => currentPath === s.href);
 }
 
 /* NAV */
+.fallback-navigation { margin: 6rem auto 0; max-width: 1100px; padding: 1rem 2rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+.fallback-navigation a { color: var(--ember-3); }
+.fallback-navigation p { flex-basis: 100%; font-size: .85rem; color: var(--text-muted); }
 .nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -325,6 +350,7 @@ const isServicesActive = services.some(s => currentPath === s.href);
   transition: opacity 0.2s ease, transform 0.2s ease, visibility 0s 0.2s;
   z-index: 200;
 }
+.nav-item-dropdown.open .nav-dropdown,
 .nav-item-dropdown:hover .nav-dropdown,
 .nav-item-dropdown:focus-within .nav-dropdown {
   opacity: 1;
@@ -444,10 +470,11 @@ const isServicesActive = services.some(s => currentPath === s.href);
   justify-content: space-between;
   align-items: center;
 }
-.footer-bottom-links { display: flex; gap: 1.5rem; }
+.footer-bottom-links { display: flex; flex-wrap: wrap; gap: 1rem; }
+.footer-policy { font-size: .8rem; color: var(--text-muted); background: none; border: 0; cursor: pointer; text-decoration: none; padding: 0; }
 .footer-bottom-links a:hover { color: var(--ember-3) !important; }
 
-/* ≤ 1024px — menu burger */
+/* ≤ 1200px — menu burger */
 @media (max-width: 1200px) {
   .nav-links {
     display: grid;
@@ -488,6 +515,7 @@ const isServicesActive = services.some(s => currentPath === s.href);
   .nav-links.open > li:nth-child(4) { transition-delay: 0.25s; }
   .nav-links.open > li:nth-child(5) { transition-delay: 0.31s; }
   .nav-links.open > li:nth-child(6) { transition-delay: 0.37s; }
+  .nav-links.open > li:nth-child(7) { transition-delay: 0.43s; }
 
   .nav-inner { padding-left: 1.25rem; padding-right: 1.25rem; }
 
@@ -626,13 +654,21 @@ servicesToggle?.addEventListener('click', (e) => {
     const isOpen = servicesItem?.classList.contains('open');
     servicesItem?.classList.toggle('open', !isOpen);
     servicesToggle.setAttribute('aria-expanded', String(!isOpen));
+  } else {
+    const expanded = servicesToggle.getAttribute('aria-expanded') !== 'true';
+    servicesToggle.setAttribute('aria-expanded', String(expanded));
+    servicesItem?.classList.toggle('open', expanded);
   }
 });
 
 
+servicesItem?.addEventListener('mouseenter', () => { if (window.innerWidth > 1200) servicesToggle?.setAttribute('aria-expanded', 'true'); });
+servicesItem?.addEventListener('mouseleave', () => { if (window.innerWidth > 1200 && !servicesItem.contains(document.activeElement)) { servicesItem.classList.remove('open'); servicesToggle?.setAttribute('aria-expanded', 'false'); } });
+servicesItem?.addEventListener('focusin', () => { if (window.innerWidth > 1200) servicesToggle?.setAttribute('aria-expanded', 'true'); });
+servicesItem?.addEventListener('focusout', (event) => { if (!servicesItem.contains(event.relatedTarget as Node)) { servicesItem.classList.remove('open'); servicesToggle?.setAttribute('aria-expanded', 'false'); } });
 // Close on Escape key
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape' && links?.classList.contains('open')) {
+  if (e.key === 'Escape') {
     closeMenu();
     toggle?.focus();
   }
@@ -646,6 +682,8 @@ document.addEventListener('click', e => {
   }
 });
 
+// Content stays visible without JavaScript or when reduced motion is requested.
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 // Scroll fade-in
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -686,7 +724,7 @@ document.querySelectorAll(
 // Cursor glow — désactivé sur appareils tactiles
 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
   document.addEventListener('mousemove', (e) => {
-    if (cursor) {
+    if (cursor && !reducedMotion) {
       cursor.style.left = e.clientX + 'px';
       cursor.style.top = e.clientY + 'px';
       cursor.style.opacity = '1';

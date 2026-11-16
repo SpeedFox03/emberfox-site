@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Page introuvable" description="Retrouvez les services et le configurateur de sites web Enkotech." noindex>
+  <section class="page-hero"><div class="container">
+    <p class="section-pre mono-font fire-text">- Page introuvable</p>
+    <h1 class="display-font page-title">Reprenons<br/><span class="fire-text">le bon chemin.</span></h1>
+    <p class="page-sub">Cette page a changé d’adresse ou n’existe plus. Retrouvez votre projet depuis l’accueil ou le configurateur.</p>
+    <div class="error-actions"><a href="/Sites-web#configurateur" class="btn-fire">Configurer mon site</a><a href="/" class="btn-outline">Revenir à l’accueil</a></div>
+  </div></section>
+</BaseLayout>
+<style>.error-actions { display: flex; flex-wrap: wrap; gap: 1rem; }</style>
