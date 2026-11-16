@@ -89,7 +89,6 @@ const processSteps: [string, string][] = [
       <h2 class="display-font pricing-title">Un site. Deux façons de démarrer.</h2>
       <div class="fire-divider"></div>
       <p class="pricing-intro">Un budget de départ léger, puis un accompagnement continu : hébergement, maintenance, sécurité et modifications sont inclus dans chaque abonnement.</p>
-      <p class="pricing-tax">Prix nets : TVA non applicable, régime de la franchise de taxe.</p>
       <div class="offer-billing" role="group" aria-label="Comparer les modes de paiement">
         <button type="button" data-billing-mode="subscription" aria-pressed="true">Abonnement & suivi</button>
         <button type="button" data-billing-mode="purchase" aria-pressed="false">Achat du site</button>
@@ -153,7 +152,7 @@ const processSteps: [string, string][] = [
                       <input type="radio" name="plan" value={offer.id} checked={index === 1} />
                       <span>
                         <strong class="display-font">{offer.title}</strong>
-                        <small>{offer.monthly} €/mois</small>
+                        <small data-plan-price={offer.id}>{offer.monthly} €/mois</small>
                       </span>
                     </label>
                   ))}
@@ -224,7 +223,6 @@ const processSteps: [string, string][] = [
                 </div>
               </div>
               <p class="summary-year" aria-live="polite">Première année : <strong id="summaryYear">1 750 €</strong></p>
-              <p class="summary-tax">TVA non applicable · Estimation sans engagement</p>
               <p class="summary-tax">Projection sur douze mois si les services mensuels sont maintenus, sans obligation de rester abonné douze mois.</p>
               <ul class="summary-lines" id="summaryLines"></ul>
               <div class="summary-tools"><button type="button" id="shareQuote">Partager le lien</button><button type="button" id="downloadQuote">Télécharger le résumé</button><button type="button" id="resetQuote">Réinitialiser</button></div>
@@ -256,6 +254,7 @@ const processSteps: [string, string][] = [
                 <p class="quote-feedback" id="quoteFeedback" role="status"></p>
                 <p class="form-reassurance">Je vous recontacte sous 24 h ouvrables pour préciser le besoin et vous proposer un devis. Rien n’est commandé par cet envoi.</p>
                 <p class="quote-privacy">Vos coordonnées servent à répondre à cette demande. <a href="/Confidentialite">Utilisation de vos données</a>.</p>
+                <p class="summary-tax">Les prix indiqués sont hors TVA.</p>
               </div>
             </aside>
           </div>

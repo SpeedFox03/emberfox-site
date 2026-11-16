@@ -120,7 +120,7 @@ if (form) {
   });
   document.getElementById('downloadQuote')?.addEventListener('click', () => {
     const quote = calculateQuote(selection());
-    const content = `ENKOTECH — Estimation indicative\n${quote.title} — ${quote.billing === 'subscription' ? 'Abonnement' : 'Achat unique'}\n${quote.quantityLabel} : ${quote.quantity}\nOptions : ${quote.optionLabels.join(', ') || 'Aucune'}\nAu lancement : ${euro(quote.setup)}\nMensuel : ${euro(quote.monthly)}\nPremière année : ${euro(quote.firstYear)}\nTVA non applicable, régime de la franchise de taxe.\n${document.getElementById('summaryNote')!.textContent}\nEstimation gratuite et sans engagement ; le devis confirme le périmètre.\n${sharedUrl()}`;
+    const content = `ENKOTECH — Estimation indicative\n${quote.title} — ${quote.billing === 'subscription' ? 'Abonnement' : 'Achat unique'}\n${quote.quantityLabel} : ${quote.quantity}\nOptions : ${quote.optionLabels.join(', ') || 'Aucune'}\nAu lancement : ${euro(quote.setup)}\nMensuel : ${euro(quote.monthly)}\nPremière année : ${euro(quote.firstYear)}\nLes prix indiqués sont hors TVA.\n${document.getElementById('summaryNote')!.textContent}\nEstimation gratuite et sans engagement ; le devis confirme le périmètre.\n${sharedUrl()}`;
     const url = URL.createObjectURL(new Blob([content], { type: 'text/plain;charset=utf-8' }));
     const link = document.createElement('a'); link.href = url; link.download = 'estimation-enkotech.txt'; link.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
   });
